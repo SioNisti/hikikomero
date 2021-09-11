@@ -242,16 +242,29 @@ namespace testiä
                 descriptionMTDT.Rows.Add($"{property.Name}", $"{property.Value}");
             }*/
 
+            //saatanan vittumainen bugi ton datagridview:in kanssa
+            //se paska kaatuu jos oot muokkaamassa jotain solua ja klikkaat toiseen soluun
 
+            //descriptionMTDT.CurrentCell = null;voi perkele
+            descriptionMTDT.ClearSelection();
             descriptionMTDT.Rows.Clear();
-
-
+            
             var file = ImageFile.FromFile(valittukuva);
-                descriptionMTDT.Rows.Add("Title", file.Properties.Get(ExifTag.WindowsTitle), "WindowsTitle");
-                descriptionMTDT.Rows.Add("Subject", file.Properties.Get(ExifTag.WindowsSubject), "WindowsSubject");
-                descriptionMTDT.Rows.Add("Rating", file.Properties.Get(ExifTag.Rating), "Rating");
-                descriptionMTDT.Rows.Add("Tags", file.Properties.Get(ExifTag.WindowsKeywords), "WindowsKeywords");
-                descriptionMTDT.Rows.Add("Comments", file.Properties.Get(ExifTag.WindowsComment), "WindowsComment");
+            if (curtab == 0)
+            {
+                descriptionMTDT.Rows.Add("Title", file.Properties.Get(ExifTag.WindowsTitle), 140091);
+                descriptionMTDT.Rows.Add("Subject", file.Properties.Get(ExifTag.WindowsSubject), 140095);
+                descriptionMTDT.Rows.Add("Rating", file.Properties.Get(ExifTag.Rating), 118246);
+                descriptionMTDT.Rows.Add("Tags", file.Properties.Get(ExifTag.WindowsKeywords), 140094);
+                descriptionMTDT.Rows.Add("Comments", file.Properties.Get(ExifTag.WindowsComment), 140092);
+            }
+            if (curtab == 1)
+            {
+                descriptionMTDT.Rows.Add("Authors", file.Properties.Get(ExifTag.WindowsAuthor), 140093);
+                descriptionMTDT.Rows.Add("Date taken", file.Properties.Get(ExifTag.DateTimeOriginal), 236867);
+                descriptionMTDT.Rows.Add("Date acquired", file.Properties.Get(ExifTag.SubSecTime), 237520);
+                descriptionMTDT.Rows.Add("Copyright", file.Properties.Get(ExifTag.Copyright), 133432);
+            }
         }
 
         private void ToolStripButton1_Click_1(object sender, EventArgs e)
@@ -381,7 +394,7 @@ namespace testiä
                 intti = 1;
                 imageamount.Value = FileBox.Items.Count;
             }
-            else
+            else if (text != "notag" && text != "")
             {
             if (text[0].Equals(';'))
             {
@@ -432,18 +445,17 @@ namespace testiä
                         string fileName = Path.GetFileName(file);
                         ListViewItem item = new ListViewItem(fileName);
 
-
                         if (file.Contains(".jpg"))
                         {
                             var gottenTags = ImageFile.FromFile(file).Properties.Get(ExifTag.WindowsKeywords);
-                            if (gottenTags != null)
+                            if (gottenTags != null && gottenTags.ToString() != "") //huh saatana piti lisätä toi toinen ehto tohon koska muuten jos jollain oli täginä "" niin se paska kaatu
                             {
                                 string gottenTags2 = gottenTags.ToString();
                                 char gt2 = gottenTags2[0];
 
                                 if (gottenTags2[0].Equals(';'))
                                 {
-                                    gottenTags2 = gottenTags2;
+                                    //gottenTags2 = gottenTags2; varoitukset pois
                                 } else
                                 {
                                     gottenTags2 = ";"+gottenTags2;
@@ -541,9 +553,7 @@ namespace testiä
 
             int x = 0;
             string celldata;
-            string exiftype = descriptionMTDT.Rows[x].Cells[2].Value.ToString();
-            if (curtab == 0)
-            {
+            var exiftype = descriptionMTDT.Rows[x].Cells[2].Value;
                 Unohdakuva();
                 var file = ImageFile.FromFile(valittukuva);
                 foreach (DataGridViewRow row in descriptionMTDT.Rows)
@@ -551,54 +561,95 @@ namespace testiä
                     if (descriptionMTDT.Rows[x].Cells[1].Value == null)
                     {
                         celldata = "";
+                        Debug.WriteLine("kivesneste");
                     }
                     else
                     {
                         celldata = descriptionMTDT.Rows[x].Cells[1].Value.ToString();
                     }
                     Debug.WriteLine(celldata);
+                    exiftype = descriptionMTDT.Rows[x].Cells[2].Value;
 
-                    //VITTUUUU MITEN SAAN TÄN TOIMIMAaN ILMAAN KAHEKSAA SATAA IF LAUSETTA PERKELEEN C# KUN SE EI OLE PHP JOSSA TÄTÄ ONGELMAA EI OLISI PERKELE
+                //VITTUUUU MITEN SAAN TÄN TOIMIMAaN ILMAAN KAHEKSAA SATAA IF LAUSETTA PERKELEEN C# KUN SE EI OLE PHP JOSSA TÄTÄ ONGELMAA EI OLISI PERKELE
 
-                    /*string stringit = "ExifTag." + exiftype;
-                    ExifLibrary.ExifTag stringit2 = "ExifTag." + exiftype;
-                    //ExifLibrary.ExifTag stringit = "ExifTag."+exiftype;
+                /*string stringit = "ExifTag." + exiftype;
+                ExifLibrary.ExifTag stringit2 = "ExifTag." + exiftype;
+                //ExifLibrary.ExifTag stringit = "ExifTag."+exiftype;
 
-                    file.Properties.Set(stringit2, celldata);*/
+                file.Properties.Set(stringit2, celldata);*/
 
-                    //tällästä if lause sotkua tulee kun C# on tyhmä kieli. saisin tän muunmuassa nyt just valmiiksi mutten suostu täyttää mun jo paskaa koodia if lauseilla
-                    //noita perkeleitähän tulee yhteensä noin 26. pelkkä ajatus 26 if lauseesta miltein peräkkäin saa mut kääntymään satanismiin
-
-                    if (x == 0)
-                    {
-                        file.Properties.Set(ExifTag.WindowsTitle, celldata);
-                    }
-                    else if (x == 1)
-                    {
-                        file.Properties.Set(ExifTag.WindowsSubject, celldata);
-                    }
-                    else if (x == 2)
-                    {
-                        file.Properties.Set(ExifTag.Rating, celldata);
-                    }
-                    else if (x == 3)
-                    {
-                        file.Properties.Set(ExifTag.WindowsKeywords, celldata);
-                    }
-                    else if (x == 4)
-                    {
-                        file.Properties.Set(ExifTag.WindowsComment, celldata);
-                    }
-
-
-                    x++;
+                //tällästä if lause sotkua tulee kun C# on tyhmä kieli. saisin tän muunmuassa nyt just valmiiksi mutten suostu täyttää mun jo paskaa koodia if lauseilla
+                //noita perkeleitähän tulee yhteensä noin 26. pelkkä ajatus 26 if lauseesta miltein peräkkäin saa mut kääntymään satanismiin
+                /*
+                if (x == 0)
+                {
+                    file.Properties.Set(ExifTag.WindowsTitle, celldata);
                 }
+                else if (x == 1)
+                {
+                    file.Properties.Set(ExifTag.WindowsSubject, celldata);
+                }
+                else if (x == 2)
+                {
+                    file.Properties.Set(ExifTag.Rating, celldata);
+                }
+                else if (x == 3)
+                {
+                    file.Properties.Set(ExifTag.WindowsKeywords, celldata);
+                }
+                else if (x == 4)
+                {
+                    file.Properties.Set(ExifTag.WindowsComment, celldata);
+                }*/
+
+                //EI KIISSELISET MEISSELIT SENTÄÄN SE TOIMII! EIKÄ SIINÄ OLE KUIN YKSI IF LAUSE JEE BOING JIHUU
+                //ongelman ratkaisi kun olin kirjottanut "exiftag.windows" niin siinä oli tullu se teksti-boksi jossa näky joku numero minkä oletin olevan sama juttu kuin se nimi mutta numerona (yllätys)
+                //jees saatana
+
+                //if (curtab == 0)
+                //{
+                    Debug.WriteLine("KIISSELI");
+                    if ((bool)(descriptionMTDT.Rows[x].Cells[2].Value == exiftype))
+                    {
+                        file.Properties.Set((ExifTag)exiftype, celldata);
+                        Debug.WriteLine("\n" + exiftype + " / " + celldata + "\nMEISSELI");
+                    if ((int)exiftype == 236867)
+                    {
+                        DateTime myDate = DateTime.ParseExact(celldata, "yyyy.MM.dd HH.mm.ss",System.Globalization.CultureInfo.InvariantCulture);
+
+                        file.Properties.Set((ExifTag)exiftype, myDate);
+                        // x = x;  huom tän virka on olla ns "breakpoint":ina kun tuo vittuilee nytten
+                        //tää on aika paskaa koodia mutta jotenkin on tarkistettava ollaanko muuttamassa tota datetimeoriginal höskää koska se celldata pitää muuttaa datetimeksi
+                    }
+                }
+                //}
 
 
-                file.Save(valittukansio2 + "/" + valittukuva2);
-                PictureBox.Image = Image.FromFile(@valittukuva);
-                Metat();
+                x++;
             }
+            Unohdakuva();
+            file.Save(valittukansio2 + "/" + valittukuva2);
+            PictureBox.Image = Image.FromFile(@valittukuva);
+            Metat();
+            Debug.WriteLine("------------------------------------------------------------------");
+        }
+
+        private void tab_description_Click(object sender, EventArgs e)
+        {
+            curtab = 0;
+            Metat();
+        }
+
+        private void tab_origin_Click(object sender, EventArgs e)
+        {
+            curtab = 1;
+            Metat();
+        }
+
+        private void descriptionMTDT_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            descriptionMTDT.ClearSelection();
+
         }
     }
 }

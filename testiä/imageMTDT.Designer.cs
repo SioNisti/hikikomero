@@ -44,13 +44,13 @@ namespace testiä
             this.currentimage = new System.Windows.Forms.NumericUpDown();
             this.TagSearch = new System.Windows.Forms.TextBox();
             this.descriptionMTDT = new System.Windows.Forms.DataGridView();
+            this.mtdtName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mtdtData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exif = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_description = new System.Windows.Forms.Button();
             this.tab_origin = new System.Windows.Forms.Button();
             this.tab_camera = new System.Windows.Forms.Button();
             this.tab_ap = new System.Windows.Forms.Button();
-            this.mtdtName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mtdtData = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.exif = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageamount)).BeginInit();
@@ -177,31 +177,8 @@ namespace testiä
             resources.ApplyResources(this.descriptionMTDT, "descriptionMTDT");
             this.descriptionMTDT.Name = "descriptionMTDT";
             this.descriptionMTDT.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.descriptionMTDT_CellEndEdit);
+            this.descriptionMTDT.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.descriptionMTDT_CellLeave);
             this.descriptionMTDT.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
-            // 
-            // tab_description
-            // 
-            resources.ApplyResources(this.tab_description, "tab_description");
-            this.tab_description.Name = "tab_description";
-            this.tab_description.UseVisualStyleBackColor = true;
-            // 
-            // tab_origin
-            // 
-            resources.ApplyResources(this.tab_origin, "tab_origin");
-            this.tab_origin.Name = "tab_origin";
-            this.tab_origin.UseVisualStyleBackColor = true;
-            // 
-            // tab_camera
-            // 
-            resources.ApplyResources(this.tab_camera, "tab_camera");
-            this.tab_camera.Name = "tab_camera";
-            this.tab_camera.UseVisualStyleBackColor = true;
-            // 
-            // tab_ap
-            // 
-            resources.ApplyResources(this.tab_ap, "tab_ap");
-            this.tab_ap.Name = "tab_ap";
-            this.tab_ap.UseVisualStyleBackColor = true;
             // 
             // mtdtName
             // 
@@ -223,6 +200,32 @@ namespace testiä
             resources.ApplyResources(this.exif, "exif");
             this.exif.Name = "exif";
             this.exif.ReadOnly = true;
+            // 
+            // tab_description
+            // 
+            resources.ApplyResources(this.tab_description, "tab_description");
+            this.tab_description.Name = "tab_description";
+            this.tab_description.UseVisualStyleBackColor = true;
+            this.tab_description.Click += new System.EventHandler(this.tab_description_Click);
+            // 
+            // tab_origin
+            // 
+            resources.ApplyResources(this.tab_origin, "tab_origin");
+            this.tab_origin.Name = "tab_origin";
+            this.tab_origin.UseVisualStyleBackColor = true;
+            this.tab_origin.Click += new System.EventHandler(this.tab_origin_Click);
+            // 
+            // tab_camera
+            // 
+            resources.ApplyResources(this.tab_camera, "tab_camera");
+            this.tab_camera.Name = "tab_camera";
+            this.tab_camera.UseVisualStyleBackColor = true;
+            // 
+            // tab_ap
+            // 
+            resources.ApplyResources(this.tab_ap, "tab_ap");
+            this.tab_ap.Name = "tab_ap";
+            this.tab_ap.UseVisualStyleBackColor = true;
             // 
             // imageMTDT
             // 
