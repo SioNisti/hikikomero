@@ -393,27 +393,12 @@
   <metadata name="mtdtName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="mtdtName.HeaderText" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="mtdtName.Width" type="System.Int32, mscorlib">
-    <value>41</value>
-  </data>
   <metadata name="mtdtData.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="mtdtData.HeaderText" xml:space="preserve">
-    <value>Data</value>
-  </data>
   <metadata name="exif.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="exif.HeaderText" xml:space="preserve">
-    <value>exif</value>
-  </data>
-  <data name="exif.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="descriptionMTDT.Location" type="System.Drawing.Point, System.Drawing">
     <value>1074, 287</value>
   </data>
@@ -437,6 +422,30 @@
   </data>
   <data name="&gt;&gt;descriptionMTDT.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <metadata name="mtdtName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="mtdtName.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="mtdtName.Width" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <metadata name="mtdtData.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="mtdtData.HeaderText" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <metadata name="exif.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="exif.HeaderText" xml:space="preserve">
+    <value>exif</value>
+  </data>
+  <data name="exif.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tab_description.Location" type="System.Drawing.Point, System.Drawing">
     <value>1074, 264</value>

@@ -248,8 +248,14 @@ namespace testiä
             //descriptionMTDT.CurrentCell = null;voi perkele
             descriptionMTDT.ClearSelection();
             descriptionMTDT.Rows.Clear();
-            
+
             var file = ImageFile.FromFile(valittukuva);
+
+            foreach (var property in file.Properties)
+            {
+                Debug.WriteLine(property.Name + " - " + property.Value);
+            }
+
             if (curtab == 0)
             {
                 descriptionMTDT.Rows.Add("Title", file.Properties.Get(ExifTag.WindowsTitle), 140091);
@@ -262,8 +268,32 @@ namespace testiä
             {
                 descriptionMTDT.Rows.Add("Authors", file.Properties.Get(ExifTag.WindowsAuthor), 140093);
                 descriptionMTDT.Rows.Add("Date taken", file.Properties.Get(ExifTag.DateTimeOriginal), 236867);
-                descriptionMTDT.Rows.Add("Date acquired", file.Properties.Get(ExifTag.SubSecTime), 237520);
+                //descriptionMTDT.Rows.Add("Date acquired", file.Properties.Get(ExifTag.SubSecTime), 237520);
                 descriptionMTDT.Rows.Add("Copyright", file.Properties.Get(ExifTag.Copyright), 133432);
+            }
+            if (curtab == 2)
+            {
+                descriptionMTDT.Rows.Add("Camera maker", file.Properties.Get(ExifTag.Make), 100271);
+                descriptionMTDT.Rows.Add("Camera model", file.Properties.Get(ExifTag.Model), 100272);
+                descriptionMTDT.Rows.Add("ISO speed", file.Properties.Get(ExifTag.ISOSpeedRatings), 234855);
+                descriptionMTDT.Rows.Add("Metering Mode", file.Properties.Get(ExifTag.MeteringMode), 237383);
+                descriptionMTDT.Rows.Add("Flash mode", file.Properties.Get(ExifTag.Flash), 237385);
+                descriptionMTDT.Rows.Add("35mm focal lenght", file.Properties.Get(ExifTag.FocalLengthIn35mmFilm), 241989);
+            }
+            if (curtab == 3)
+            {
+                descriptionMTDT.Rows.Add("Lens maker", file.Properties.Get(ExifTag.LensMake), 242035);
+                descriptionMTDT.Rows.Add("Lens model", file.Properties.Get(ExifTag.LensModel), 242036);
+                descriptionMTDT.Rows.Add("Flash maker", file.Properties.Get(ExifTag.FlashEnergy), 241483);
+                descriptionMTDT.Rows.Add("Flash model", file.Properties.Get(ExifTag.FlashpixVersion), 240960);
+                descriptionMTDT.Rows.Add("Camera serial number", file.Properties.Get(ExifTag.BodySerialNumber), 242033);
+                descriptionMTDT.Rows.Add("Contrast", file.Properties.Get(ExifTag.Contrast), 241992);
+                descriptionMTDT.Rows.Add("Light source", file.Properties.Get(ExifTag.LightSource), 237384);
+                descriptionMTDT.Rows.Add("Exposure program", file.Properties.Get(ExifTag.ExposureProgram), 234850);
+                descriptionMTDT.Rows.Add("Saturation", file.Properties.Get(ExifTag.Saturation), 241993);
+                descriptionMTDT.Rows.Add("Sharpness", file.Properties.Get(ExifTag.Sharpness), 241994);
+                descriptionMTDT.Rows.Add("White balance", file.Properties.Get(ExifTag.WhiteBalance), 241987);
+                descriptionMTDT.Rows.Add("EXIF version", file.Properties.Get(ExifTag.ExifVersion), 236864);
             }
         }
 
@@ -561,7 +591,7 @@ namespace testiä
                     if (descriptionMTDT.Rows[x].Cells[1].Value == null)
                     {
                         celldata = "";
-                        Debug.WriteLine("kivesneste");
+                        Debug.WriteLine("kivesneste"); //mikä helvetin mieliala pitää olla jotta laittaa debug viestiksi "kivesneste"????
                     }
                     else
                     {
@@ -615,9 +645,16 @@ namespace testiä
                         Debug.WriteLine("\n" + exiftype + " / " + celldata + "\nMEISSELI");
                     if ((int)exiftype == 236867)
                     {
-                        DateTime myDate = DateTime.ParseExact(celldata, "yyyy.MM.dd HH.mm.ss",System.Globalization.CultureInfo.InvariantCulture);
+                        if (celldata == null || celldata == "")
+                        {
+                            string myDate2 = "";
+                            file.Properties.Set((ExifTag)exiftype, myDate2);
+                        } else
+                        {
+                            DateTime myDate = DateTime.ParseExact(celldata, "yyyy.MM.dd HH.mm.ss", System.Globalization.CultureInfo.InvariantCulture);
+                            file.Properties.Set((ExifTag)exiftype, myDate);
+                        }
 
-                        file.Properties.Set((ExifTag)exiftype, myDate);
                         // x = x;  huom tän virka on olla ns "breakpoint":ina kun tuo vittuilee nytten
                         //tää on aika paskaa koodia mutta jotenkin on tarkistettava ollaanko muuttamassa tota datetimeoriginal höskää koska se celldata pitää muuttaa datetimeksi
                     }
@@ -650,6 +687,18 @@ namespace testiä
         {
             descriptionMTDT.ClearSelection();
 
+        }
+
+        private void tab_camera_Click(object sender, EventArgs e)
+        {
+            curtab = 2;
+            Metat();
+        }
+
+        private void tab_ap_Click(object sender, EventArgs e)
+        {
+            curtab = 3;
+            Metat();
         }
     }
 }

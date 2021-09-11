@@ -220,12 +220,14 @@ namespace testiä
             resources.ApplyResources(this.tab_camera, "tab_camera");
             this.tab_camera.Name = "tab_camera";
             this.tab_camera.UseVisualStyleBackColor = true;
+            this.tab_camera.Click += new System.EventHandler(this.tab_camera_Click);
             // 
             // tab_ap
             // 
             resources.ApplyResources(this.tab_ap, "tab_ap");
             this.tab_ap.Name = "tab_ap";
             this.tab_ap.UseVisualStyleBackColor = true;
+            this.tab_ap.Click += new System.EventHandler(this.tab_ap_Click);
             // 
             // imageMTDT
             // 
