@@ -329,13 +329,12 @@ namespace testiä
             var file = ImageFile.FromFile(valittukuva);
             foreach (var property in file.Properties)
             {
+                //var property = file.Properties;
                 /*ListViewItem item = new ListViewItem();
                 item.Text = ($"{property.Name}");
                 item.SubItems.Add(($"{ property.Value}"));*/
                 //DataGridView.Items.Add(new Item() { Name = $"{property.Name}", Data = $"{property.Value}" });
                 dataGridView1.Rows.Add($"{property.Name}", $"{property.Value}");
-
-
                 //MetadataBox.Items.Add(item);
             }
         }
