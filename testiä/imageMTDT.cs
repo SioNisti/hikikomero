@@ -6,6 +6,7 @@ using Directory = System.IO.Directory;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using ExifLibrary;
 using System.ComponentModel;
+using System.Diagnostics;
 /*
 *nää on kuulemma turhia t:vs
 using System.Collections.Generic;
@@ -332,6 +333,7 @@ namespace testiä
         }
         public void searchwithtag(string text)
         {
+            
             //MessageBox.Show(text);
             /*string[] Xtags = text.Split(';');
             foreach (var Xtag in Xtags)
@@ -394,73 +396,128 @@ namespace testiä
                     if (gottenTags != null) {  
                     string gottenTags2 = gottenTags.ToString();
 
-                        //var file5 = ImageFile.FromFile(file);
+                        //var file5 = ImageFile.FromFile(file); 
 
                         //MessageBox.Show(gottenTags2);
                         if (gottenTags != null)
                         {
+//tää saatanan paska koodin pätkä toimmii mutta se ärsyttää iha vitusteen koska tämä on mahollisesti pirun hidas jos kuvia on vähänkään enemmän
+//tää vitun paska lyhyt perkele kattoo joka kuvasta joka valitun tägin sen sijasta että se lopettaisi edes yrittämisen jos yksikään tägi ei löydy
+//perkele kun käytin joku 10 vitullista tuntia tonne alempaan pois kommentoituun kohtaan koska se periaate oli hyvä mutta en vaan saanut toimimaan
+//enemmällä kuin kahdella tägillä vittu perkele saatana kirosana jumalauta >>>>>>>>>>::::::::(((((((((((((((
+//tl:dr vituttaa paska koodi
 
-                            //MessageBox.Show(ota + "\n=?\n" + text);
-                            //MessageBox.Show($"{Xtags2[0]}");
-                            if (gottenTags2.Contains($"{Xtags2[0]}"))
-                            {
-                                //MessageBox.Show("vittu");
-                                //MessageBox.Show(file + "\n" + gottenTags2 + "\n\ncontains\n\n" + tagi2 + "\n\n" + tloop);
-                                if (count > 1)
+// JOOOOOOO Just parasta jeebou juuh eliikkääs "break;" tonne else:n sisälle korjas ongelman :DDD olo vitun tyhmä
+                            tloop = 0;
+
+                            foreach (var tagÅ in Xtags2)
                                 {
-                                    //MessageBox.Show("saatana");
-                                    if (tloop <= count)
+                                    if (gottenTags2.Contains(tagÅ))
                                     {
-                                        //MessageBox.Show($"{Xtags2[tloop]}");
-                                        if (gottenTags2.Contains($"{Xtags2[tloop + 1]}"))
+                                        tloop++;
+                                        Debug.WriteLine(file + "\n\n" + tagÅ + "\n\n" + gottenTags2 + "\n\n" + tloop + "/" + count);
+                                        if (tloop > count)
                                         {
-                                            //MessageBox.Show(file + "\n" + gottenTags2 + "\n\ncontains\n\n" + $"{Xtags2[tloop]}" + "\n\n"+tloop);
+                                        tloop = 0;
+                                        item.Tag = file;
+                                        FileBox.Items.Add(item);
+                                        Debug.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                                        }
+                                        b--;//tää estää sen ettei se jää loputtomaan looppiin jumihin
+                                    }
+                                    else
+                                    {
+                                        tloop = 0;
+                                        Debug.WriteLine(file + "\nXXX\n" + tagÅ + "\n\n" + gottenTags2 + "\n\n" + tloop + "/" + count);
+                                        break;
+                                    }
+                                }
+                                Debug.WriteLine("--------------------------------------------------------------");
+
+
+                                /*
+                                //MessageBox.Show(ota + "\n=?\n" + text);
+                                //MessageBox.Show($"{Xtags2[0]}");
+                                if (gottenTags2.Contains($"{Xtags2[tloop]}"))
+                                {
+                                    Debug.WriteLine(file + "\n" + gottenTags2 + "\n\n\n\n" + $"{Xtags2[tloop]}" + "{Xtags2[0]}\n\n\n\nTAG" + tloop + " OLI");
+                                    tloop++;
+                                    //MessageBox.Show("vittu");
+                                    //MessageBox.Show(file + "\n" + gottenTags2 + "\n\ncontains\n\n" + tagi2 + "\n\n" + tloop);
+                                        if (count > 1)
+                                        {
+                                        //MessageBox.Show("saatana");
+                                        if (tloop <= count)
+                                        {
+                                            //MessageBox.Show($"{Xtags2[tloop]}");
+                                            if (gottenTags2.Contains($"{Xtags2[tloop]}"))
+                                            {
+                                                Debug.WriteLine(file + "\n" + gottenTags2 + "\n\n\n\n" + $"{Xtags2[tloop]}" + "{Xtags2[tloop]}\n\n\n\nTAG" + tloop + " OLI"+count);
+                                                //MessageBox.Show(file + "\n" + gottenTags2 + "\n\ncontains\n\n" + $"{Xtags2[tloop]}" + "\n\n"+tloop);
+                                                //
+                                                if(tloop == count)
+                                                    {
+                                                        if (!FileBox.Items.Contains(item))
+                                                        {
+                                                            item.Tag = file;
+                                                            FileBox.Items.Add(item);
+                                                            Debug.WriteLine(file + "\nAdded");
+                                                            tloop = 0;
+                                                            b--;
+                                                            Debug.WriteLine("-----------------------------------------------------------------------------------------------------------------");
+                                                        }
+                                                        if (tloop == count - 1)
+                                                        {
+                                                        }
+                                                        else
+                                                        {
+                                                            tloop++;
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        tloop++;
+                                                    }
+                                            }
+                                            else
+                                                {
+                                                    Debug.WriteLine(file + "\n" + gottenTags2 + "\n\n\n\n" + $"{Xtags2[tloop]}" + "{Xtags2[tloop]}\n\n\n\nTAG" + tloop + " EI OLLUT"); 
+                                                    tloop = 0;
+                                                    //b--;
+                                                    Debug.WriteLine("-----------------------------------------------------------------------------------------------------------------");
+                                                }
+                                        }
+                                        else
+                                        {
+                                            Debug.WriteLine(tloop + "<=" + count);
                                             item.Tag = file;
 
                                             if (!FileBox.Items.Contains(item))
                                             {
                                                 FileBox.Items.Add(item);
+                                                b--;
                                             }
-                                            if (tloop == count - 1)
-                                            {
-                                            }
-                                            else
-                                            {
-                                                tloop++;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            //return;
                                         }
                                     }
                                     else
                                     {
+                                        Debug.WriteLine("tägejä on yksi");
                                         item.Tag = file;
-
+                                        //MessageBox.Show("perkele");
                                         if (!FileBox.Items.Contains(item))
                                         {
                                             FileBox.Items.Add(item);
+                                            b--;
                                         }
                                     }
                                 }
-                                else
-                                {
-                                    item.Tag = file;
-                                    //MessageBox.Show("perkele");
-                                    if (!FileBox.Items.Contains(item))
-                                    {
-                                        FileBox.Items.Add(item);
-                                    }
-                                }
-                            }
 
-                        }
+                            */
+                            }
                     }
                 }
                 intti = -3;
                 numericUpDown1.Value = FileBox.Items.Count;
-                    b--;
                 }
             }
 
