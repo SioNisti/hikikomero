@@ -52,11 +52,14 @@ namespace testiä
             this.button1 = new System.Windows.Forms.Button();
             this.TagTaker = new System.Windows.Forms.TextBox();
             this.TagSearch = new System.Windows.Forms.TextBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.mtdtName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mtdtData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // prevbtn
@@ -68,6 +71,7 @@ namespace testiä
             this.prevbtn.Text = "Previous";
             this.prevbtn.UseVisualStyleBackColor = true;
             this.prevbtn.Click += new System.EventHandler(this.Button1_Click);
+            this.prevbtn.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
             // 
             // nxtbtn
             // 
@@ -78,6 +82,7 @@ namespace testiä
             this.nxtbtn.Text = "Next";
             this.nxtbtn.UseVisualStyleBackColor = true;
             this.nxtbtn.Click += new System.EventHandler(this.Button2_Click);
+            this.nxtbtn.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
             // 
             // PictureBox
             // 
@@ -89,6 +94,7 @@ namespace testiä
             this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PictureBox.TabIndex = 2;
             this.PictureBox.TabStop = false;
+            this.PictureBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragfolder);
             // 
             // toolStrip1
             // 
@@ -114,12 +120,14 @@ namespace testiä
             // 
             // ChosenFolder
             // 
+            this.ChosenFolder.AllowDrop = true;
             this.ChosenFolder.Location = new System.Drawing.Point(997, 28);
             this.ChosenFolder.Name = "ChosenFolder";
             this.ChosenFolder.ReadOnly = true;
             this.ChosenFolder.Size = new System.Drawing.Size(255, 20);
             this.ChosenFolder.TabIndex = 7;
             this.ChosenFolder.Text = "Folder path";
+            this.ChosenFolder.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragfolder);
             // 
             // FileBox
             // 
@@ -134,6 +142,7 @@ namespace testiä
             this.FileBox.TabIndex = 8;
             this.FileBox.UseCompatibleStateImageBehavior = false;
             this.FileBox.View = System.Windows.Forms.View.Details;
+            this.FileBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragfolder);
             // 
             // columnHeader1
             // 
@@ -265,12 +274,29 @@ namespace testiä
             this.TagSearch.Text = "Search with tags";
             this.TagSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TagSearch_KeyUp);
             // 
-            // progressBar1
+            // dataGridView1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(736, 5);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(255, 16);
-            this.progressBar1.TabIndex = 20;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.mtdtName,
+            this.mtdtData});
+            this.dataGridView1.Location = new System.Drawing.Point(751, 28);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(240, 441);
+            this.dataGridView1.TabIndex = 21;
+            // 
+            // mtdtName
+            // 
+            this.mtdtName.HeaderText = "Name";
+            this.mtdtName.Name = "mtdtName";
+            // 
+            // mtdtData
+            // 
+            this.mtdtData.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.mtdtData.HeaderText = "Data";
+            this.mtdtData.Name = "mtdtData";
             // 
             // imageMTDT
             // 
@@ -279,7 +305,7 @@ namespace testiä
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.TagSearch);
             this.Controls.Add(this.TagTaker);
             this.Controls.Add(this.button1);
@@ -300,13 +326,17 @@ namespace testiä
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "imageMTDT";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Image Metadata";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragfolder);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,7 +365,9 @@ namespace testiä
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox TagTaker;
         private System.Windows.Forms.TextBox TagSearch;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mtdtName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mtdtData;
     }
 }
 

@@ -194,6 +194,68 @@ namespace testiä
 
         }
 
+        private void PictureBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (ModifierKeys.HasFlag(Keys.Control))
+            {
+                if (e.KeyCode == Keys.Left || e.KeyCode == Keys.B)
+                {
+                    //edellinen kuva
+                    unohdakuva();
+
+                    intti--;
+
+                    if (intti == -4)
+                    {
+                        intti = -1;
+                    }
+                    FileBox.Items[0].Selected = true;
+
+                    if (intti < 0)
+                    {
+                        intti = FileBox.Items.Count - 1;
+                    }
+
+                    /*if (FileBox.SelectedItems.Count == 0)
+                        return;*/
+                    numericUpDown2.Value = intti;//ehkä pitää olla miinus
+                    numericUpDown1.Value = FileBox.Items.Count - 1;
+                }
+            }
+            //https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.keys?view=net-5.0
+            if (ModifierKeys.HasFlag(Keys.Control))
+            {
+                if (e.KeyCode == Keys.Right || e.KeyCode == Keys.N)
+                {
+                    // seuraava kuva
+                    unohdakuva();
+
+                    intti++;
+
+                    if (intti == -2)
+                    {
+                        intti = 0;
+                    }
+                    FileBox.Items[0].Selected = true;
+
+                    if (intti == FileBox.Items.Count)
+                    {
+                        intti = 0;
+                    }
+
+                    if (intti < 0)
+                    {
+                        intti = 0;
+                    }
+
+                    /*if (FileBox.SelectedItems.Count == 0)
+                        return;*/
+                    numericUpDown2.Value = intti;
+                    numericUpDown1.Value = FileBox.Items.Count - 1;
+                }
+            }
+        }
+
         private void Button2_Click(object sender, EventArgs e)
         {
             // seuraava kuva
@@ -234,6 +296,7 @@ namespace testiä
                 ListViewItem item = new ListViewItem();
                 item.Text = ($"{property.Name}");
                 item.SubItems.Add(($"{ property.Value}"));
+                //DataGridView.Items.Add(new Item() { Name = $"{property.Name}", Data = $"{property.Value}" });
 
                 MetadataBox.Items.Add(item);
             }
@@ -572,6 +635,12 @@ namespace testiä
             Metat();
             //MessageBox.Show(valittukuva);
             PictureBox.Image = Image.FromFile(@valittukuva);
+        }
+
+        private void dragfolder(object sender, DragEventArgs e)
+        {
+            //huom: ei toimi koska se ei syystä tuntemattomasta huoli sitä kansiota
+            Kakapylytoimi();
         }
     }
 }
