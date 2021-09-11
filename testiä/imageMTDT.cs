@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Directory = System.IO.Directory;
 /*
 *nää on kuulemma turhia t:vs
+*"kuulemma" on aika X sana tähän.  muunmuassa nää joskus vanhassa koodissa käytetyt library:t vei 300mb tilaa turhaan
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
@@ -38,7 +39,15 @@ namespace testiä
         public string valittukuva;
         public string valittukuva2;
         int intti = 0;
+        int curtab = 0;
 
+        private void imageMTDT_Load(object sender, EventArgs e)
+        {
+            prevbtn.Enabled = false;
+            nxtbtn.Enabled = false;
+            TagSearch.Enabled = false;
+            currentimage.Enabled = false;
+        }
         public void Unohdakuva()
         {
             //tää koodin pätkä ottaa sen käytössä olevan kuvan pois pictureboxista jotta sen voi tiedoston päälle voi tallentaa
@@ -63,7 +72,6 @@ namespace testiä
                  * 
                  * äänitiedostot ei tue tagejä mutta niille voi antaa esim: artistin, genren, titlen ja sun muuta
                  */
-
 
                 if (Path.GetExtension(valittukuva2) == ".jpg")
                 {
@@ -152,8 +160,21 @@ namespace testiä
         }
         private void Button1_Click(object sender, EventArgs e)
         {
-            //edellinen kuva
-            Unohdakuva();
+            if (valittukansio2 == null || valittukansio2 == "")
+            {
+                prevbtn.Enabled = false;
+                nxtbtn.Enabled = false;
+                TagSearch.Enabled = false;
+                currentimage.Enabled = false;
+            } else
+            {
+                prevbtn.Enabled = true;
+                nxtbtn.Enabled = true;
+                TagSearch.Enabled = true;
+                currentimage.Enabled = true;
+
+                //edellinen kuva
+                Unohdakuva();
             intti--;
 
             FileBox.Items[0].Selected = true;
@@ -176,13 +197,28 @@ namespace testiä
 
             gsImages();
             Debug.WriteLine(intti);
+            }
 
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            // seuraava kuva
-            Unohdakuva();
+            if (valittukansio2 == null || valittukansio2 == "")
+            {
+                prevbtn.Enabled = false;
+                nxtbtn.Enabled = false;
+                TagSearch.Enabled = false;
+                currentimage.Enabled = false;
+            }
+            else
+            {
+                prevbtn.Enabled = true;
+                nxtbtn.Enabled = true;
+                TagSearch.Enabled = true;
+                currentimage.Enabled = true;
+
+                // seuraava kuva
+                Unohdakuva();
 
             intti++;
 
@@ -203,11 +239,26 @@ namespace testiä
             }
             gsImages();
             Debug.WriteLine(intti);
+            }
         }
 
         private void PictureBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (ModifierKeys.HasFlag(Keys.Control))
+            if (valittukansio2 == null || valittukansio2 == "")
+            {
+                prevbtn.Enabled = false;
+                nxtbtn.Enabled = false;
+                TagSearch.Enabled = false;
+                currentimage.Enabled = false;
+            }
+            else
+            {
+                prevbtn.Enabled = true;
+                nxtbtn.Enabled = true;
+                TagSearch.Enabled = true;
+                currentimage.Enabled = true;
+
+                if (ModifierKeys.HasFlag(Keys.Control))
             {
                 if (e.KeyCode == Keys.Left || e.KeyCode == Keys.B)
                 {
@@ -267,6 +318,7 @@ namespace testiä
                     Debug.WriteLine(intti);
                 }
             }
+            }
             if (ModifierKeys.HasFlag(Keys.Control))
             {
                 if (e.KeyCode == Keys.D)
@@ -279,14 +331,25 @@ namespace testiä
         public void Metat()
         {
             //tää siis ottaa valitusta kuvasta kaikki löytyvät metadatat ja asettaa ne siihen listview:iin
-
-            dataGridView1.Rows.Clear();
+            /*
+            descriptionMTDT.Rows.Clear();
 
             var file = ImageFile.FromFile(valittukuva);
             foreach (var property in file.Properties)
             {
-                dataGridView1.Rows.Add($"{property.Name}", $"{property.Value}");
-            }
+                descriptionMTDT.Rows.Add($"{property.Name}", $"{property.Value}");
+            }*/
+
+
+            descriptionMTDT.Rows.Clear();
+
+
+            var file = ImageFile.FromFile(valittukuva);
+                descriptionMTDT.Rows.Add("Title", file.Properties.Get(ExifTag.WindowsTitle), "WindowsTitle");
+                descriptionMTDT.Rows.Add("Subject", file.Properties.Get(ExifTag.WindowsSubject), "WindowsSubject");
+                descriptionMTDT.Rows.Add("Rating", file.Properties.Get(ExifTag.Rating), "Rating");
+                descriptionMTDT.Rows.Add("Tags", file.Properties.Get(ExifTag.WindowsKeywords), "WindowsKeywords");
+                descriptionMTDT.Rows.Add("Comments", file.Properties.Get(ExifTag.WindowsComment), "WindowsComment");
         }
 
         private void ToolStripButton1_Click_1(object sender, EventArgs e)
@@ -324,23 +387,19 @@ namespace testiä
             }
             if (FileBox.Items.Count == 0)
             {
-                MessageBox.Show("No images were found in the path \"" + valittukansio2 + "\"");
+                MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs");
             } else
             {
                 intti = 0;
                 imageamount.Value = FileBox.Items.Count;
                 currentimage.Value = intti;
+
+                prevbtn.Enabled = true;
+                nxtbtn.Enabled = true;
+                TagSearch.Enabled = true;
+                currentimage.Enabled = true;
             }
         }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            audioMTDT form = new audioMTDT();
-            form.Show();
-            imageMTDT form2 = new imageMTDT();
-            form2.Close();
-        }
-
         private void currentimage_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -431,7 +490,7 @@ namespace testiä
 
                 if (sloop >= fcount - 1)
                 {
-                    MessageBox.Show("No images were found with the tags \"" + text + "\"");
+                    MessageBox.Show("No images were found with the tags \"" + text + "\"", "No found images");
                     b--;
                     break;
                 }
@@ -514,7 +573,7 @@ namespace testiä
             }
             if (FileBox.Items.Count == 0)
             {
-                MessageBox.Show("No images were found with the tags \"" + text + "\"");
+                MessageBox.Show("No images were found with the tags \"" + text + "\"", "No found images");
             }
             }
 
@@ -542,6 +601,50 @@ namespace testiä
         {
             //huom: ei toimi koska se ei syystä tuntemattomasta huoli sitä kansiota
             Kakapylytoimi();
+        }
+
+        private void descriptionMTDT_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            /*string vittu = descriptionMTDT.CurrentCell.RowIndex.ToString();
+            string perkele = descriptionMTDT.Rows[descriptionMTDT.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            MessageBox.Show(vittu+"\n\n"+perkele);*/
+
+            int x = 0;
+            string celldata;
+            string exiftype = descriptionMTDT.Rows[x].Cells[2].Value.ToString();
+            if (curtab == 0)
+            {
+                Unohdakuva();
+                var file = ImageFile.FromFile(valittukuva);
+                foreach (DataGridViewRow row in descriptionMTDT.Rows)
+                {
+                    if (descriptionMTDT.Rows[x].Cells[1].Value == null)
+                    {
+                        celldata = "";
+                    }
+                    else
+                    {
+                        celldata = descriptionMTDT.Rows[x].Cells[1].Value.ToString();
+                    }
+                    Debug.WriteLine(celldata);
+                    //int i = (int)Convert.ChangeType(d, typeof(int));
+
+                    //VITTUUUU MITEN SAAN TÄN TOIMIMAaN ILMAAN KAHEKSAA SATAA IF LAUSETTA PERKELEEN C# KUN SE EI OLE PHP JOSSA TÄTÄ ONGELMAA EI OLISI PERKELE
+
+                    string stringit = "ExifTag." + exiftype;
+                    ExifLibrary.ExifTag stringit2 = "ExifTag." + exiftype;
+                    //ExifLibrary.ExifTag stringit = "ExifTag."+exiftype;
+
+                    file.Properties.Set(stringit2, celldata);
+
+                    x++;
+                }
+
+
+                file.Save(valittukansio2 + "/" + valittukuva2);
+                PictureBox.Image = Image.FromFile(@valittukuva);
+                Metat();
+            }
         }
     }
 }

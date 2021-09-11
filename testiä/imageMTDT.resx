@@ -122,7 +122,7 @@
     <value>12, 630</value>
   </data>
   <data name="prevbtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>486, 39</value>
+    <value>525, 39</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="prevbtn.TabIndex" type="System.Int32, mscorlib">
@@ -144,10 +144,10 @@
     <value>16</value>
   </data>
   <data name="nxtbtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>502, 630</value>
+    <value>543, 630</value>
   </data>
   <data name="nxtbtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>486, 39</value>
+    <value>525, 39</value>
   </data>
   <data name="nxtbtn.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -171,7 +171,7 @@
     <value>12, 28</value>
   </data>
   <data name="PictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>979, 596</value>
+    <value>1056, 594</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
@@ -195,6 +195,30 @@
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1404, 25</value>
+  </data>
+  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="toolStrip1.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
   <data name="DirectoryBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -219,38 +243,14 @@
   <data name="DirectoryBtn.Text" xml:space="preserve">
     <value>Directory</value>
   </data>
-  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1264, 25</value>
-  </data>
-  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="toolStrip1.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>139, 15</value>
   </metadata>
   <data name="ChosenFolder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>997, 28</value>
+    <value>1074, 27</value>
   </data>
   <data name="ChosenFolder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 20</value>
+    <value>318, 20</value>
   </data>
   <data name="ChosenFolder.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -270,17 +270,11 @@
   <data name="&gt;&gt;ChosenFolder.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value>File name</value>
-  </data>
-  <data name="columnHeader1.Width" type="System.Int32, mscorlib">
-    <value>230</value>
-  </data>
   <data name="FileBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>997, 109</value>
+    <value>1074, 107</value>
   </data>
   <data name="FileBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 151</value>
+    <value>318, 151</value>
   </data>
   <data name="FileBox.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -297,11 +291,17 @@
   <data name="&gt;&gt;FileBox.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="columnHeader1.Text" xml:space="preserve">
+    <value>File name</value>
+  </data>
+  <data name="columnHeader1.Width" type="System.Int32, mscorlib">
+    <value>287</value>
+  </data>
   <data name="CurrentFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>997, 54</value>
+    <value>1074, 53</value>
   </data>
   <data name="CurrentFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 20</value>
+    <value>317, 20</value>
   </data>
   <data name="CurrentFile.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -322,7 +322,7 @@
     <value>10</value>
   </data>
   <data name="imageamount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1132, 5</value>
+    <value>1271, 5</value>
   </data>
   <data name="imageamount.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 16</value>
@@ -343,7 +343,7 @@
     <value>9</value>
   </data>
   <data name="currentimage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>997, 5</value>
+    <value>1136, 5</value>
   </data>
   <data name="currentimage.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 16</value>
@@ -366,47 +366,8 @@
   <data name="&gt;&gt;currentimage.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="columnHeader2.Width" type="System.Int32, mscorlib">
-    <value>110</value>
-  </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="columnHeader3.Width" type="System.Int32, mscorlib">
-    <value>120</value>
-  </data>
-  <data name="MetadataBox.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="MetadataBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>997, 318</value>
-  </data>
-  <data name="MetadataBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 351</value>
-  </data>
-  <data name="MetadataBox.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="MetadataBox.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;MetadataBox.Name" xml:space="preserve">
-    <value>MetadataBox</value>
-  </data>
-  <data name="&gt;&gt;MetadataBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MetadataBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;MetadataBox.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="TagGiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>997, 266</value>
+    <value>590, 5</value>
   </data>
   <data name="TagGiver.Size" type="System.Drawing.Size, System.Drawing">
     <value>255, 20</value>
@@ -430,37 +391,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TagGiver.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 2</value>
-  </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 23</value>
-  </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="button1.Text" xml:space="preserve">
-    <value>salainen nappula</value>
-  </data>
-  <data name="button1.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
-  </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="TagTaker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>997, 292</value>
+    <value>851, 5</value>
   </data>
   <data name="TagTaker.Size" type="System.Drawing.Size, System.Drawing">
     <value>255, 20</value>
@@ -484,13 +418,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TagTaker.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="TagSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>997, 83</value>
+    <value>1074, 82</value>
   </data>
   <data name="TagSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 20</value>
+    <value>317, 20</value>
   </data>
   <data name="TagSearch.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -508,7 +442,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TagSearch.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <metadata name="mtdtName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -522,82 +456,154 @@
   <data name="mtdtData.HeaderText" xml:space="preserve">
     <value>Data</value>
   </data>
-  <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>997, 292</value>
+  <metadata name="exif.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="exif.HeaderText" xml:space="preserve">
+    <value>exif</value>
   </data>
-  <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 377</value>
+  <data name="exif.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
+  <data name="descriptionMTDT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1074, 287</value>
+  </data>
+  <data name="descriptionMTDT.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 3</value>
+  </data>
+  <data name="descriptionMTDT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 382</value>
+  </data>
+  <data name="descriptionMTDT.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
-    <value>dataGridView1</value>
+  <data name="&gt;&gt;descriptionMTDT.Name" xml:space="preserve">
+    <value>descriptionMTDT</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
+  <data name="&gt;&gt;descriptionMTDT.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;descriptionMTDT.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;descriptionMTDT.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
-  <data name="comboBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
+  <data name="tab_description.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1074, 264</value>
   </data>
-  <data name="comboBox1.Items" xml:space="preserve">
-    <value>WindowsKeywords</value>
+  <data name="tab_description.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 0, 0</value>
   </data>
-  <data name="comboBox1.Items1" xml:space="preserve">
-    <value>Artist</value>
+  <data name="tab_description.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 23</value>
   </data>
-  <data name="comboBox1.Items2" xml:space="preserve">
-    <value>Rating</value>
-  </data>
-  <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>997, 265</value>
-  </data>
-  <data name="comboBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 21</value>
-  </data>
-  <data name="comboBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="tab_description.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
-  <data name="&gt;&gt;comboBox1.Name" xml:space="preserve">
-    <value>comboBox1</value>
+  <data name="tab_description.Text" xml:space="preserve">
+    <value>Description</value>
   </data>
-  <data name="&gt;&gt;comboBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tab_description.Name" xml:space="preserve">
+    <value>tab_description</value>
   </data>
-  <data name="&gt;&gt;comboBox1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;comboBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1170, 266</value>
-  </data>
-  <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 20</value>
-  </data>
-  <data name="button2.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="button2.Text" xml:space="preserve">
-    <value>Add Metadata</value>
-  </data>
-  <data name="&gt;&gt;button2.Name" xml:space="preserve">
-    <value>button2</value>
-  </data>
-  <data name="&gt;&gt;button2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tab_description.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tab_description.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tab_description.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tab_origin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tab_origin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1154, 264</value>
+  </data>
+  <data name="tab_origin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
+  </data>
+  <data name="tab_origin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 23</value>
+  </data>
+  <data name="tab_origin.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="tab_origin.Text" xml:space="preserve">
+    <value>Origin</value>
+  </data>
+  <data name="&gt;&gt;tab_origin.Name" xml:space="preserve">
+    <value>tab_origin</value>
+  </data>
+  <data name="&gt;&gt;tab_origin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tab_origin.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tab_origin.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tab_camera.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tab_camera.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1233, 264</value>
+  </data>
+  <data name="tab_camera.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
+  </data>
+  <data name="tab_camera.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 23</value>
+  </data>
+  <data name="tab_camera.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="tab_camera.Text" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="&gt;&gt;tab_camera.Name" xml:space="preserve">
+    <value>tab_camera</value>
+  </data>
+  <data name="&gt;&gt;tab_camera.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tab_camera.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tab_camera.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tab_ap.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tab_ap.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1312, 264</value>
+  </data>
+  <data name="tab_ap.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
+  </data>
+  <data name="tab_ap.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 23</value>
+  </data>
+  <data name="tab_ap.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="tab_ap.Text" xml:space="preserve">
+    <value>Advanced Photo</value>
+  </data>
+  <data name="&gt;&gt;tab_ap.Name" xml:space="preserve">
+    <value>tab_ap</value>
+  </data>
+  <data name="&gt;&gt;tab_ap.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tab_ap.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tab_ap.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -613,7 +619,7 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1264, 681</value>
+    <value>1404, 681</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2488,18 +2494,6 @@
   <data name="&gt;&gt;columnHeader1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
-    <value>columnHeader2</value>
-  </data>
-  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
-    <value>columnHeader3</value>
-  </data>
-  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;mtdtName.Name" xml:space="preserve">
     <value>mtdtName</value>
   </data>
@@ -2510,6 +2504,12 @@
     <value>mtdtData</value>
   </data>
   <data name="&gt;&gt;mtdtData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exif.Name" xml:space="preserve">
+    <value>exif</value>
+  </data>
+  <data name="&gt;&gt;exif.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

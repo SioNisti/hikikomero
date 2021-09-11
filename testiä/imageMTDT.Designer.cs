@@ -42,23 +42,22 @@ namespace testiä
             this.CurrentFile = new System.Windows.Forms.TextBox();
             this.imageamount = new System.Windows.Forms.NumericUpDown();
             this.currentimage = new System.Windows.Forms.NumericUpDown();
-            this.MetadataBox = new System.Windows.Forms.ListView();
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TagGiver = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.TagTaker = new System.Windows.Forms.TextBox();
             this.TagSearch = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.descriptionMTDT = new System.Windows.Forms.DataGridView();
+            this.tab_description = new System.Windows.Forms.Button();
+            this.tab_origin = new System.Windows.Forms.Button();
+            this.tab_camera = new System.Windows.Forms.Button();
+            this.tab_ap = new System.Windows.Forms.Button();
             this.mtdtName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mtdtData = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.exif = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageamount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentimage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.descriptionMTDT)).BeginInit();
             this.SuspendLayout();
             // 
             // prevbtn
@@ -80,7 +79,6 @@ namespace testiä
             // PictureBox
             // 
             this.PictureBox.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.PictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.PictureBox, "PictureBox");
             this.PictureBox.Name = "PictureBox";
             this.PictureBox.TabStop = false;
@@ -161,37 +159,11 @@ namespace testiä
             this.currentimage.Name = "currentimage";
             this.currentimage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.currentimage_KeyUp);
             // 
-            // MetadataBox
-            // 
-            this.MetadataBox.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader2,
-            this.columnHeader3});
-            resources.ApplyResources(this.MetadataBox, "MetadataBox");
-            this.MetadataBox.HideSelection = false;
-            this.MetadataBox.Name = "MetadataBox";
-            this.MetadataBox.UseCompatibleStateImageBehavior = false;
-            this.MetadataBox.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader2
-            // 
-            resources.ApplyResources(this.columnHeader2, "columnHeader2");
-            // 
-            // columnHeader3
-            // 
-            resources.ApplyResources(this.columnHeader3, "columnHeader3");
-            // 
             // TagGiver
             // 
             resources.ApplyResources(this.TagGiver, "TagGiver");
             this.TagGiver.Name = "TagGiver";
             this.TagGiver.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TagGiver_KeyUp);
-            // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // TagTaker
             // 
@@ -205,19 +177,46 @@ namespace testiä
             this.TagSearch.Name = "TagSearch";
             this.TagSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TagSearch_KeyUp);
             // 
-            // dataGridView1
+            // descriptionMTDT
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.descriptionMTDT.AllowUserToAddRows = false;
+            this.descriptionMTDT.AllowUserToDeleteRows = false;
+            this.descriptionMTDT.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.descriptionMTDT.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.descriptionMTDT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.descriptionMTDT.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.mtdtName,
-            this.mtdtData});
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            resources.ApplyResources(this.dataGridView1, "dataGridView1");
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
+            this.mtdtData,
+            this.exif});
+            this.descriptionMTDT.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(this.descriptionMTDT, "descriptionMTDT");
+            this.descriptionMTDT.Name = "descriptionMTDT";
+            this.descriptionMTDT.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.descriptionMTDT_CellEndEdit);
+            this.descriptionMTDT.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
+            // 
+            // tab_description
+            // 
+            resources.ApplyResources(this.tab_description, "tab_description");
+            this.tab_description.Name = "tab_description";
+            this.tab_description.UseVisualStyleBackColor = true;
+            // 
+            // tab_origin
+            // 
+            resources.ApplyResources(this.tab_origin, "tab_origin");
+            this.tab_origin.Name = "tab_origin";
+            this.tab_origin.UseVisualStyleBackColor = true;
+            // 
+            // tab_camera
+            // 
+            resources.ApplyResources(this.tab_camera, "tab_camera");
+            this.tab_camera.Name = "tab_camera";
+            this.tab_camera.UseVisualStyleBackColor = true;
+            // 
+            // tab_ap
+            // 
+            resources.ApplyResources(this.tab_ap, "tab_ap");
+            this.tab_ap.Name = "tab_ap";
+            this.tab_ap.UseVisualStyleBackColor = true;
             // 
             // mtdtName
             // 
@@ -231,37 +230,25 @@ namespace testiä
             resources.ApplyResources(this.mtdtData, "mtdtData");
             this.mtdtData.Name = "mtdtData";
             // 
-            // comboBox1
+            // exif
             // 
-            this.comboBox1.AllowDrop = true;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items"),
-            resources.GetString("comboBox1.Items1"),
-            resources.GetString("comboBox1.Items2")});
-            this.comboBox1.Name = "comboBox1";
-            // 
-            // button2
-            // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.exif, "exif");
+            this.exif.Name = "exif";
+            this.exif.ReadOnly = true;
             // 
             // imageMTDT
             // 
             this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.tab_ap);
+            this.Controls.Add(this.tab_camera);
+            this.Controls.Add(this.tab_origin);
+            this.Controls.Add(this.tab_description);
+            this.Controls.Add(this.descriptionMTDT);
             this.Controls.Add(this.TagSearch);
             this.Controls.Add(this.TagTaker);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.TagGiver);
-            this.Controls.Add(this.MetadataBox);
             this.Controls.Add(this.currentimage);
             this.Controls.Add(this.imageamount);
             this.Controls.Add(this.CurrentFile);
@@ -275,6 +262,7 @@ namespace testiä
             this.HelpButton = true;
             this.MaximizeBox = false;
             this.Name = "imageMTDT";
+            this.Load += new System.EventHandler(this.imageMTDT_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragfolder);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
@@ -282,7 +270,7 @@ namespace testiä
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageamount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentimage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.descriptionMTDT)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,18 +290,17 @@ namespace testiä
         private System.Windows.Forms.TextBox CurrentFile;
         private System.Windows.Forms.NumericUpDown imageamount;
         private System.Windows.Forms.NumericUpDown currentimage;
-        private System.Windows.Forms.ListView MetadataBox;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.TextBox TagGiver;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox TagTaker;
         private System.Windows.Forms.TextBox TagSearch;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridView descriptionMTDT;
+        private System.Windows.Forms.Button tab_description;
+        private System.Windows.Forms.Button tab_origin;
+        private System.Windows.Forms.Button tab_camera;
+        private System.Windows.Forms.Button tab_ap;
         private System.Windows.Forms.DataGridViewTextBoxColumn mtdtName;
         private System.Windows.Forms.DataGridViewTextBoxColumn mtdtData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn exif;
     }
 }
 

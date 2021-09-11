@@ -73,12 +73,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="audioMTDT.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="audioMTDT.Designer.cs">
-      <DependentUpon>audioMTDT.cs</DependentUpon>
-    </Compile>
     <Compile Include="imageMTDT.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,9 +81,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="audioMTDT.resx">
-      <DependentUpon>audioMTDT.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="imageMTDT.aa.resx">
       <DependentUpon>imageMTDT.cs</DependentUpon>
     </EmbeddedResource>
