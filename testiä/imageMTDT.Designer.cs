@@ -1,7 +1,7 @@
 ﻿
 namespace testiä
 {
-    partial class Form1
+    partial class imageMTDT
     {
         /// <summary>
         /// Required designer variable.
@@ -30,19 +30,12 @@ namespace testiä
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(imageMTDT));
             this.prevbtn = new System.Windows.Forms.Button();
             this.nxtbtn = new System.Windows.Forms.Button();
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.DirectoryBtn = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.showImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showVideoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showAudioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.ChosenFolder = new System.Windows.Forms.TextBox();
             this.FileBox = new System.Windows.Forms.ListView();
@@ -56,6 +49,7 @@ namespace testiä
             this.TagGiver = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TagAdder = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -97,11 +91,7 @@ namespace testiä
             // 
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DirectoryBtn,
-            this.toolStripSeparator1,
-            this.toolStripDropDownButton1,
-            this.toolStripSeparator2,
-            this.toolStripButton2});
+            this.DirectoryBtn});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -119,61 +109,6 @@ namespace testiä
             this.DirectoryBtn.Text = "Directory";
             this.DirectoryBtn.Click += new System.EventHandler(this.ToolStripButton1_Click_1);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showImagesToolStripMenuItem,
-            this.showVideoToolStripMenuItem,
-            this.showAudioToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(49, 22);
-            this.toolStripDropDownButton1.Text = "Show";
-            // 
-            // showImagesToolStripMenuItem
-            // 
-            this.showImagesToolStripMenuItem.Name = "showImagesToolStripMenuItem";
-            this.showImagesToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.showImagesToolStripMenuItem.Text = "Show Images";
-            // 
-            // showVideoToolStripMenuItem
-            // 
-            this.showVideoToolStripMenuItem.Name = "showVideoToolStripMenuItem";
-            this.showVideoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.showVideoToolStripMenuItem.Text = "Show Video";
-            // 
-            // showAudioToolStripMenuItem
-            // 
-            this.showAudioToolStripMenuItem.Name = "showAudioToolStripMenuItem";
-            this.showAudioToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.showAudioToolStripMenuItem.Text = "Show Audio";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(44, 22);
-            this.toolStripButton2.Text = "About";
-            this.toolStripButton2.Click += new System.EventHandler(this.ToolStripButton2_Click);
-            // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.HelpRequest += new System.EventHandler(this.FolderBrowserDialog1_HelpRequest);
-            // 
             // ChosenFolder
             // 
             this.ChosenFolder.Location = new System.Drawing.Point(997, 28);
@@ -185,6 +120,7 @@ namespace testiä
             // 
             // FileBox
             // 
+            this.FileBox.AllowDrop = true;
             this.FileBox.CheckBoxes = true;
             this.FileBox.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
@@ -195,7 +131,6 @@ namespace testiä
             this.FileBox.TabIndex = 8;
             this.FileBox.UseCompatibleStateImageBehavior = false;
             this.FileBox.View = System.Windows.Forms.View.Details;
-            this.FileBox.SelectedIndexChanged += new System.EventHandler(this.ListView1_SelectedIndexChanged_1);
             // 
             // columnHeader1
             // 
@@ -210,7 +145,6 @@ namespace testiä
             this.CurrentFile.Size = new System.Drawing.Size(255, 20);
             this.CurrentFile.TabIndex = 9;
             this.CurrentFile.Text = "File Name";
-            this.CurrentFile.TextChanged += new System.EventHandler(this.TextBox2_TextChanged);
             // 
             // numericUpDown1
             // 
@@ -240,7 +174,6 @@ namespace testiä
             this.numericUpDown2.Size = new System.Drawing.Size(120, 16);
             this.numericUpDown2.TabIndex = 11;
             this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown2.ValueChanged += new System.EventHandler(this.NumericUpDown2_ValueChanged);
             // 
             // MetadataBox
             // 
@@ -271,7 +204,7 @@ namespace testiä
             this.TagGiver.Name = "TagGiver";
             this.TagGiver.Size = new System.Drawing.Size(174, 20);
             this.TagGiver.TabIndex = 14;
-            this.TagGiver.Text = "Desired tags here.  separate tags with ; (semicolon)";
+            this.TagGiver.Text = "Separate tags with ; (semicolon)";
             // 
             // contextMenuStrip1
             // 
@@ -288,13 +221,24 @@ namespace testiä
             this.TagAdder.UseVisualStyleBackColor = true;
             this.TagAdder.Click += new System.EventHandler(this.TagAdder_Click);
             // 
-            // Form1
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(441, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // imageMTDT
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.TagAdder);
             this.Controls.Add(this.TagGiver);
             this.Controls.Add(this.MetadataBox);
@@ -311,8 +255,8 @@ namespace testiä
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form1";
-            this.Text = "tägäytin";
+            this.Name = "imageMTDT";
+            this.Text = "Image Metadata";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.toolStrip1.ResumeLayout(false);
@@ -331,13 +275,6 @@ namespace testiä
         private System.Windows.Forms.PictureBox PictureBox;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton DirectoryBtn;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem showImagesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showVideoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showAudioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.TextBox ChosenFolder;
         private System.Windows.Forms.ListView FileBox;
@@ -351,6 +288,7 @@ namespace testiä
         private System.Windows.Forms.TextBox TagGiver;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button TagAdder;
+        private System.Windows.Forms.Button button1;
     }
 }
 

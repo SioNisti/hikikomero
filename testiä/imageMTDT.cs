@@ -4,8 +4,6 @@ using System.IO;
 using System.Windows.Forms;
 using Directory = System.IO.Directory;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using MetadataExtractor;
-using System.Linq;
 using ExifLibrary;
 /*
 *nää on kuulemma turhia t:vs
@@ -21,13 +19,15 @@ using System.Linq;
 using System.Data;
 using GroupDocs.Metadata.Common;
 using System.Runtime.InteropServices;
+using MetadataExtractor;
+using System.Linq;
 */
 
 namespace testiä
 {
-    public partial class Form1 : Form
+    public partial class imageMTDT : Form
     {
-        public Form1()
+        public imageMTDT()
         {
             InitializeComponent();
         }
@@ -44,24 +44,63 @@ namespace testiä
 
         private void TagAdder_Click(object sender, EventArgs e)
         {
-            Graphics graphic = Graphics.FromImage(PictureBox.Image);
-            graphic.Clear(Color.Red);
 
-            PictureBox.Image = null;
+            /*Tiedostot jotka tukee tagejä: 
+             * jpg, 
+             * mp4, m4v, wmv, mkv
+             * 
+             * äänitiedostot ei tue tagejä mutta niille voi antaa esim: artistin, genren, titlen ja sun muuta
+             */
 
-            string tagstoadd = TagGiver.Text;
-            //MessageBox.Show("perkeleen saatanan vittu \"kirjasto\" library on paska helvetti ja kokoversio maksaa ja trial versiossa ei pysty tallentamaan niitä vitun tiedostoja.  mä vittu tunnin yritin miettiä miksi se heittää erroria joka loppujen lopuksi olikin \"haista vittu, köyhät kyykkyyn\" viesti boksi error lootan vaatteissa perkele");
 
-            var file = ImageFile.FromFile(valittukuva);
-            // note the explicit cast to ushort< ushort > 
-            file.Properties.Set(ExifTag.WindowsKeywords, tagstoadd);
-            file.Save(valittukansio2 + "/" + valittukuva2);
-            PictureBox.Image = Image.FromFile(@valittukuva);
+            if (Path.GetExtension(valittukuva2) == ".jpg")
+            {
+
+                var file2 = ImageFile.FromFile(valittukuva);
+
+                var oldtags = file2.Properties.Get(ExifTag.WindowsKeywords);
+
+                var bit = new Bitmap(this.Width, this.Height);
+                var g = Graphics.FromImage(bit);
+
+                var oldImage = PictureBox.Image;
+                PictureBox.Image = bit;
+                oldImage?.Dispose();
+
+                g.Dispose();
+
+                string tagstoadd = TagGiver.Text;
+                //MessageBox.Show("perkeleen saatanan vittu \"kirjasto\" library on paska helvetti ja kokoversio maksaa ja trial versiossa ei pysty tallentamaan niitä vitun tiedostoja.  mä vittu tunnin yritin miettiä miksi se heittää erroria joka loppujen lopuksi olikin \"haista vittu, köyhät kyykkyyn\" viesti boksi error lootan vaatteissa perkele");
+
+                var file = ImageFile.FromFile(valittukuva);
+
+                //MessageBox.Show(oldtags + tagstoadd);
+
+                file.Properties.Set(ExifTag.WindowsKeywords, oldtags + tagstoadd);
+                file.Save(valittukansio2 + "/" + valittukuva2);
+                PictureBox.Image = Image.FromFile(@valittukuva);
+                Metat();
+            }
+            else
+            {
+                MessageBox.Show("Not a JPG file.", "Error");
+            }
+
 
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
+
+            var bit = new Bitmap(this.Width, this.Height);
+            var g = Graphics.FromImage(bit);
+            
+            var oldImage = PictureBox.Image;
+            PictureBox.Image = bit;
+            oldImage?.Dispose();
+
+            g.Dispose();
+
             if (intti == -1) {
                 intti = 0;
             }
@@ -90,6 +129,16 @@ namespace testiä
 
         private void Button2_Click(object sender, EventArgs e)
         {
+
+            var bit = new Bitmap(this.Width, this.Height);
+            var g = Graphics.FromImage(bit);
+
+            var oldImage = PictureBox.Image;
+            PictureBox.Image = bit;
+            oldImage?.Dispose();
+
+            g.Dispose();
+
             if (intti == -1)
             {
                 intti = FileBox.Items.Count - 1;
@@ -192,16 +241,6 @@ namespace testiä
          */
         }
 
-        private void ToolStripButton1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ToolStripLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ToolStripButton2_Click(object sender, EventArgs e)
         {
             /*CommonOpenFileDialog dialog = new CommonOpenFileDialog();
@@ -217,14 +256,6 @@ namespace testiä
         private void ToolStripButton1_Click_1(object sender, EventArgs e)
         {
             Kakapylytoimi();
-        }
-        private void FolderBrowserDialog1_HelpRequest(object sender, EventArgs e)
-        {
-
-        }
-        private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
         //FolderBrowserDialog folderPicker = new FolderBrowserDialog();
 
@@ -272,25 +303,18 @@ namespace testiä
 
         }
 
-        private void TextBox2_TextChanged(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
-
+            audioMTDT form = new audioMTDT();
+            form.Show();
+            imageMTDT form2 = new imageMTDT();
+            form2.Close();
         }
-
-        private void NumericUpDown2_ValueChanged(object sender, EventArgs e)
+        void Form1_DragDrop(object sender, DragEventArgs e)
         {
-            
-        }
-
-        private void ListView1_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
+            string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            MessageBox.Show("aa");
+            //more processing
         }
     }
-
 }
