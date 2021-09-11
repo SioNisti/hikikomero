@@ -173,7 +173,6 @@ namespace testiä
         {
             //edellinen kuva
             Unohdakuva();
-
             intti--;
 
             if (intti == -4)
@@ -187,10 +186,17 @@ namespace testiä
                 intti = FileBox.Items.Count - 1;
             }
 
-            /*if (FileBox.SelectedItems.Count == 0)
-                return;*/
-            numericUpDown2.Value = intti;//ehkä pitää olla miinus
             numericUpDown1.Value = FileBox.Items.Count - 1;
+
+            if (FileBox.Items.Count == 1)
+            {
+                numericUpDown2.Value = 0;
+                gsImages();
+            } else
+            {
+                numericUpDown2.Value = intti;
+            }
+
 
         }
 
@@ -202,7 +208,6 @@ namespace testiä
                 {
                     //edellinen kuva
                     Unohdakuva();
-
                     intti--;
 
                     if (intti == -4)
@@ -216,10 +221,17 @@ namespace testiä
                         intti = FileBox.Items.Count - 1;
                     }
 
-                    /*if (FileBox.SelectedItems.Count == 0)
-                        return;*/
-                    numericUpDown2.Value = intti;//ehkä pitää olla miinus
                     numericUpDown1.Value = FileBox.Items.Count - 1;
+
+                    if (FileBox.Items.Count == 1)
+                    {
+                        numericUpDown2.Value = 0;
+                        gsImages();
+                    }
+                    else
+                    {
+                        numericUpDown2.Value = intti;
+                    }
                 }
             }
             //https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.keys?view=net-5.0
@@ -248,10 +260,17 @@ namespace testiä
                         intti = 0;
                     }
 
-                    /*if (FileBox.SelectedItems.Count == 0)
-                        return;*/
-                    numericUpDown2.Value = intti;
                     numericUpDown1.Value = FileBox.Items.Count - 1;
+
+                    if (FileBox.Items.Count == 1)
+                    {
+                        numericUpDown2.Value = 0;
+                        gsImages();
+                    }
+                    else
+                    {
+                        numericUpDown2.Value = intti;
+                    }
                 }
             }
             if (ModifierKeys.HasFlag(Keys.Control))
@@ -286,10 +305,17 @@ namespace testiä
                 intti = 0;
             }
 
-            /*if (FileBox.SelectedItems.Count == 0)
-                return;*/
-            numericUpDown2.Value = intti;
             numericUpDown1.Value = FileBox.Items.Count - 1;
+
+            if (FileBox.Items.Count == 1)
+            {
+                numericUpDown2.Value = 0;
+                gsImages();
+            }
+            else
+            {
+                numericUpDown2.Value = intti;
+            }
         }
 
         public void Metat()
@@ -405,45 +431,35 @@ namespace testiä
         }
         public void searchwithtag(string text)
         {
-
-            //MessageBox.Show(text);
-            /*string[] Xtags = text.Split(';');
-            foreach (var Xtag in Xtags)
-            {
-                //tää niinkut ottaa sen tekstin siitä boksista ja ottaa tekstit ";" merkkien välistä
-                var ota = $"{Xtag};";
-
-                if (ota == ";")
-                {
-                    PictureBox.Image = Image.FromFile(@valittukuva);
-                    MessageBox.Show("Error", "Error");
-                    return;
-                }
-                    unohdakuva();
-            }*/
-
             //nyt pitäis jotenkin saada jokaikinen tägi tonne alempaan if lauseeseen että se kattoo onko tiedoston metadatasa nää tägit (text)
 
             FileBox.Items.Clear();
 
+            //string fixedtext = text;
+
+            //en tiä miksi fixedtext string:in pois ottaminen ja kaikki missä sitä käytettiin vaihtaminen text string:iin toimii
+
+            if (text[0].Equals(';'))
+            {
+                Debug.WriteLine(text);
+                text = text.Remove(0, 1);
+                Debug.WriteLine(text);
+            }
+
             char lastchar = text.Last();
-            string lastchar2 = lastchar.ToString();
-            string fixedtext;
 
-            if (lastchar2 == ";")
+            if (lastchar.Equals(';'))
             {
-                fixedtext = text.Remove(text.Length - 1);
-                //MessageBox.Show(fixedtext);
-            }
-            else
-            {
-                fixedtext = text;
+                Debug.WriteLine(text);
+                text = text.Remove(text.Length - 1);
+                Debug.WriteLine(text);
             }
 
-            string[] Xtags2 = fixedtext.Split(';');
+
+            string[] Xtags2 = text.Split(';');
 
             int count = Xtags2.Length - 1;
-            int tloop = 0;
+            int tloop;
             int sloop = 0;
             var b = 1;
 
@@ -466,7 +482,7 @@ namespace testiä
 
                 if (sloop >= fcount - 1)
                 {
-                    MessageBox.Show("No images were found with the tags \"" + fixedtext + "\"");
+                    MessageBox.Show("No images were found with the tags \"" + text + "\"");
                     b--;
                     break;
                 }
@@ -485,6 +501,15 @@ namespace testiä
                             if (gottenTags != null)
                             {
                                 string gottenTags2 = gottenTags.ToString();
+                                char gt2 = gottenTags2[0];
+
+                                if (gottenTags2[0].Equals(';'))
+                                {
+                                    gottenTags2 = gottenTags2;
+                                } else
+                                {
+                                    gottenTags2 = ";"+gottenTags2;
+                                }
 
                                 //var file5 = ImageFile.FromFile(file); 
 
@@ -513,7 +538,7 @@ namespace testiä
                                     if (gottenTags2.Contains(";" + tagÅ + ";"))
                                     {
                                         tloop++;
-                                        Debug.WriteLine(file + "\n\n" + ";" + tagÅ + ";" + "\n\n" + gottenTags2 + "\n\n" + tloop + "/" + count);
+                                        Debug.WriteLine(file + "\n\n" + ";" + tagÅ + ";" + "\n\n" + gottenTags2 + "\n"+ TagSearch.Text +"\n" + tloop + "/" + count);
                                         if (tloop > count)
                                         {
                                             tloop = 0;
@@ -535,7 +560,7 @@ namespace testiä
                                             sloop = sloop + tloop;
                                         }
                                         tloop = 0;
-                                        Debug.WriteLine(file + "\nXXX\n" + ";" + tagÅ + ";" + "\n\n" + gottenTags2 + "\n\n" + tloop + "/" + count + "(" + sloop + ")");
+                                        Debug.WriteLine(file + "\nXXX\n" + ";" + tagÅ + ";" + "\n\n" + gottenTags2 + "\n" + TagSearch.Text + "\n" + tloop + "/" + count + "(" + sloop + ")");
                                         break;
                                     }
                                 }
@@ -634,7 +659,7 @@ namespace testiä
             }
             if (FileBox.Items.Count == 0)
             {
-                MessageBox.Show("No images were found with the tags \"" + fixedtext + "\"");
+                MessageBox.Show("No images were found with the tags \"" + text + "\"");
             }
 
         }
