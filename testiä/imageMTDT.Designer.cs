@@ -42,8 +42,6 @@ namespace testiä
             this.CurrentFile = new System.Windows.Forms.TextBox();
             this.imageamount = new System.Windows.Forms.NumericUpDown();
             this.currentimage = new System.Windows.Forms.NumericUpDown();
-            this.TagGiver = new System.Windows.Forms.TextBox();
-            this.TagTaker = new System.Windows.Forms.TextBox();
             this.TagSearch = new System.Windows.Forms.TextBox();
             this.descriptionMTDT = new System.Windows.Forms.DataGridView();
             this.tab_description = new System.Windows.Forms.Button();
@@ -159,18 +157,6 @@ namespace testiä
             this.currentimage.Name = "currentimage";
             this.currentimage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.currentimage_KeyUp);
             // 
-            // TagGiver
-            // 
-            resources.ApplyResources(this.TagGiver, "TagGiver");
-            this.TagGiver.Name = "TagGiver";
-            this.TagGiver.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TagGiver_KeyUp);
-            // 
-            // TagTaker
-            // 
-            resources.ApplyResources(this.TagTaker, "TagTaker");
-            this.TagTaker.Name = "TagTaker";
-            this.TagTaker.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TagTaker_KeyUp);
-            // 
             // TagSearch
             // 
             resources.ApplyResources(this.TagSearch, "TagSearch");
@@ -181,8 +167,7 @@ namespace testiä
             // 
             this.descriptionMTDT.AllowUserToAddRows = false;
             this.descriptionMTDT.AllowUserToDeleteRows = false;
-            this.descriptionMTDT.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.descriptionMTDT.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.descriptionMTDT.BackgroundColor = System.Drawing.Color.White;
             this.descriptionMTDT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.descriptionMTDT.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.mtdtName,
@@ -220,15 +205,18 @@ namespace testiä
             // 
             // mtdtName
             // 
+            this.mtdtName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.mtdtName, "mtdtName");
             this.mtdtName.Name = "mtdtName";
             this.mtdtName.ReadOnly = true;
+            this.mtdtName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // mtdtData
             // 
             this.mtdtData.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             resources.ApplyResources(this.mtdtData, "mtdtData");
             this.mtdtData.Name = "mtdtData";
+            this.mtdtData.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // exif
             // 
@@ -247,8 +235,6 @@ namespace testiä
             this.Controls.Add(this.tab_description);
             this.Controls.Add(this.descriptionMTDT);
             this.Controls.Add(this.TagSearch);
-            this.Controls.Add(this.TagTaker);
-            this.Controls.Add(this.TagGiver);
             this.Controls.Add(this.currentimage);
             this.Controls.Add(this.imageamount);
             this.Controls.Add(this.CurrentFile);
@@ -290,8 +276,6 @@ namespace testiä
         private System.Windows.Forms.TextBox CurrentFile;
         private System.Windows.Forms.NumericUpDown imageamount;
         private System.Windows.Forms.NumericUpDown currentimage;
-        private System.Windows.Forms.TextBox TagGiver;
-        private System.Windows.Forms.TextBox TagTaker;
         private System.Windows.Forms.TextBox TagSearch;
         private System.Windows.Forms.DataGridView descriptionMTDT;
         private System.Windows.Forms.Button tab_description;

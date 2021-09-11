@@ -60,104 +60,6 @@ namespace testiä
 
             g.Dispose();
         }
-
-        private void TagTaker_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-
-                /*Tiedostot jotka tukee tagejä: 
-                 * jpg, 
-                 * mp4, m4v, wmv, mkv
-                 * 
-                 * äänitiedostot ei tue tagejä mutta niille voi antaa esim: artistin, genren, titlen ja sun muuta
-                 */
-
-                if (Path.GetExtension(valittukuva2) == ".jpg")
-                {
-                    Unohdakuva();
-                    var file2 = ImageFile.FromFile(valittukuva);
-
-                    var oldtags = file2.Properties.Get(ExifTag.WindowsKeywords);
-                    string oldtags2 = Convert.ToString(oldtags);
-
-                    string tagstotake = TagTaker.Text;
-
-                    var file = ImageFile.FromFile(valittukuva);
-
-                    string[] Xtags = tagstotake.Split(';');
-                    foreach (var Xtag in Xtags)
-                    {
-                        //tää niinkut ottaa sen tekstin siitä boksista ja ottaa tekstit ";" merkkien välistä
-                        var ota = $"{Xtag};";
-
-                        if (ota == ";")
-                        {
-                            PictureBox.Image = Image.FromFile(@valittukuva);
-                            MessageBox.Show("Error", "Error");
-                            return;
-                        }
-                        if (oldtags2.Contains(ota))
-                        {
-                            Unohdakuva();
-                            oldtags2 = oldtags2.Replace(ota, "");
-                            file.Properties.Set(ExifTag.WindowsKeywords, oldtags2);
-                            file.Save(valittukansio2 + "/" + valittukuva2);
-                            PictureBox.Image = Image.FromFile(@valittukuva);
-                            MessageBox.Show("Successfully removed tag: " + ota, "Success");
-                            Metat();
-                        }
-                        else
-                        {
-                            PictureBox.Image = Image.FromFile(@valittukuva);
-                            MessageBox.Show("Tag \"" + ota + "\" not found", "Error");
-                        }
-
-                    }
-
-                }
-                else
-                {
-                    MessageBox.Show("Not a JPG file.", "Error");
-                }
-
-            }
-        }
-        private void TagGiver_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (Path.GetExtension(valittukuva2) == ".jpg")
-                {
-
-                    Unohdakuva();
-                    var file2 = ImageFile.FromFile(valittukuva);
-
-                    var oldtags = file2.Properties.Get(ExifTag.WindowsKeywords);
-
-                    string tagstoadd = TagGiver.Text;
-                    //MessageBox.Show("perkeleen saatanan vittu \"kirjasto\" library on paska helvetti ja kokoversio maksaa ja trial versiossa ei pysty tallentamaan niitä vitun tiedostoja.  mä vittu tunnin yritin miettiä miksi se heittää erroria joka loppujen lopuksi olikin \"haista vittu, köyhät kyykkyyn\" viesti boksi error lootan vaatteissa perkele");
-                    var file = ImageFile.FromFile(valittukuva);
-
-                    if (tagstoadd.EndsWith(";"))
-                    {
-                        file.Properties.Set(ExifTag.WindowsKeywords, oldtags + tagstoadd);
-                    }
-                    else
-                    {
-                        file.Properties.Set(ExifTag.WindowsKeywords, oldtags + tagstoadd + ";");
-                    }
-                    file.Save(valittukansio2 + "/" + valittukuva2);
-                    PictureBox.Image = Image.FromFile(@valittukuva);
-                    Metat();
-                }
-                else
-                {
-                    MessageBox.Show("Not a JPG file.", "Error");
-                }
-
-            }
-        }
         private void Button1_Click(object sender, EventArgs e)
         {
             if (valittukansio2 == null || valittukansio2 == "")
@@ -450,6 +352,34 @@ namespace testiä
 
                     }
                 }
+            } 
+            else if (text == "notag")
+            {
+                string[] files = Directory.GetFiles(valittukansio2);
+                foreach (string file in files)
+                {
+                    if (file.Contains(".jpg"))
+                    {
+                        string fileName = Path.GetFileName(file);
+                        ListViewItem item = new ListViewItem(fileName);
+                        var imagetags = ImageFile.FromFile(file).Properties.Get(ExifTag.WindowsKeywords);
+                        string imagetags2 = "";
+                        if (imagetags != null)
+                        {
+                            imagetags2 = imagetags.ToString();
+                        }
+
+                        if (file.Contains(".jpg") && imagetags == null || imagetags2 == "")
+                        {
+                            item.Tag = file;
+                            FileBox.Items.Add(item);
+                            Debug.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                            Debug.WriteLine("--------------------------------------------------------------");
+                        }
+                    }
+                }
+                intti = 1;
+                imageamount.Value = FileBox.Items.Count;
             }
             else
             {
@@ -627,15 +557,39 @@ namespace testiä
                         celldata = descriptionMTDT.Rows[x].Cells[1].Value.ToString();
                     }
                     Debug.WriteLine(celldata);
-                    //int i = (int)Convert.ChangeType(d, typeof(int));
 
                     //VITTUUUU MITEN SAAN TÄN TOIMIMAaN ILMAAN KAHEKSAA SATAA IF LAUSETTA PERKELEEN C# KUN SE EI OLE PHP JOSSA TÄTÄ ONGELMAA EI OLISI PERKELE
 
-                    string stringit = "ExifTag." + exiftype;
+                    /*string stringit = "ExifTag." + exiftype;
                     ExifLibrary.ExifTag stringit2 = "ExifTag." + exiftype;
                     //ExifLibrary.ExifTag stringit = "ExifTag."+exiftype;
 
-                    file.Properties.Set(stringit2, celldata);
+                    file.Properties.Set(stringit2, celldata);*/
+
+                    //tällästä if lause sotkua tulee kun C# on tyhmä kieli. saisin tän muunmuassa nyt just valmiiksi mutten suostu täyttää mun jo paskaa koodia if lauseilla
+                    //noita perkeleitähän tulee yhteensä noin 26. pelkkä ajatus 26 if lauseesta miltein peräkkäin saa mut kääntymään satanismiin
+
+                    if (x == 0)
+                    {
+                        file.Properties.Set(ExifTag.WindowsTitle, celldata);
+                    }
+                    else if (x == 1)
+                    {
+                        file.Properties.Set(ExifTag.WindowsSubject, celldata);
+                    }
+                    else if (x == 2)
+                    {
+                        file.Properties.Set(ExifTag.Rating, celldata);
+                    }
+                    else if (x == 3)
+                    {
+                        file.Properties.Set(ExifTag.WindowsKeywords, celldata);
+                    }
+                    else if (x == 4)
+                    {
+                        file.Properties.Set(ExifTag.WindowsComment, celldata);
+                    }
+
 
                     x++;
                 }

@@ -141,7 +141,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;prevbtn.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>14</value>
   </data>
   <data name="nxtbtn.Location" type="System.Drawing.Point, System.Drawing">
     <value>543, 630</value>
@@ -165,7 +165,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;nxtbtn.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="PictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 28</value>
@@ -190,7 +190,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PictureBox.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>12</value>
   </data>
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -217,7 +217,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="DirectoryBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -268,7 +268,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ChosenFolder.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="FileBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>1074, 107</value>
@@ -289,7 +289,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;FileBox.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="columnHeader1.Text" xml:space="preserve">
     <value>File name</value>
@@ -319,7 +319,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;CurrentFile.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="imageamount.Location" type="System.Drawing.Point, System.Drawing">
     <value>1271, 5</value>
@@ -340,7 +340,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;imageamount.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="currentimage.Location" type="System.Drawing.Point, System.Drawing">
     <value>1136, 5</value>
@@ -364,60 +364,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;currentimage.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="TagGiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>590, 5</value>
-  </data>
-  <data name="TagGiver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 20</value>
-  </data>
-  <data name="TagGiver.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="TagGiver.Text" xml:space="preserve">
-    <value>Separate tags with ; (semicolon)</value>
-  </data>
-  <data name="TagGiver.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;TagGiver.Name" xml:space="preserve">
-    <value>TagGiver</value>
-  </data>
-  <data name="&gt;&gt;TagGiver.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TagGiver.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TagGiver.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="TagTaker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>851, 5</value>
-  </data>
-  <data name="TagTaker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 20</value>
-  </data>
-  <data name="TagTaker.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="TagTaker.Text" xml:space="preserve">
-    <value>Tags to delete (separate with ;)</value>
-  </data>
-  <data name="TagTaker.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;TagTaker.Name" xml:space="preserve">
-    <value>TagTaker</value>
-  </data>
-  <data name="&gt;&gt;TagTaker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TagTaker.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TagTaker.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="TagSearch.Location" type="System.Drawing.Point, System.Drawing">
@@ -449,6 +395,9 @@
   </metadata>
   <data name="mtdtName.HeaderText" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="mtdtName.Width" type="System.Int32, mscorlib">
+    <value>41</value>
   </data>
   <metadata name="mtdtData.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
