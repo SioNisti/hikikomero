@@ -50,6 +50,9 @@ namespace testiä
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TagAdder = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.TagTaker = new System.Windows.Forms.TextBox();
+            this.TagSearch = new System.Windows.Forms.TextBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -125,9 +128,9 @@ namespace testiä
             this.FileBox.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.FileBox.HideSelection = false;
-            this.FileBox.Location = new System.Drawing.Point(997, 79);
+            this.FileBox.Location = new System.Drawing.Point(997, 109);
             this.FileBox.Name = "FileBox";
-            this.FileBox.Size = new System.Drawing.Size(255, 213);
+            this.FileBox.Size = new System.Drawing.Size(255, 151);
             this.FileBox.TabIndex = 8;
             this.FileBox.UseCompatibleStateImageBehavior = false;
             this.FileBox.View = System.Windows.Forms.View.Details;
@@ -169,11 +172,22 @@ namespace testiä
             0,
             0,
             0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.ReadOnly = true;
             this.numericUpDown2.Size = new System.Drawing.Size(120, 16);
             this.numericUpDown2.TabIndex = 11;
             this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
+            this.numericUpDown2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.numericUpDown2_KeyUp);
             // 
             // MetadataBox
             // 
@@ -181,9 +195,9 @@ namespace testiä
             this.columnHeader2,
             this.columnHeader3});
             this.MetadataBox.HideSelection = false;
-            this.MetadataBox.Location = new System.Drawing.Point(997, 325);
+            this.MetadataBox.Location = new System.Drawing.Point(997, 318);
             this.MetadataBox.Name = "MetadataBox";
-            this.MetadataBox.Size = new System.Drawing.Size(256, 344);
+            this.MetadataBox.Size = new System.Drawing.Size(256, 351);
             this.MetadataBox.TabIndex = 13;
             this.MetadataBox.UseCompatibleStateImageBehavior = false;
             this.MetadataBox.View = System.Windows.Forms.View.Details;
@@ -200,11 +214,12 @@ namespace testiä
             // 
             // TagGiver
             // 
-            this.TagGiver.Location = new System.Drawing.Point(997, 299);
+            this.TagGiver.Location = new System.Drawing.Point(997, 266);
             this.TagGiver.Name = "TagGiver";
-            this.TagGiver.Size = new System.Drawing.Size(174, 20);
+            this.TagGiver.Size = new System.Drawing.Size(255, 20);
             this.TagGiver.TabIndex = 14;
             this.TagGiver.Text = "Separate tags with ; (semicolon)";
+            this.TagGiver.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TagGiver_KeyUp);
             // 
             // contextMenuStrip1
             // 
@@ -213,7 +228,7 @@ namespace testiä
             // 
             // TagAdder
             // 
-            this.TagAdder.Location = new System.Drawing.Point(1177, 299);
+            this.TagAdder.Location = new System.Drawing.Point(135, -10);
             this.TagAdder.Name = "TagAdder";
             this.TagAdder.Size = new System.Drawing.Size(75, 20);
             this.TagAdder.TabIndex = 16;
@@ -223,13 +238,38 @@ namespace testiä
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(441, 2);
+            this.button1.Location = new System.Drawing.Point(135, -13);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 17;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // TagTaker
+            // 
+            this.TagTaker.Location = new System.Drawing.Point(997, 292);
+            this.TagTaker.Name = "TagTaker";
+            this.TagTaker.Size = new System.Drawing.Size(255, 20);
+            this.TagTaker.TabIndex = 18;
+            this.TagTaker.Text = "Tags to delete (separate with ;)";
+            this.TagTaker.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TagTaker_KeyUp);
+            // 
+            // TagSearch
+            // 
+            this.TagSearch.Location = new System.Drawing.Point(997, 83);
+            this.TagSearch.Name = "TagSearch";
+            this.TagSearch.Size = new System.Drawing.Size(255, 20);
+            this.TagSearch.TabIndex = 19;
+            this.TagSearch.Text = "Search with tags";
+            this.TagSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TagSearch_KeyUp);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(736, 5);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(255, 16);
+            this.progressBar1.TabIndex = 20;
             // 
             // imageMTDT
             // 
@@ -238,6 +278,9 @@ namespace testiä
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.TagSearch);
+            this.Controls.Add(this.TagTaker);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.TagAdder);
             this.Controls.Add(this.TagGiver);
@@ -289,6 +332,9 @@ namespace testiä
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button TagAdder;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox TagTaker;
+        private System.Windows.Forms.TextBox TagSearch;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 
