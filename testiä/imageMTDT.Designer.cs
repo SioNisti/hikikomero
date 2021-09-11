@@ -48,7 +48,6 @@ namespace testiä
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TagGiver = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.TagAdder = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.TagTaker = new System.Windows.Forms.TextBox();
             this.TagSearch = new System.Windows.Forms.TextBox();
@@ -132,7 +131,6 @@ namespace testiä
             // FileBox
             // 
             this.FileBox.AllowDrop = true;
-            this.FileBox.CheckBoxes = true;
             this.FileBox.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.FileBox.HideSelection = false;
@@ -203,6 +201,7 @@ namespace testiä
             this.MetadataBox.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2,
             this.columnHeader3});
+            this.MetadataBox.Enabled = false;
             this.MetadataBox.HideSelection = false;
             this.MetadataBox.Location = new System.Drawing.Point(997, 318);
             this.MetadataBox.Name = "MetadataBox";
@@ -210,6 +209,7 @@ namespace testiä
             this.MetadataBox.TabIndex = 13;
             this.MetadataBox.UseCompatibleStateImageBehavior = false;
             this.MetadataBox.View = System.Windows.Forms.View.Details;
+            this.MetadataBox.Visible = false;
             // 
             // columnHeader2
             // 
@@ -235,23 +235,13 @@ namespace testiä
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // TagAdder
-            // 
-            this.TagAdder.Location = new System.Drawing.Point(217, 3);
-            this.TagAdder.Name = "TagAdder";
-            this.TagAdder.Size = new System.Drawing.Size(75, 20);
-            this.TagAdder.TabIndex = 16;
-            this.TagAdder.Text = "Add Tags";
-            this.TagAdder.UseVisualStyleBackColor = true;
-            this.TagAdder.Visible = false;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(298, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(157, 23);
             this.button1.TabIndex = 17;
-            this.button1.Text = "button1";
+            this.button1.Text = "salainen nappula";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
@@ -278,19 +268,22 @@ namespace testiä
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.mtdtName,
             this.mtdtData});
-            this.dataGridView1.Location = new System.Drawing.Point(751, 28);
+            this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dataGridView1.Location = new System.Drawing.Point(997, 318);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(240, 441);
+            this.dataGridView1.Size = new System.Drawing.Size(255, 351);
             this.dataGridView1.TabIndex = 21;
+            this.dataGridView1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
             // 
             // mtdtName
             // 
             this.mtdtName.HeaderText = "Name";
             this.mtdtName.Name = "mtdtName";
+            this.mtdtName.ReadOnly = true;
             // 
             // mtdtData
             // 
@@ -309,7 +302,6 @@ namespace testiä
             this.Controls.Add(this.TagSearch);
             this.Controls.Add(this.TagTaker);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.TagAdder);
             this.Controls.Add(this.TagGiver);
             this.Controls.Add(this.MetadataBox);
             this.Controls.Add(this.numericUpDown2);
@@ -361,7 +353,6 @@ namespace testiä
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.TextBox TagGiver;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.Button TagAdder;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox TagTaker;
         private System.Windows.Forms.TextBox TagSearch;
