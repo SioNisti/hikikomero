@@ -7,6 +7,7 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using ExifLibrary;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 /*
 *nää on kuulemma turhia t:vs
 using System.Collections.Generic;
@@ -188,7 +189,7 @@ namespace testiä
 
             /*if (FileBox.SelectedItems.Count == 0)
                 return;*/
-            numericUpDown2.Value = intti;
+            numericUpDown2.Value = intti;//ehkä pitää olla miinus
             numericUpDown1.Value = FileBox.Items.Count - 1;
 
         }
@@ -353,24 +354,30 @@ namespace testiä
             //nyt pitäis jotenkin saada jokaikinen tägi tonne alempaan if lauseeseen että se kattoo onko tiedoston metadatasa nää tägit (text)
 
             FileBox.Items.Clear();
-            string[] Xtags2 = text.Split(';');
+
+            char lastchar = text.Last();
+            string lastchar2 = lastchar.ToString();
+            string fixedtext = "";
+
+            if (lastchar2 == ";")
+            {
+                fixedtext = text.Remove(text.Length - 1);
+                //MessageBox.Show(fixedtext);
+            } else
+            {
+                fixedtext = text;
+            }
+
+            string[] Xtags2 = fixedtext.Split(';');
 
             int count = Xtags2.Length - 1;
             int tloop = 0;
+            int sloop = 0;
             var b = 1;
 
             //MessageBox.Show("vittu haloo\n"+b);
             while (b == 1)
             {
-                if (count > 1)
-                {
-                    var tagi = Xtags2[1];
-                    var tagi2 = tagi + ";";
-                    if (tagi2 == ";")
-                    {
-                        return;
-                    }
-                }
                 //MessageBox.Show(tagi2+"\n"+count+"\n"+tloop);
 
 
@@ -380,59 +387,86 @@ namespace testiä
                 //käy kuvat läpi yksikerrallaan,  jos kuva sisältää tägin yksi kokeile sisältääkö se tägin 1,2,3,4 jne jos joo, lisää listalle, jos ei niin ohita ja mene seuraavaan kuvaan <- jos toimii niin ehkä nopeampi
 
                 string[] files = Directory.GetFiles(valittukansio2);
-
+                int fcount = files.Length;
+                //string fcount2 = fcount.ToString();
+                //MessageBox.Show(fcount2);
                 //MessageBox.Show("mitä vittua");
 
-                foreach (string file in files)
+                if (sloop >= fcount-1)
                 {
-                    //MessageBox.Show("vittu pääseekö se mihinkään");
-                    string fileName = Path.GetFileName(file);
-                    ListViewItem item = new ListViewItem(fileName);
-
-
-                    if (file.Contains(".jpg"))
+                    MessageBox.Show("No images were found with the tags \"" + fixedtext + "\"");
+                    b--;
+                    break;
+                }
+                else
+                {
+                    foreach (string file in files)
                     {
-                    var gottenTags = ImageFile.FromFile(file).Properties.Get(ExifTag.WindowsKeywords);
-                    if (gottenTags != null) {  
-                    string gottenTags2 = gottenTags.ToString();
+                        //MessageBox.Show("vittu pääseekö se mihinkään");
+                        string fileName = Path.GetFileName(file);
+                        ListViewItem item = new ListViewItem(fileName);
 
-                        //var file5 = ImageFile.FromFile(file); 
 
-                        //MessageBox.Show(gottenTags2);
-                        if (gottenTags != null)
+                        if (file.Contains(".jpg"))
                         {
-//tää saatanan paska koodin pätkä toimmii mutta se ärsyttää iha vitusteen koska tämä on mahollisesti pirun hidas jos kuvia on vähänkään enemmän
-//tää vitun paska lyhyt perkele kattoo joka kuvasta joka valitun tägin sen sijasta että se lopettaisi edes yrittämisen jos yksikään tägi ei löydy
-//perkele kun käytin joku 10 vitullista tuntia tonne alempaan pois kommentoituun kohtaan koska se periaate oli hyvä mutta en vaan saanut toimimaan
-//enemmällä kuin kahdella tägillä vittu perkele saatana kirosana jumalauta >>>>>>>>>>::::::::(((((((((((((((
-//tl:dr vituttaa paska koodi
+                            var gottenTags = ImageFile.FromFile(file).Properties.Get(ExifTag.WindowsKeywords);
+                            if (gottenTags != null)
+                            {
+                                string gottenTags2 = gottenTags.ToString();
 
-// JOOOOOOO Just parasta jeebou juuh eliikkääs "break;" tonne else:n sisälle korjas ongelman :DDD olo vitun tyhmä
-                            tloop = 0;
+                                //var file5 = ImageFile.FromFile(file); 
 
-                            foreach (var tagÅ in Xtags2)
-                                {
-                                    if (gottenTags2.Contains(tagÅ))
+                                //MessageBox.Show(gottenTags2);
+                                    //tää saatanan paska koodin pätkä toimmii mutta se ärsyttää iha vitusteen koska tämä on mahollisesti pirun hidas jos kuvia on vähänkään enemmän
+                                    //tää vitun paska lyhyt perkele kattoo joka kuvasta joka valitun tägin sen sijasta että se lopettaisi edes yrittämisen jos yksikään tägi ei löydy
+                                    //perkele kun käytin joku 10 vitullista tuntia tonne alempaan pois kommentoituun kohtaan koska se periaate oli hyvä mutta en vaan saanut toimimaan
+                                    //enemmällä kuin kahdella tägillä vittu perkele saatana kirosana jumalauta >>>>>>>>>>::::::::(((((((((((((((
+                                    //tl:dr vituttaa paska koodi
+
+                                    // JOOOOOOO Just parasta jeebou juuh eliikkääs "break;" tonne else:n sisälle korjas ongelman :DDD olo vitun tyhmä
+                                    tloop = 0;
+
+
+                                    foreach (var tagÅ in Xtags2)
                                     {
-                                        tloop++;
-                                        Debug.WriteLine(file + "\n\n" + tagÅ + "\n\n" + gottenTags2 + "\n\n" + tloop + "/" + count);
-                                        if (tloop > count)
+                                        /*if (count > 1)
+                                        //{
+                                            var tagÅ2 = ";" + tagÅ + ";";
+                                            if (tagÅ2 == ";;")
+                                            {
+                                                Debug.WriteLine(tagÅ2);
+                                                break;
+                                            }
+                                        }*/
+                                        if (gottenTags2.Contains(";" + tagÅ + ";"))
                                         {
-                                        tloop = 0;
-                                        item.Tag = file;
-                                        FileBox.Items.Add(item);
-                                        Debug.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                                            tloop++;
+                                            Debug.WriteLine(file + "\n\n" + ";" + tagÅ + ";" + "\n\n" + gottenTags2 + "\n\n" + tloop + "/" + count);
+                                            if (tloop > count)
+                                            {
+                                                tloop = 0;
+                                                item.Tag = file;
+                                                FileBox.Items.Add(item);
+                                                Debug.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                                            }
+                                            b--;//tää estää sen ettei se jää loputtomaan looppiin jumihin
                                         }
-                                        b--;//tää estää sen ettei se jää loputtomaan looppiin jumihin
+                                        else
+                                        {
+                                            
+                                            if (tloop == 0)
+                                            {
+                                                sloop++;
+                                            } else
+                                            {
+                                                sloop = sloop + tloop;
+                                            }
+                                            tloop = 0;
+                                            Debug.WriteLine(file + "\nXXX\n" + ";" + tagÅ + ";" + "\n\n" + gottenTags2 + "\n\n" + tloop + "/" + count + "(" + sloop + ")");
+                                            break;
+                                        }
                                     }
-                                    else
-                                    {
-                                        tloop = 0;
-                                        Debug.WriteLine(file + "\nXXX\n" + tagÅ + "\n\n" + gottenTags2 + "\n\n" + tloop + "/" + count);
-                                        break;
-                                    }
-                                }
-                                Debug.WriteLine("--------------------------------------------------------------");
+                                    Debug.WriteLine("--------------------------------------------------------------");
 
 
                                 /*
@@ -514,10 +548,15 @@ namespace testiä
 
                             */
                             }
+                            else
+                            {
+                                Debug.WriteLine(file + "\nYYYYY no tags\n(" + sloop + ")\n--------------------------------------------------------------");
+                                sloop++;
+                            }
+                        }
+                        intti = -3;
+                        numericUpDown1.Value = FileBox.Items.Count;
                     }
-                }
-                intti = -3;
-                numericUpDown1.Value = FileBox.Items.Count;
                 }
             }
 
