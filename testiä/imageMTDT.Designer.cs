@@ -228,22 +228,23 @@ namespace testiä
             // 
             // TagAdder
             // 
-            this.TagAdder.Location = new System.Drawing.Point(135, -10);
+            this.TagAdder.Location = new System.Drawing.Point(217, 3);
             this.TagAdder.Name = "TagAdder";
             this.TagAdder.Size = new System.Drawing.Size(75, 20);
             this.TagAdder.TabIndex = 16;
             this.TagAdder.Text = "Add Tags";
             this.TagAdder.UseVisualStyleBackColor = true;
-            this.TagAdder.Click += new System.EventHandler(this.TagAdder_Click);
+            this.TagAdder.Visible = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(135, -13);
+            this.button1.Location = new System.Drawing.Point(298, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 17;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // TagTaker

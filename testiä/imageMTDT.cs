@@ -96,6 +96,7 @@ namespace testiä
                         if (oldtags2.Contains(ota))
                         {
                             unohdakuva();
+                            System.Threading.Thread.Sleep(1000);
                             oldtags2 = oldtags2.Replace(ota, "");
                             //MessageBox.Show(oldtags2);
                             file.Properties.Set(ExifTag.WindowsKeywords, oldtags2);
@@ -154,6 +155,8 @@ namespace testiä
                     }
 
                     unohdakuva();
+
+                    System.Threading.Thread.Sleep(100);
                     file.Save(valittukansio2 + "/" + valittukuva2);
                     PictureBox.Image = Image.FromFile(@valittukuva);
                     Metat();
@@ -165,11 +168,6 @@ namespace testiä
 
             }
         }
-
-        private void TagAdder_Click(object sender, EventArgs e)
-        {
-        }
-
         private void Button1_Click(object sender, EventArgs e)
         {
             //edellinen kuva
@@ -352,48 +350,121 @@ namespace testiä
 
             //nyt pitäis jotenkin saada jokaikinen tägi tonne alempaan if lauseeseen että se kattoo onko tiedoston metadatasa nää tägit (text)
 
-            FileBox.Items.Clear(); 
+            FileBox.Items.Clear();
+            string[] Xtags2 = text.Split(';');
 
-            string[] files = Directory.GetFiles(valittukansio2);
+            int count = Xtags2.Length - 1;
+            int tloop = 0;
+            var b = 1;
 
-            foreach (string file in files)
+            //MessageBox.Show("vittu haloo\n"+b);
+            while (b == 1)
             {
-                string fileName = Path.GetFileName(file);
-                ListViewItem item = new ListViewItem(fileName);
-
-                if (file.Contains(".jpg"))
+                if (count > 1)
                 {
+                    var tagi = Xtags2[1];
+                    var tagi2 = tagi + ";";
+                    if (tagi2 == ";")
+                    {
+                        return;
+                    }
+                }
+                //MessageBox.Show(tagi2+"\n"+count+"\n"+tloop);
 
-                    var file5 = ImageFile.FromFile(file);
-                    var gottenTags = file5.Properties.Get(ExifTag.WindowsKeywords);
-                    
-                    if (gottenTags != null) { 
+
+                //MessageBox.Show($"tagsi{1}" + $"tagsi{1}");
+                //ota kaikki kuvat jotka sisältää tägin1 ja lisää listalle.  kun kaikki kuvat on lisätty mene listan kuvat läpi katsoen onko niissä tägi2,3,4,5,6 jne ja poista listalta jos ei ole???
+                //vittu kun aivot sulああああああああああああ
+                //käy kuvat läpi yksikerrallaan,  jos kuva sisältää tägin yksi kokeile sisältääkö se tägin 1,2,3,4 jne jos joo, lisää listalle, jos ei niin ohita ja mene seuraavaan kuvaan <- jos toimii niin ehkä nopeampi
+
+                string[] files = Directory.GetFiles(valittukansio2);
+
+                //MessageBox.Show("mitä vittua");
+
+                foreach (string file in files)
+                {
+                    //MessageBox.Show("vittu pääseekö se mihinkään");
+                    string fileName = Path.GetFileName(file);
+                    ListViewItem item = new ListViewItem(fileName);
+
+
+                    if (file.Contains(".jpg"))
+                    {
+                    var gottenTags = ImageFile.FromFile(file).Properties.Get(ExifTag.WindowsKeywords);
+                    if (gottenTags != null) {  
                     string gottenTags2 = gottenTags.ToString();
 
-                    string[] Xtags = gottenTags2.Split(';');
+                        //var file5 = ImageFile.FromFile(file);
 
-                    foreach (var Xtag in Xtags)
-                    {
-                        var ota = $"{Xtag};";
-                            
-                        //MessageBox.Show(ota + "\n=?\n" + text);
-                    if (text == ota)
-                    {
-                        item.Tag = file;
-
-                        if (!FileBox.Items.Contains(item))
+                        //MessageBox.Show(gottenTags2);
+                        if (gottenTags != null)
                         {
-                        FileBox.Items.Add(item);
+
+                            //MessageBox.Show(ota + "\n=?\n" + text);
+                            //MessageBox.Show($"{Xtags2[0]}");
+                            if (gottenTags2.Contains($"{Xtags2[0]}"))
+                            {
+                                //MessageBox.Show("vittu");
+                                //MessageBox.Show(file + "\n" + gottenTags2 + "\n\ncontains\n\n" + tagi2 + "\n\n" + tloop);
+                                if (count > 1)
+                                {
+                                    //MessageBox.Show("saatana");
+                                    if (tloop <= count)
+                                    {
+                                        //MessageBox.Show($"{Xtags2[tloop]}");
+                                        if (gottenTags2.Contains($"{Xtags2[tloop + 1]}"))
+                                        {
+                                            //MessageBox.Show(file + "\n" + gottenTags2 + "\n\ncontains\n\n" + $"{Xtags2[tloop]}" + "\n\n"+tloop);
+                                            item.Tag = file;
+
+                                            if (!FileBox.Items.Contains(item))
+                                            {
+                                                FileBox.Items.Add(item);
+                                            }
+                                            if (tloop == count - 1)
+                                            {
+                                            }
+                                            else
+                                            {
+                                                tloop++;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            //return;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        item.Tag = file;
+
+                                        if (!FileBox.Items.Contains(item))
+                                        {
+                                            FileBox.Items.Add(item);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    item.Tag = file;
+                                    //MessageBox.Show("perkele");
+                                    if (!FileBox.Items.Contains(item))
+                                    {
+                                        FileBox.Items.Add(item);
+                                    }
+                                }
+                            }
+
                         }
                     }
-                    }
-                    }
-
+                }
+                intti = -3;
+                numericUpDown1.Value = FileBox.Items.Count;
+                    b--;
                 }
             }
-            intti = -3;
-            numericUpDown1.Value = FileBox.Items.Count;
-        }
+
+            }
         public void gsImages()
         {
             ListViewItem item = FileBox.Items[intti];
