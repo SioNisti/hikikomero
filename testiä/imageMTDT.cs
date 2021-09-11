@@ -37,12 +37,7 @@ namespace testiä
         public string valittukansio2;
         public string valittukuva;
         public string valittukuva2;
-        int intti = -3;
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+        int intti = 0;
 
         public void Unohdakuva()
         {
@@ -98,7 +93,6 @@ namespace testiä
                         {
                             Unohdakuva();
                             oldtags2 = oldtags2.Replace(ota, "");
-                            //MessageBox.Show(oldtags2);
                             file.Properties.Set(ExifTag.WindowsKeywords, oldtags2);
                             file.Save(valittukansio2 + "/" + valittukuva2);
                             PictureBox.Image = Image.FromFile(@valittukuva);
@@ -125,15 +119,6 @@ namespace testiä
         {
             if (e.KeyCode == Keys.Enter)
             {
-
-                /*Tiedostot jotka tukee tagejä: 
-                 * jpg, 
-                 * mp4, m4v, wmv, mkv
-                 * 
-                 * äänitiedostot ei tue tagejä mutta niille voi antaa esim: artistin, genren, titlen ja sun muuta
-                 */
-
-
                 if (Path.GetExtension(valittukuva2) == ".jpg")
                 {
 
@@ -144,7 +129,6 @@ namespace testiä
 
                     string tagstoadd = TagGiver.Text;
                     //MessageBox.Show("perkeleen saatanan vittu \"kirjasto\" library on paska helvetti ja kokoversio maksaa ja trial versiossa ei pysty tallentamaan niitä vitun tiedostoja.  mä vittu tunnin yritin miettiä miksi se heittää erroria joka loppujen lopuksi olikin \"haista vittu, köyhät kyykkyyn\" viesti boksi error lootan vaatteissa perkele");
-
                     var file = ImageFile.FromFile(valittukuva);
 
                     if (tagstoadd.EndsWith(";"))
@@ -155,9 +139,6 @@ namespace testiä
                     {
                         file.Properties.Set(ExifTag.WindowsKeywords, oldtags + tagstoadd + ";");
                     }
-
-                    //unohdakuva();
-
                     file.Save(valittukansio2 + "/" + valittukuva2);
                     PictureBox.Image = Image.FromFile(@valittukuva);
                     Metat();
@@ -175,29 +156,53 @@ namespace testiä
             Unohdakuva();
             intti--;
 
-            if (intti == -4)
-            {
-                intti = -1;
-            }
             FileBox.Items[0].Selected = true;
 
-            if (intti < 0)
-            {
-                intti = FileBox.Items.Count - 1;
-            }
+            imageamount.Value = FileBox.Items.Count;
+            currentimage.Value = intti;
 
-            numericUpDown1.Value = FileBox.Items.Count - 1;
+            if (intti < 1)
+            {
+                intti = FileBox.Items.Count;
+            }
 
             if (FileBox.Items.Count == 1)
             {
-                numericUpDown2.Value = 0;
-                gsImages();
+                currentimage.Value = 1;
             } else
             {
-                numericUpDown2.Value = intti;
+                currentimage.Value = intti;
             }
 
+            gsImages();
+            Debug.WriteLine(intti);
 
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            // seuraava kuva
+            Unohdakuva();
+
+            intti++;
+
+            FileBox.Items[0].Selected = true;
+
+            if (intti == FileBox.Items.Count + 1)
+            {
+                intti = 1;
+            }
+
+            imageamount.Value = FileBox.Items.Count;
+            currentimage.Value = intti;
+
+            if (FileBox.Items.Count == 1)
+            {
+                currentimage.Value = 1;
+                gsImages();
+            }
+            gsImages();
+            Debug.WriteLine(intti);
         }
 
         private void PictureBox_KeyUp(object sender, KeyEventArgs e)
@@ -210,28 +215,27 @@ namespace testiä
                     Unohdakuva();
                     intti--;
 
-                    if (intti == -4)
-                    {
-                        intti = -1;
-                    }
                     FileBox.Items[0].Selected = true;
 
-                    if (intti < 0)
-                    {
-                        intti = FileBox.Items.Count - 1;
-                    }
+                    imageamount.Value = FileBox.Items.Count;
+                    currentimage.Value = intti;
 
-                    numericUpDown1.Value = FileBox.Items.Count - 1;
+                    if (intti < 1)
+                    {
+                        intti = FileBox.Items.Count;
+                    }
 
                     if (FileBox.Items.Count == 1)
                     {
-                        numericUpDown2.Value = 0;
-                        gsImages();
+                        currentimage.Value = 1;
                     }
                     else
                     {
-                        numericUpDown2.Value = intti;
+                        currentimage.Value = intti;
                     }
+
+                    gsImages();
+                    Debug.WriteLine(intti);
                 }
             }
             //https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.keys?view=net-5.0
@@ -244,33 +248,23 @@ namespace testiä
 
                     intti++;
 
-                    if (intti == -2)
-                    {
-                        intti = 0;
-                    }
                     FileBox.Items[0].Selected = true;
 
-                    if (intti == FileBox.Items.Count)
+                    if (intti == FileBox.Items.Count + 1)
                     {
-                        intti = 0;
+                        intti = 1;
                     }
 
-                    if (intti < 0)
-                    {
-                        intti = 0;
-                    }
-
-                    numericUpDown1.Value = FileBox.Items.Count - 1;
+                    imageamount.Value = FileBox.Items.Count;
+                    currentimage.Value = intti;
 
                     if (FileBox.Items.Count == 1)
                     {
-                        numericUpDown2.Value = 0;
+                        currentimage.Value = 1;
                         gsImages();
                     }
-                    else
-                    {
-                        numericUpDown2.Value = intti;
-                    }
+                    gsImages();
+                    Debug.WriteLine(intti);
                 }
             }
             if (ModifierKeys.HasFlag(Keys.Control))
@@ -282,60 +276,16 @@ namespace testiä
             }
         }
 
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            // seuraava kuva
-            Unohdakuva();
-
-            intti++;
-
-            if (intti == -2)
-            {
-                intti = 0;
-            }
-            FileBox.Items[0].Selected = true;
-
-            if (intti == FileBox.Items.Count)
-            {
-                intti = 0;
-            }
-
-            if (intti < 0)
-            {
-                intti = 0;
-            }
-
-            numericUpDown1.Value = FileBox.Items.Count - 1;
-
-            if (FileBox.Items.Count == 1)
-            {
-                numericUpDown2.Value = 0;
-                gsImages();
-            }
-            else
-            {
-                numericUpDown2.Value = intti;
-            }
-        }
-
         public void Metat()
         {
             //tää siis ottaa valitusta kuvasta kaikki löytyvät metadatat ja asettaa ne siihen listview:iin
-            //MetadataBox.Items.Clear();
-            //dataGridView1.Rows[1].Cells[0].Selected = false;
 
             dataGridView1.Rows.Clear();
 
             var file = ImageFile.FromFile(valittukuva);
             foreach (var property in file.Properties)
             {
-                //var property = file.Properties;
-                /*ListViewItem item = new ListViewItem();
-                item.Text = ($"{property.Name}");
-                item.SubItems.Add(($"{ property.Value}"));*/
-                //DataGridView.Items.Add(new Item() { Name = $"{property.Name}", Data = $"{property.Value}" });
                 dataGridView1.Rows.Add($"{property.Name}", $"{property.Value}");
-                //MetadataBox.Items.Add(item);
             }
         }
 
@@ -347,11 +297,10 @@ namespace testiä
         private void Kakapylytoimi()
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-            //dialog.InitialDirectory = "C:\\Users";
+            //dialog.InitialDirectory = "C:\\Users"; tällä sais valittua alotus kansion mutta jos se ei ole määritelty niin se alottaa siitä mihin jäit
             dialog.IsFolderPicker = true;
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                //intti = -1;
                 valittukansio2 = dialog.FileName;
                 ChosenFolder.Text = dialog.FileName;
 
@@ -365,7 +314,7 @@ namespace testiä
                     ListViewItem item = new ListViewItem(fileName);
 
                     if (file.Contains(".jpg"))
-                    { // || file.Contains(".png") || file.Contains(".gif")
+                    {
                         item.Tag = file;
 
                         FileBox.Items.Add(item);
@@ -378,10 +327,10 @@ namespace testiä
                 MessageBox.Show("No images were found in the path \"" + valittukansio2 + "\"");
             } else
             {
-                numericUpDown1.Value = FileBox.Items.Count - 1;
+                intti = 0;
+                imageamount.Value = FileBox.Items.Count;
+                currentimage.Value = intti;
             }
-
-
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -392,27 +341,18 @@ namespace testiä
             form2.Close();
         }
 
-        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
-        {
-            if (intti < 0)
-            {
-                intti = 0;
-            }
-            gsImages();
-        }
-
-        private void numericUpDown2_KeyUp(object sender, KeyEventArgs e)
+        private void currentimage_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 int bintti = intti;
-                int value2 = Convert.ToInt32(numericUpDown2.Value);
+                int value2 = Convert.ToInt32(currentimage.Value);
                 intti = value2;
                 if (intti < 0)
                 {
                     MessageBox.Show("Value must be positive");
                     intti = bintti;
-                    numericUpDown2.Value = bintti;
+                    currentimage.Value = bintti;
                 }
                 else
                 {
@@ -431,13 +371,29 @@ namespace testiä
         public void searchwithtag(string text)
         {
             //nyt pitäis jotenkin saada jokaikinen tägi tonne alempaan if lauseeseen että se kattoo onko tiedoston metadatasa nää tägit (text)
-
             FileBox.Items.Clear();
 
-            //string fixedtext = text;
-
             //en tiä miksi fixedtext string:in pois ottaminen ja kaikki missä sitä käytettiin vaihtaminen text string:iin toimii
+            if (text == "")
+            {
+                string[] files = Directory.GetFiles(valittukansio2);
 
+                foreach (string file in files)
+                {
+                    string fileName = Path.GetFileName(file);
+                    ListViewItem item = new ListViewItem(fileName);
+
+                    if (file.Contains(".jpg"))
+                    {
+                        item.Tag = file;
+
+                        FileBox.Items.Add(item);
+
+                    }
+                }
+            }
+            else
+            {
             if (text[0].Equals(';'))
             {
                 Debug.WriteLine(text);
@@ -454,7 +410,6 @@ namespace testiä
                 Debug.WriteLine(text);
             }
 
-
             string[] Xtags2 = text.Split(';');
 
             int count = Xtags2.Length - 1;
@@ -465,9 +420,6 @@ namespace testiä
             //MessageBox.Show("vittu haloo\n"+b);
             while (b == 1)
             {
-                //MessageBox.Show(tagi2+"\n"+count+"\n"+tloop);
-
-
                 //MessageBox.Show($"tagsi{1}" + $"tagsi{1}");
                 //ota kaikki kuvat jotka sisältää tägin1 ja lisää listalle.  kun kaikki kuvat on lisätty mene listan kuvat läpi katsoen onko niissä tägi2,3,4,5,6 jne ja poista listalta jos ei ole???
                 //vittu kun aivot sulああああああああああああ
@@ -475,8 +427,6 @@ namespace testiä
 
                 string[] files = Directory.GetFiles(valittukansio2);
                 int fcount = files.Length;
-                //string fcount2 = fcount.ToString();
-                //MessageBox.Show(fcount2);
                 //MessageBox.Show("mitä vittua");
 
                 if (sloop >= fcount - 1)
@@ -509,10 +459,6 @@ namespace testiä
                                 {
                                     gottenTags2 = ";"+gottenTags2;
                                 }
-
-                                //var file5 = ImageFile.FromFile(file); 
-
-                                //MessageBox.Show(gottenTags2);
                                 //tää saatanan paska koodin pätkä toimmii mutta se ärsyttää iha vitusteen koska tämä on mahollisesti pirun hidas jos kuvia on vähänkään enemmän
                                 //tää vitun paska lyhyt perkele kattoo joka kuvasta joka valitun tägin sen sijasta että se lopettaisi edes yrittämisen jos yksikään tägi ei löydy
                                 //perkele kun käytin joku 10 vitullista tuntia tonne alempaan pois kommentoituun kohtaan koska se periaate oli hyvä mutta en vaan saanut toimimaan
@@ -522,18 +468,8 @@ namespace testiä
                                 // JOOOOOOO Just parasta jeebou juuh eliikkääs "break;" tonne else:n sisälle korjas ongelman :DDD olo vitun tyhmä
                                 tloop = 0;
 
-
                                 foreach (var tagÅ in Xtags2)
                                 {
-                                    /*if (count > 1)
-                                    //{
-                                        var tagÅ2 = ";" + tagÅ + ";";
-                                        if (tagÅ2 == ";;")
-                                        {
-                                            Debug.WriteLine(tagÅ2);
-                                            break;
-                                        }
-                                    }*/
                                     if (gottenTags2.Contains(";" + tagÅ + ";"))
                                     {
                                         tloop++;
@@ -564,86 +500,6 @@ namespace testiä
                                     }
                                 }
                                 Debug.WriteLine("--------------------------------------------------------------");
-
-
-                                /*
-                                //MessageBox.Show(ota + "\n=?\n" + text);
-                                //MessageBox.Show($"{Xtags2[0]}");
-                                if (gottenTags2.Contains($"{Xtags2[tloop]}"))
-                                {
-                                    Debug.WriteLine(file + "\n" + gottenTags2 + "\n\n\n\n" + $"{Xtags2[tloop]}" + "{Xtags2[0]}\n\n\n\nTAG" + tloop + " OLI");
-                                    tloop++;
-                                    //MessageBox.Show("vittu");
-                                    //MessageBox.Show(file + "\n" + gottenTags2 + "\n\ncontains\n\n" + tagi2 + "\n\n" + tloop);
-                                        if (count > 1)
-                                        {
-                                        //MessageBox.Show("saatana");
-                                        if (tloop <= count)
-                                        {
-                                            //MessageBox.Show($"{Xtags2[tloop]}");
-                                            if (gottenTags2.Contains($"{Xtags2[tloop]}"))
-                                            {
-                                                Debug.WriteLine(file + "\n" + gottenTags2 + "\n\n\n\n" + $"{Xtags2[tloop]}" + "{Xtags2[tloop]}\n\n\n\nTAG" + tloop + " OLI"+count);
-                                                //MessageBox.Show(file + "\n" + gottenTags2 + "\n\ncontains\n\n" + $"{Xtags2[tloop]}" + "\n\n"+tloop);
-                                                //
-                                                if(tloop == count)
-                                                    {
-                                                        if (!FileBox.Items.Contains(item))
-                                                        {
-                                                            item.Tag = file;
-                                                            FileBox.Items.Add(item);
-                                                            Debug.WriteLine(file + "\nAdded");
-                                                            tloop = 0;
-                                                            b--;
-                                                            Debug.WriteLine("-----------------------------------------------------------------------------------------------------------------");
-                                                        }
-                                                        if (tloop == count - 1)
-                                                        {
-                                                        }
-                                                        else
-                                                        {
-                                                            tloop++;
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        tloop++;
-                                                    }
-                                            }
-                                            else
-                                                {
-                                                    Debug.WriteLine(file + "\n" + gottenTags2 + "\n\n\n\n" + $"{Xtags2[tloop]}" + "{Xtags2[tloop]}\n\n\n\nTAG" + tloop + " EI OLLUT"); 
-                                                    tloop = 0;
-                                                    //b--;
-                                                    Debug.WriteLine("-----------------------------------------------------------------------------------------------------------------");
-                                                }
-                                        }
-                                        else
-                                        {
-                                            Debug.WriteLine(tloop + "<=" + count);
-                                            item.Tag = file;
-
-                                            if (!FileBox.Items.Contains(item))
-                                            {
-                                                FileBox.Items.Add(item);
-                                                b--;
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Debug.WriteLine("tägejä on yksi");
-                                        item.Tag = file;
-                                        //MessageBox.Show("perkele");
-                                        if (!FileBox.Items.Contains(item))
-                                        {
-                                            FileBox.Items.Add(item);
-                                            b--;
-                                        }
-                                    }
-                                }
-
-                            */
                             }
                             else
                             {
@@ -651,8 +507,8 @@ namespace testiä
                                 sloop++;
                             }
                         }
-                        intti = -3;
-                        numericUpDown1.Value = FileBox.Items.Count;
+                        intti = 1;
+                        imageamount.Value = FileBox.Items.Count;
                     }
                 }
             }
@@ -660,22 +516,25 @@ namespace testiä
             {
                 MessageBox.Show("No images were found with the tags \"" + text + "\"");
             }
+            }
 
         }
         public void gsImages()
         {
             if (intti > FileBox.Items.Count)
             {
-                intti = 0;
+                intti = 1;
             }
-            ListViewItem item = FileBox.Items[intti];
-            //MessageBox.Show(valittukuva);
+            if (intti <= 0)
+            {
+                intti = FileBox.Items.Count;
+            }
+            ListViewItem item = FileBox.Items[intti - 1];
             valittukuva = valittukansio2 + "/" + item.SubItems[0].Text;
             valittukuva2 = item.SubItems[0].Text;
 
             CurrentFile.Text = valittukuva2;
             Metat();
-            //MessageBox.Show(valittukuva);
             PictureBox.Image = Image.FromFile(@valittukuva);
         }
 

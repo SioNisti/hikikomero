@@ -40,8 +40,8 @@ namespace testiä
             this.FileBox = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CurrentFile = new System.Windows.Forms.TextBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.imageamount = new System.Windows.Forms.NumericUpDown();
+            this.currentimage = new System.Windows.Forms.NumericUpDown();
             this.MetadataBox = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -50,35 +50,29 @@ namespace testiä
             this.TagTaker = new System.Windows.Forms.TextBox();
             this.TagSearch = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.mtdtName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mtdtData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageamount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.currentimage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // prevbtn
             // 
-            this.prevbtn.Location = new System.Drawing.Point(12, 630);
+            resources.ApplyResources(this.prevbtn, "prevbtn");
             this.prevbtn.Name = "prevbtn";
-            this.prevbtn.Size = new System.Drawing.Size(486, 39);
-            this.prevbtn.TabIndex = 0;
-            this.prevbtn.Text = "Previous";
             this.prevbtn.UseVisualStyleBackColor = true;
             this.prevbtn.Click += new System.EventHandler(this.Button1_Click);
             this.prevbtn.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
             // 
             // nxtbtn
             // 
-            this.nxtbtn.Location = new System.Drawing.Point(502, 630);
+            resources.ApplyResources(this.nxtbtn, "nxtbtn");
             this.nxtbtn.Name = "nxtbtn";
-            this.nxtbtn.Size = new System.Drawing.Size(486, 39);
-            this.nxtbtn.TabIndex = 1;
-            this.nxtbtn.Text = "Next";
             this.nxtbtn.UseVisualStyleBackColor = true;
             this.nxtbtn.Click += new System.EventHandler(this.Button2_Click);
             this.nxtbtn.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
@@ -87,11 +81,8 @@ namespace testiä
             // 
             this.PictureBox.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.PictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PictureBox.Location = new System.Drawing.Point(12, 28);
+            resources.ApplyResources(this.PictureBox, "PictureBox");
             this.PictureBox.Name = "PictureBox";
-            this.PictureBox.Size = new System.Drawing.Size(979, 596);
-            this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PictureBox.TabIndex = 2;
             this.PictureBox.TabStop = false;
             this.PictureBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragfolder);
             // 
@@ -100,32 +91,23 @@ namespace testiä
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DirectoryBtn});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(1264, 25);
-            this.toolStrip1.TabIndex = 3;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // DirectoryBtn
             // 
             this.DirectoryBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.DirectoryBtn.Image = ((System.Drawing.Image)(resources.GetObject("DirectoryBtn.Image")));
-            this.DirectoryBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            resources.ApplyResources(this.DirectoryBtn, "DirectoryBtn");
             this.DirectoryBtn.Name = "DirectoryBtn";
-            this.DirectoryBtn.Size = new System.Drawing.Size(59, 22);
-            this.DirectoryBtn.Text = "Directory";
             this.DirectoryBtn.Click += new System.EventHandler(this.ToolStripButton1_Click_1);
             // 
             // ChosenFolder
             // 
             this.ChosenFolder.AllowDrop = true;
-            this.ChosenFolder.Location = new System.Drawing.Point(997, 28);
+            resources.ApplyResources(this.ChosenFolder, "ChosenFolder");
             this.ChosenFolder.Name = "ChosenFolder";
             this.ChosenFolder.ReadOnly = true;
-            this.ChosenFolder.Size = new System.Drawing.Size(255, 20);
-            this.ChosenFolder.TabIndex = 7;
-            this.ChosenFolder.Text = "Folder path";
             this.ChosenFolder.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragfolder);
             // 
             // FileBox
@@ -134,131 +116,93 @@ namespace testiä
             this.FileBox.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.FileBox.HideSelection = false;
-            this.FileBox.Location = new System.Drawing.Point(997, 109);
+            resources.ApplyResources(this.FileBox, "FileBox");
             this.FileBox.Name = "FileBox";
-            this.FileBox.Size = new System.Drawing.Size(255, 151);
-            this.FileBox.TabIndex = 8;
             this.FileBox.UseCompatibleStateImageBehavior = false;
             this.FileBox.View = System.Windows.Forms.View.Details;
             this.FileBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragfolder);
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "File name";
-            this.columnHeader1.Width = 230;
+            resources.ApplyResources(this.columnHeader1, "columnHeader1");
             // 
             // CurrentFile
             // 
-            this.CurrentFile.Location = new System.Drawing.Point(997, 54);
+            resources.ApplyResources(this.CurrentFile, "CurrentFile");
             this.CurrentFile.Name = "CurrentFile";
             this.CurrentFile.ReadOnly = true;
-            this.CurrentFile.Size = new System.Drawing.Size(255, 20);
-            this.CurrentFile.TabIndex = 9;
-            this.CurrentFile.Text = "File Name";
             // 
-            // numericUpDown1
+            // imageamount
             // 
-            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown1.Location = new System.Drawing.Point(1132, 5);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.imageamount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.imageamount, "imageamount");
+            this.imageamount.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.ReadOnly = true;
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 16);
-            this.numericUpDown1.TabIndex = 10;
+            this.imageamount.Name = "imageamount";
+            this.imageamount.ReadOnly = true;
             // 
-            // numericUpDown2
+            // currentimage
             // 
-            this.numericUpDown2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown2.Location = new System.Drawing.Point(997, 5);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.currentimage.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.currentimage, "currentimage");
+            this.currentimage.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
+            this.currentimage.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             -2147483648});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 16);
-            this.numericUpDown2.TabIndex = 11;
-            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown2.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
-            this.numericUpDown2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.numericUpDown2_KeyUp);
+            this.currentimage.Name = "currentimage";
+            this.currentimage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.currentimage_KeyUp);
             // 
             // MetadataBox
             // 
             this.MetadataBox.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2,
             this.columnHeader3});
-            this.MetadataBox.Enabled = false;
+            resources.ApplyResources(this.MetadataBox, "MetadataBox");
             this.MetadataBox.HideSelection = false;
-            this.MetadataBox.Location = new System.Drawing.Point(997, 318);
             this.MetadataBox.Name = "MetadataBox";
-            this.MetadataBox.Size = new System.Drawing.Size(256, 351);
-            this.MetadataBox.TabIndex = 13;
             this.MetadataBox.UseCompatibleStateImageBehavior = false;
             this.MetadataBox.View = System.Windows.Forms.View.Details;
-            this.MetadataBox.Visible = false;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Name";
-            this.columnHeader2.Width = 110;
+            resources.ApplyResources(this.columnHeader2, "columnHeader2");
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Data";
-            this.columnHeader3.Width = 120;
+            resources.ApplyResources(this.columnHeader3, "columnHeader3");
             // 
             // TagGiver
             // 
-            this.TagGiver.Location = new System.Drawing.Point(997, 266);
+            resources.ApplyResources(this.TagGiver, "TagGiver");
             this.TagGiver.Name = "TagGiver";
-            this.TagGiver.Size = new System.Drawing.Size(255, 20);
-            this.TagGiver.TabIndex = 14;
-            this.TagGiver.Text = "Separate tags with ; (semicolon)";
-            this.TagGiver.Visible = false;
             this.TagGiver.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TagGiver_KeyUp);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(298, 2);
+            resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(157, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "salainen nappula";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // TagTaker
             // 
-            this.TagTaker.Location = new System.Drawing.Point(997, 292);
+            resources.ApplyResources(this.TagTaker, "TagTaker");
             this.TagTaker.Name = "TagTaker";
-            this.TagTaker.Size = new System.Drawing.Size(255, 20);
-            this.TagTaker.TabIndex = 18;
-            this.TagTaker.Text = "Tags to delete (separate with ;)";
-            this.TagTaker.Visible = false;
             this.TagTaker.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TagTaker_KeyUp);
             // 
             // TagSearch
             // 
-            this.TagSearch.Location = new System.Drawing.Point(997, 83);
+            resources.ApplyResources(this.TagSearch, "TagSearch");
             this.TagSearch.Name = "TagSearch";
-            this.TagSearch.Size = new System.Drawing.Size(255, 20);
-            this.TagSearch.TabIndex = 19;
-            this.TagSearch.Text = "Search images with tags";
             this.TagSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TagSearch_KeyUp);
             // 
             // dataGridView1
@@ -271,55 +215,45 @@ namespace testiä
             this.mtdtName,
             this.mtdtData});
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dataGridView1.Location = new System.Drawing.Point(997, 292);
+            resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(255, 377);
-            this.dataGridView1.TabIndex = 21;
             this.dataGridView1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.AllowDrop = true;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.comboBox1.Items.AddRange(new object[] {
-            "WindowsKeywords",
-            "Artist",
-            "Rating"});
-            this.comboBox1.Location = new System.Drawing.Point(997, 265);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(167, 21);
-            this.comboBox1.TabIndex = 22;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1170, 266);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(83, 20);
-            this.button2.TabIndex = 23;
-            this.button2.Text = "Add Metadata";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // mtdtName
             // 
-            this.mtdtName.HeaderText = "Name";
+            resources.ApplyResources(this.mtdtName, "mtdtName");
             this.mtdtName.Name = "mtdtName";
             this.mtdtName.ReadOnly = true;
             // 
             // mtdtData
             // 
             this.mtdtData.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.mtdtData.HeaderText = "Data";
+            resources.ApplyResources(this.mtdtData, "mtdtData");
             this.mtdtData.Name = "mtdtData";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.AllowDrop = true;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            resources.ApplyResources(this.comboBox1, "comboBox1");
+            this.comboBox1.Items.AddRange(new object[] {
+            resources.GetString("comboBox1.Items"),
+            resources.GetString("comboBox1.Items1"),
+            resources.GetString("comboBox1.Items2")});
+            this.comboBox1.Name = "comboBox1";
+            // 
+            // button2
+            // 
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // imageMTDT
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dataGridView1);
@@ -328,8 +262,8 @@ namespace testiä
             this.Controls.Add(this.button1);
             this.Controls.Add(this.TagGiver);
             this.Controls.Add(this.MetadataBox);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.currentimage);
+            this.Controls.Add(this.imageamount);
             this.Controls.Add(this.CurrentFile);
             this.Controls.Add(this.FileBox);
             this.Controls.Add(this.ChosenFolder);
@@ -339,19 +273,15 @@ namespace testiä
             this.Controls.Add(this.prevbtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "imageMTDT";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Image Metadata";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragfolder);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageamount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.currentimage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -370,8 +300,8 @@ namespace testiä
         private System.Windows.Forms.ListView FileBox;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.TextBox CurrentFile;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown imageamount;
+        private System.Windows.Forms.NumericUpDown currentimage;
         private System.Windows.Forms.ListView MetadataBox;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;

@@ -90,6 +90,9 @@
     <EmbeddedResource Include="audioMTDT.resx">
       <DependentUpon>audioMTDT.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="imageMTDT.aa.resx">
+      <DependentUpon>imageMTDT.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="imageMTDT.resx">
       <DependentUpon>imageMTDT.cs</DependentUpon>
     </EmbeddedResource>
