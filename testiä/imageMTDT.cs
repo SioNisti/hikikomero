@@ -233,15 +233,7 @@ namespace testiä
         public void Metat()
         {
             //tää siis ottaa valitusta kuvasta kaikki löytyvät metadatat ja asettaa ne siihen listview:iin
-            /*
-            descriptionMTDT.Rows.Clear();
-
-            var file = ImageFile.FromFile(valittukuva);
-            foreach (var property in file.Properties)
-            {
-                descriptionMTDT.Rows.Add($"{property.Name}", $"{property.Value}");
-            }*/
-
+            
             //saatanan vittumainen bugi ton datagridview:in kanssa
             //se paska kaatuu jos oot muokkaamassa jotain solua ja klikkaat toiseen soluun
 
@@ -264,11 +256,11 @@ namespace testiä
                 descriptionMTDT.Rows.Add("Tags", file.Properties.Get(ExifTag.WindowsKeywords), 140094);
                 descriptionMTDT.Rows.Add("Comments", file.Properties.Get(ExifTag.WindowsComment), 140092);
             }
-            if (curtab == 1)
+            if (curtab == 1) 
             {
                 descriptionMTDT.Rows.Add("Authors", file.Properties.Get(ExifTag.WindowsAuthor), 140093);
                 descriptionMTDT.Rows.Add("Date taken", file.Properties.Get(ExifTag.DateTimeOriginal), 236867);
-                //descriptionMTDT.Rows.Add("Date acquired", file.Properties.Get(ExifTag.SubSecTime), 237520);
+                //descriptionMTDT.Rows.Add("Date acquired", file.Properties.Get(ExifTag.SubSecTime), 237520); //exiflib:issä ei ole "date acquired" juttua???
                 descriptionMTDT.Rows.Add("Copyright", file.Properties.Get(ExifTag.Copyright), 133432);
             }
             if (curtab == 2)
@@ -283,10 +275,10 @@ namespace testiä
             if (curtab == 3)
             {
                 descriptionMTDT.Rows.Add("Lens maker", file.Properties.Get(ExifTag.LensMake), 242035);
-                descriptionMTDT.Rows.Add("Lens model", file.Properties.Get(ExifTag.LensModel), 242036);
-                descriptionMTDT.Rows.Add("Flash maker", file.Properties.Get(ExifTag.FlashEnergy), 241483);
-                descriptionMTDT.Rows.Add("Flash model", file.Properties.Get(ExifTag.FlashpixVersion), 240960);
-                descriptionMTDT.Rows.Add("Camera serial number", file.Properties.Get(ExifTag.BodySerialNumber), 242033);
+                descriptionMTDT.Rows.Add("Lens model", file.Properties.Get(ExifTag.LensModel), 242036); //tää on väärä
+                descriptionMTDT.Rows.Add("Flash maker", file.Properties.Get(ExifTag.FlashEnergy), 241483); //tää on väärä
+                descriptionMTDT.Rows.Add("Flash model", file.Properties.Get(ExifTag.FlashpixVersion), 240960); //tää on väärä
+                descriptionMTDT.Rows.Add("Camera serial number", file.Properties.Get(ExifTag.BodySerialNumber), 242033); //tää on väärä
                 descriptionMTDT.Rows.Add("Contrast", file.Properties.Get(ExifTag.Contrast), 241992);
                 descriptionMTDT.Rows.Add("Light source", file.Properties.Get(ExifTag.LightSource), 237384);
                 descriptionMTDT.Rows.Add("Exposure program", file.Properties.Get(ExifTag.ExposureProgram), 234850);
@@ -643,11 +635,13 @@ namespace testiä
                     {
                         file.Properties.Set((ExifTag)exiftype, celldata);
                         Debug.WriteLine("\n" + exiftype + " / " + celldata + "\nMEISSELI");
+
+                        string myDate2 = "";
+
                     if ((int)exiftype == 236867)
                     {
                         if (celldata == null || celldata == "")
                         {
-                            string myDate2 = "";
                             file.Properties.Set((ExifTag)exiftype, myDate2);
                         } else
                         {
@@ -658,10 +652,100 @@ namespace testiä
                         // x = x;  huom tän virka on olla ns "breakpoint":ina kun tuo vittuilee nytten
                         //tää on aika paskaa koodia mutta jotenkin on tarkistettava ollaanko muuttamassa tota datetimeoriginal höskää koska se celldata pitää muuttaa datetimeksi
                     }
+
+                    //IF LAUSE SOTKUA KOSKA PERKELEEN ENUM:IT
+                    //tää toimii mutta ei ole käyttäjä ystävällinen koska pitää tietää tismalleen miten tuo exiflib tahtoo nuo tiedot. properties > data "flash" voi olla esim 'flash' meinaten että se oli päällä
+                    //mutta jos haluaa sen laittaa tolla ohjelmalla niin pitää kirjoittaa 'FlashFired' ja kyllä tismalleen noin isot kirjaimet ja ei välejä ja kaiken kukkuraksi tää on hirveä if lause soppa
+
+                    if ((int)exiftype == 237383) /*MeteringMode*/
+                    {
+                        if (celldata == null || celldata == "")
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(MeteringMode), myDate2));
+                        }
+                        else
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(MeteringMode), celldata));
+                        }
+                    }
+                    if ((int)exiftype == 237385/*Flash*/)
+                    {
+                        if (celldata == null || celldata == "")
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Flash), myDate2));
+                        }
+                        else
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Flash), celldata));
+                        }
+                    }
+                    if ((int)exiftype == 241992) //contrast
+                    {
+                        if (celldata == null || celldata == "")
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Contrast), myDate2));
+                        }
+                        else
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Contrast), celldata));
+                        }
+                    }
+                    if ((int)exiftype == 237384) //light source
+                    {
+                        if (celldata == null || celldata == "")
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(LightSource), myDate2));
+                        }
+                        else
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(LightSource), celldata));
+                        }
+                    }
+                    if ((int)exiftype == 234850) //exposure program
+                    {
+                        if (celldata == null || celldata == "")
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(ExposureProgram), myDate2));
+                        }
+                        else
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(ExposureProgram), celldata));
+                        }
+                    }
+                    if ((int)exiftype == 241993) //ssaturation
+                    {
+                        if (celldata == null || celldata == "")
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Saturation), myDate2));
+                        }
+                        else
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Saturation), celldata));
+                        }
+                    }
+                    if ((int)exiftype == 241994) // sharpness
+                    {
+                        if (celldata == null || celldata == "")
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Sharpness), myDate2));
+                        }
+                        else
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Sharpness), celldata));
+                        }
+                    }
+                    if ((int)exiftype == 241987) //white balance
+                    {
+                        if (celldata == null || celldata == "")
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(WhiteBalance), myDate2));
+                        }
+                        else
+                        {
+                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(WhiteBalance), celldata));
+                        }
+                    }
                 }
-                //}
-
-
                 x++;
             }
             Unohdakuva();
