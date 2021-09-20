@@ -40,6 +40,9 @@ namespace testiä
         public string valittukuva2;
         int intti = 0;
         int curtab = 0;
+        public static string quickdata_type;
+        public static string quickdata_name;
+        public static string quickdata_data;
 
         private void imageMTDT_Load(object sender, EventArgs e)
         {
@@ -90,28 +93,29 @@ namespace testiä
 
                 //edellinen kuva
                 Unohdakuva();
-            intti--;
+                intti--;
 
-            FileBox.Items[0].Selected = true;
+                FileBox.Items[0].Selected = true;
 
-            imageamount.Value = FileBox.Items.Count;
-            currentimage.Value = intti;
-
-            if (intti < 1)
-            {
-                intti = FileBox.Items.Count;
-            }
-
-            if (FileBox.Items.Count == 1)
-            {
-                currentimage.Value = 1;
-            } else
-            {
+                imageamount.Value = FileBox.Items.Count;
                 currentimage.Value = intti;
-            }
 
-            gsImages();
-            Debug.WriteLine(intti);
+                if (intti < 1)
+                {
+                    intti = FileBox.Items.Count;
+                }
+
+                if (FileBox.Items.Count == 1)
+                {
+                    currentimage.Value = 1;
+                }
+                else
+                {
+                    currentimage.Value = intti;
+                }
+
+                gsImages();
+                Debug.WriteLine(intti);
             }
 
         }
@@ -143,25 +147,25 @@ namespace testiä
                 // seuraava kuva
                 Unohdakuva();
 
-            intti++;
+                intti++;
 
-            FileBox.Items[0].Selected = true;
+                FileBox.Items[0].Selected = true;
 
-            if (intti == FileBox.Items.Count + 1)
-            {
-                intti = 1;
-            }
+                if (intti == FileBox.Items.Count + 1)
+                {
+                    intti = 1;
+                }
 
-            imageamount.Value = FileBox.Items.Count;
-            currentimage.Value = intti;
+                imageamount.Value = FileBox.Items.Count;
+                currentimage.Value = intti;
 
-            if (FileBox.Items.Count == 1)
-            {
-                currentimage.Value = 1;
+                if (FileBox.Items.Count == 1)
+                {
+                    currentimage.Value = 1;
+                    gsImages();
+                }
                 gsImages();
-            }
-            gsImages();
-            Debug.WriteLine(intti);
+                Debug.WriteLine(intti);
             }
         }
 
@@ -190,65 +194,65 @@ namespace testiä
                 tab_origin.Enabled = true;
 
                 if (ModifierKeys.HasFlag(Keys.Control))
-            {
-                if (e.KeyCode == Keys.Left || e.KeyCode == Keys.B)
                 {
-                    //edellinen kuva
-                    Unohdakuva();
-                    intti--;
-
-                    FileBox.Items[0].Selected = true;
-
-                    imageamount.Value = FileBox.Items.Count;
-                    currentimage.Value = intti;
-
-                    if (intti < 1)
+                    if (e.KeyCode == Keys.Left || e.KeyCode == Keys.B)
                     {
-                        intti = FileBox.Items.Count;
-                    }
+                        //edellinen kuva
+                        Unohdakuva();
+                        intti--;
 
-                    if (FileBox.Items.Count == 1)
-                    {
-                        currentimage.Value = 1;
-                    }
-                    else
-                    {
+                        FileBox.Items[0].Selected = true;
+
+                        imageamount.Value = FileBox.Items.Count;
                         currentimage.Value = intti;
-                    }
 
-                    gsImages();
-                    Debug.WriteLine(intti);
-                }
-            }
-            //https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.keys?view=net-5.0
-            if (ModifierKeys.HasFlag(Keys.Control))
-            {
-                if (e.KeyCode == Keys.Right || e.KeyCode == Keys.N)
-                {
-                    // seuraava kuva
-                    Unohdakuva();
+                        if (intti < 1)
+                        {
+                            intti = FileBox.Items.Count;
+                        }
 
-                    intti++;
+                        if (FileBox.Items.Count == 1)
+                        {
+                            currentimage.Value = 1;
+                        }
+                        else
+                        {
+                            currentimage.Value = intti;
+                        }
 
-                    FileBox.Items[0].Selected = true;
-
-                    if (intti == FileBox.Items.Count + 1)
-                    {
-                        intti = 1;
-                    }
-
-                    imageamount.Value = FileBox.Items.Count;
-                    currentimage.Value = intti;
-
-                    if (FileBox.Items.Count == 1)
-                    {
-                        currentimage.Value = 1;
                         gsImages();
+                        Debug.WriteLine(intti);
                     }
-                    gsImages();
-                    Debug.WriteLine(intti);
                 }
-            }
+                //https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.keys?view=net-5.0
+                if (ModifierKeys.HasFlag(Keys.Control))
+                {
+                    if (e.KeyCode == Keys.Right || e.KeyCode == Keys.N)
+                    {
+                        // seuraava kuva
+                        Unohdakuva();
+
+                        intti++;
+
+                        FileBox.Items[0].Selected = true;
+
+                        if (intti == FileBox.Items.Count + 1)
+                        {
+                            intti = 1;
+                        }
+
+                        imageamount.Value = FileBox.Items.Count;
+                        currentimage.Value = intti;
+
+                        if (FileBox.Items.Count == 1)
+                        {
+                            currentimage.Value = 1;
+                            gsImages();
+                        }
+                        gsImages();
+                        Debug.WriteLine(intti);
+                    }
+                }
             }
             if (ModifierKeys.HasFlag(Keys.Control))
             {
@@ -262,7 +266,7 @@ namespace testiä
         public void Metat()
         {
             //tää siis ottaa valitusta kuvasta kaikki löytyvät metadatat ja asettaa ne siihen listview:iin
-            
+
             //saatanan vittumainen bugi ton datagridview:in kanssa
             //se paska kaatuu jos oot muokkaamassa jotain solua ja klikkaat toiseen soluun
 
@@ -285,7 +289,7 @@ namespace testiä
                 descriptionMTDT.Rows.Add("Tags", file.Properties.Get(ExifTag.WindowsKeywords), 140094);
                 descriptionMTDT.Rows.Add("Comments", file.Properties.Get(ExifTag.WindowsComment), 140092);
             }
-            if (curtab == 1) 
+            if (curtab == 1)
             {
                 descriptionMTDT.Rows.Add("Authors", file.Properties.Get(ExifTag.WindowsAuthor), 140093);
                 descriptionMTDT.Rows.Add("Date taken", file.Properties.Get(ExifTag.DateTimeOriginal), 236867);
@@ -354,7 +358,8 @@ namespace testiä
             if (FileBox.Items.Count == 0)
             {
                 MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs");
-            } else
+            }
+            else
             {
                 intti = 0;
                 imageamount.Value = FileBox.Items.Count;
@@ -416,7 +421,7 @@ namespace testiä
 
                     }
                 }
-            } 
+            }
             else if (text == "notag")
             {
                 string[] files = Directory.GetFiles(valittukansio2);
@@ -447,127 +452,128 @@ namespace testiä
             }
             else if (text != "notag" && text != "")
             {
-            if (text[0].Equals(';'))
-            {
-                Debug.WriteLine(text);
-                text = text.Remove(0, 1);
-                Debug.WriteLine(text);
-            }
-
-            char lastchar = text.Last();
-
-            if (lastchar.Equals(';'))
-            {
-                Debug.WriteLine(text);
-                text = text.Remove(text.Length - 1);
-                Debug.WriteLine(text);
-            }
-
-            string[] Xtags2 = text.Split(';');
-
-            int count = Xtags2.Length - 1;
-            int tloop;
-            int sloop = 0;
-            var b = 1;
-
-            //MessageBox.Show("vittu haloo\n"+b);
-            while (b == 1)
-            {
-                //MessageBox.Show($"tagsi{1}" + $"tagsi{1}");
-                //ota kaikki kuvat jotka sisältää tägin1 ja lisää listalle.  kun kaikki kuvat on lisätty mene listan kuvat läpi katsoen onko niissä tägi2,3,4,5,6 jne ja poista listalta jos ei ole???
-                //vittu kun aivot sulああああああああああああ
-                //käy kuvat läpi yksikerrallaan,  jos kuva sisältää tägin yksi kokeile sisältääkö se tägin 1,2,3,4 jne jos joo, lisää listalle, jos ei niin ohita ja mene seuraavaan kuvaan <- jos toimii niin ehkä nopeampi
-
-                string[] files = Directory.GetFiles(valittukansio2);
-                int fcount = files.Length;
-                //MessageBox.Show("mitä vittua");
-
-                if (sloop >= fcount - 1)
+                if (text[0].Equals(';'))
                 {
-                    MessageBox.Show("No images were found with the tags \"" + text + "\"", "No found images");
-                    b--;
-                    break;
+                    Debug.WriteLine(text);
+                    text = text.Remove(0, 1);
+                    Debug.WriteLine(text);
                 }
-                else
+
+                char lastchar = text.Last();
+
+                if (lastchar.Equals(';'))
                 {
-                    foreach (string file in files)
+                    Debug.WriteLine(text);
+                    text = text.Remove(text.Length - 1);
+                    Debug.WriteLine(text);
+                }
+
+                string[] Xtags2 = text.Split(';');
+
+                int count = Xtags2.Length - 1;
+                int tloop;
+                int sloop = 0;
+                var b = 1;
+
+                //MessageBox.Show("vittu haloo\n"+b);
+                while (b == 1)
+                {
+                    //MessageBox.Show($"tagsi{1}" + $"tagsi{1}");
+                    //ota kaikki kuvat jotka sisältää tägin1 ja lisää listalle.  kun kaikki kuvat on lisätty mene listan kuvat läpi katsoen onko niissä tägi2,3,4,5,6 jne ja poista listalta jos ei ole???
+                    //vittu kun aivot sulああああああああああああ
+                    //käy kuvat läpi yksikerrallaan,  jos kuva sisältää tägin yksi kokeile sisältääkö se tägin 1,2,3,4 jne jos joo, lisää listalle, jos ei niin ohita ja mene seuraavaan kuvaan <- jos toimii niin ehkä nopeampi
+
+                    string[] files = Directory.GetFiles(valittukansio2);
+                    int fcount = files.Length;
+                    //MessageBox.Show("mitä vittua");
+
+                    if (sloop >= fcount - 1)
                     {
-                        //MessageBox.Show("vittu pääseekö se mihinkään");
-                        string fileName = Path.GetFileName(file);
-                        ListViewItem item = new ListViewItem(fileName);
-
-                        if (file.Contains(".jpg"))
+                        MessageBox.Show("No images were found with the tags \"" + text + "\"", "No found images");
+                        b--;
+                        break;
+                    }
+                    else
+                    {
+                        foreach (string file in files)
                         {
-                            var gottenTags = ImageFile.FromFile(file).Properties.Get(ExifTag.WindowsKeywords);
-                            if (gottenTags != null && gottenTags.ToString() != "") //huh saatana piti lisätä toi toinen ehto tohon koska muuten jos jollain oli täginä "" niin se paska kaatu
+                            //MessageBox.Show("vittu pääseekö se mihinkään");
+                            string fileName = Path.GetFileName(file);
+                            ListViewItem item = new ListViewItem(fileName);
+
+                            if (file.Contains(".jpg"))
                             {
-                                string gottenTags2 = gottenTags.ToString();
-                                char gt2 = gottenTags2[0];
-
-                                if (gottenTags2[0].Equals(';'))
+                                var gottenTags = ImageFile.FromFile(file).Properties.Get(ExifTag.WindowsKeywords);
+                                if (gottenTags != null && gottenTags.ToString() != "") //huh saatana piti lisätä toi toinen ehto tohon koska muuten jos jollain oli täginä "" niin se paska kaatu
                                 {
-                                    //gottenTags2 = gottenTags2; varoitukset pois
-                                } else
-                                {
-                                    gottenTags2 = ";"+gottenTags2;
-                                }
-                                //tää saatanan paska koodin pätkä toimmii mutta se ärsyttää iha vitusteen koska tämä on mahollisesti pirun hidas jos kuvia on vähänkään enemmän
-                                //tää vitun paska lyhyt perkele kattoo joka kuvasta joka valitun tägin sen sijasta että se lopettaisi edes yrittämisen jos yksikään tägi ei löydy
-                                //perkele kun käytin joku 10 vitullista tuntia tonne alempaan pois kommentoituun kohtaan koska se periaate oli hyvä mutta en vaan saanut toimimaan
-                                //enemmällä kuin kahdella tägillä vittu perkele saatana kirosana jumalauta >>>>>>>>>>::::::::(((((((((((((((
-                                //tl:dr vituttaa paska koodi
+                                    string gottenTags2 = gottenTags.ToString();
+                                    char gt2 = gottenTags2[0];
 
-                                // JOOOOOOO Just parasta jeebou juuh eliikkääs "break;" tonne else:n sisälle korjas ongelman :DDD olo vitun tyhmä
-                                tloop = 0;
-
-                                foreach (var tagÅ in Xtags2)
-                                {
-                                    if (gottenTags2.Contains(";" + tagÅ + ";"))
+                                    if (gottenTags2[0].Equals(';'))
                                     {
-                                        tloop++;
-                                        Debug.WriteLine(file + "\n\n" + ";" + tagÅ + ";" + "\n\n" + gottenTags2 + "\n"+ TagSearch.Text +"\n" + tloop + "/" + count);
-                                        if (tloop > count)
-                                        {
-                                            tloop = 0;
-                                            item.Tag = file;
-                                            FileBox.Items.Add(item);
-                                            Debug.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                                        }
-                                        b--;//tää estää sen ettei se jää loputtomaan looppiin jumihin
+                                        //gottenTags2 = gottenTags2; varoitukset pois
                                     }
                                     else
                                     {
+                                        gottenTags2 = ";" + gottenTags2;
+                                    }
+                                    //tää saatanan paska koodin pätkä toimmii mutta se ärsyttää iha vitusteen koska tämä on mahollisesti pirun hidas jos kuvia on vähänkään enemmän
+                                    //tää vitun paska lyhyt perkele kattoo joka kuvasta joka valitun tägin sen sijasta että se lopettaisi edes yrittämisen jos yksikään tägi ei löydy
+                                    //perkele kun käytin joku 10 vitullista tuntia tonne alempaan pois kommentoituun kohtaan koska se periaate oli hyvä mutta en vaan saanut toimimaan
+                                    //enemmällä kuin kahdella tägillä vittu perkele saatana kirosana jumalauta >>>>>>>>>>::::::::(((((((((((((((
+                                    //tl:dr vituttaa paska koodi
 
-                                        if (tloop == 0)
+                                    // JOOOOOOO Just parasta jeebou juuh eliikkääs "break;" tonne else:n sisälle korjas ongelman :DDD olo vitun tyhmä
+                                    tloop = 0;
+
+                                    foreach (var tagÅ in Xtags2)
+                                    {
+                                        if (gottenTags2.Contains(";" + tagÅ + ";"))
                                         {
-                                            sloop++;
+                                            tloop++;
+                                            Debug.WriteLine(file + "\n\n" + ";" + tagÅ + ";" + "\n\n" + gottenTags2 + "\n" + TagSearch.Text + "\n" + tloop + "/" + count);
+                                            if (tloop > count)
+                                            {
+                                                tloop = 0;
+                                                item.Tag = file;
+                                                FileBox.Items.Add(item);
+                                                Debug.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                                            }
+                                            b--;//tää estää sen ettei se jää loputtomaan looppiin jumihin
                                         }
                                         else
                                         {
-                                            sloop = sloop + tloop;
+
+                                            if (tloop == 0)
+                                            {
+                                                sloop++;
+                                            }
+                                            else
+                                            {
+                                                sloop = sloop + tloop;
+                                            }
+                                            tloop = 0;
+                                            Debug.WriteLine(file + "\nXXX\n" + ";" + tagÅ + ";" + "\n\n" + gottenTags2 + "\n" + TagSearch.Text + "\n" + tloop + "/" + count + "(" + sloop + ")");
+                                            break;
                                         }
-                                        tloop = 0;
-                                        Debug.WriteLine(file + "\nXXX\n" + ";" + tagÅ + ";" + "\n\n" + gottenTags2 + "\n" + TagSearch.Text + "\n" + tloop + "/" + count + "(" + sloop + ")");
-                                        break;
                                     }
+                                    Debug.WriteLine("--------------------------------------------------------------");
                                 }
-                                Debug.WriteLine("--------------------------------------------------------------");
+                                else
+                                {
+                                    Debug.WriteLine(file + "\nYYYYY no tags\n(" + sloop + ")\n--------------------------------------------------------------");
+                                    sloop++;
+                                }
                             }
-                            else
-                            {
-                                Debug.WriteLine(file + "\nYYYYY no tags\n(" + sloop + ")\n--------------------------------------------------------------");
-                                sloop++;
-                            }
+                            intti = 1;
+                            imageamount.Value = FileBox.Items.Count;
                         }
-                        intti = 1;
-                        imageamount.Value = FileBox.Items.Count;
                     }
                 }
-            }
-            if (FileBox.Items.Count == 0)
-            {
-                MessageBox.Show("No images were found with the tags \"" + text + "\"", "No found images");
-            }
+                if (FileBox.Items.Count == 0)
+                {
+                    MessageBox.Show("No images were found with the tags \"" + text + "\"", "No found images");
+                }
             }
 
         }
@@ -605,21 +611,21 @@ namespace testiä
             int x = 0;
             string celldata;
             var exiftype = descriptionMTDT.Rows[x].Cells[2].Value;
-                Unohdakuva();
-                var file = ImageFile.FromFile(valittukuva);
-                foreach (DataGridViewRow row in descriptionMTDT.Rows)
+            Unohdakuva();
+            var file = ImageFile.FromFile(valittukuva);
+            foreach (DataGridViewRow row in descriptionMTDT.Rows)
+            {
+                if (descriptionMTDT.Rows[x].Cells[1].Value == null)
                 {
-                    if (descriptionMTDT.Rows[x].Cells[1].Value == null)
-                    {
-                        celldata = "";
-                        Debug.WriteLine("kivesneste"); //mikä helvetin mieliala pitää olla jotta laittaa debug viestiksi "kivesneste"????
-                    }
-                    else
-                    {
-                        celldata = descriptionMTDT.Rows[x].Cells[1].Value.ToString();
-                    }
-                    Debug.WriteLine(celldata);
-                    exiftype = descriptionMTDT.Rows[x].Cells[2].Value;
+                    celldata = "";
+                    Debug.WriteLine("kivesneste"); //mikä helvetin mieliala pitää olla jotta laittaa debug viestiksi "kivesneste"????
+                }
+                else
+                {
+                    celldata = descriptionMTDT.Rows[x].Cells[1].Value.ToString();
+                }
+                Debug.WriteLine(celldata);
+                exiftype = descriptionMTDT.Rows[x].Cells[2].Value;
 
                 //VITTUUUU MITEN SAAN TÄN TOIMIMAaN ILMAAN KAHEKSAA SATAA IF LAUSETTA PERKELEEN C# KUN SE EI OLE PHP JOSSA TÄTÄ ONGELMAA EI OLISI PERKELE
 
@@ -659,20 +665,21 @@ namespace testiä
 
                 //if (curtab == 0)
                 //{
-                    Debug.WriteLine("KIISSELI");
-                    if ((bool)(descriptionMTDT.Rows[x].Cells[2].Value == exiftype))
-                    {
-                        file.Properties.Set((ExifTag)exiftype, celldata);
-                        Debug.WriteLine("\n" + exiftype + " / " + celldata + "\nMEISSELI");
+                Debug.WriteLine("KIISSELI");
+                if ((bool)(descriptionMTDT.Rows[x].Cells[2].Value == exiftype))
+                {
+                    file.Properties.Set((ExifTag)exiftype, celldata);
+                    Debug.WriteLine("\n" + exiftype + " / " + celldata + "\nMEISSELI");
 
-                        string myDate2 = "";
+                    string myDate2 = "";
 
                     if ((int)exiftype == 236867)
                     {
                         if (celldata == null || celldata == "")
                         {
                             file.Properties.Set((ExifTag)exiftype, myDate2);
-                        } else
+                        }
+                        else
                         {
                             DateTime myDate = DateTime.ParseExact(celldata, "yyyy.MM.dd HH.mm.ss", System.Globalization.CultureInfo.InvariantCulture);
                             file.Properties.Set((ExifTag)exiftype, myDate);
@@ -813,6 +820,32 @@ namespace testiä
         {
             curtab = 3;
             Metat();
+        }
+
+        private void dtgrd_KeyUp(object sender, KeyEventArgs e)
+        {
+            //miten vitaleeessa saan ton quickdata_Load() event:in käynnistettyä täältä imagemtdt:stä >:[
+            if (ModifierKeys.HasFlag(Keys.Control))
+            {
+                if (e.KeyCode == Keys.Q)
+                {
+                    //avaa quickdata ja lähetä valitun rivin tiedot
+
+                    Int32 selectedCellCount = descriptionMTDT.GetCellCount(DataGridViewElementStates.Selected);
+                    if (selectedCellCount == 3)
+                    {
+                        int o = selectedCellCount - 1;
+
+                        quickdata_type = descriptionMTDT.Rows[descriptionMTDT.SelectedCells[o].RowIndex].Cells[2].Value.ToString();
+                        quickdata_data = descriptionMTDT.Rows[descriptionMTDT.SelectedCells[o].RowIndex].Cells[1].Value.ToString();
+                        quickdata_name = descriptionMTDT.Rows[descriptionMTDT.SelectedCells[o].RowIndex].Cells[0].Value.ToString();
+                        Debug.WriteLine("sr: " + descriptionMTDT.SelectedCells[o].RowIndex.ToString() + "\n" + "qdt: " + quickdata_type + "\n" + "qdn: " + quickdata_name);
+
+                        quickdata d = new quickdata();
+                        d.Show();
+                    }
+                }
+            }
         }
     }
 }

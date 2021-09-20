@@ -178,7 +178,7 @@ namespace testiä
             this.descriptionMTDT.Name = "descriptionMTDT";
             this.descriptionMTDT.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.descriptionMTDT_CellEndEdit);
             this.descriptionMTDT.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.descriptionMTDT_CellLeave);
-            this.descriptionMTDT.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
+            this.descriptionMTDT.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dtgrd_KeyUp);
             // 
             // mtdtName
             // 
