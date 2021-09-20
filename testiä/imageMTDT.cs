@@ -749,7 +749,7 @@ namespace testiä
                             file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(ExposureProgram), celldata));
                         }
                     }
-                    if ((int)exiftype == 241993) //ssaturation
+                    if ((int)exiftype == 241993) //saturation
                     {
                         if (celldata == null || celldata == "")
                         {
@@ -807,7 +807,6 @@ namespace testiä
         private void descriptionMTDT_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
             descriptionMTDT.ClearSelection();
-
         }
 
         private void tab_camera_Click(object sender, EventArgs e)
