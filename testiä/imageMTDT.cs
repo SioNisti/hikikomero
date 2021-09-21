@@ -598,7 +598,7 @@ namespace testiä
 
         private void dragfolder(object sender, DragEventArgs e)
         {
-            //huom: ei toimi koska se ei syystä tuntemattomasta huoli sitä kansiota
+            //huom: ei toimi koska se ei syystä tuntemattomasta huoli sitä kansiota+
             Kakapylytoimi();
         }
 
@@ -689,13 +689,13 @@ namespace testiä
                     // x = x;  huom tän virka on olla ns "breakpoint":ina kun tuo vittuilee nytten
                     //tää on aika paskaa koodia mutta jotenkin on tarkistettava ollaanko muuttamassa tota datetimeoriginal höskää koska se celldata pitää muuttaa datetimeksi
 
-                    //IF LAUSE SOTKUA KOSKA PERKELEEN ENUM:IT
+                    //-IF- SWITCH LAUSE SOTKUA KOSKA PERKELEEN ENUM:IT
                     //tää toimii mutta ei ole käyttäjäystävällinen koska pitää tietää tismalleen miten tuo exiflib tahtoo nuo tiedot. properties > data "flash" voi olla esim 'flash' meinaten että se oli päällä
                     //mutta jos haluaa sen laittaa tolla ohjelmalla niin pitää kirjoittaa 'FlashFired' ja kyllä tismalleen noin isot kirjaimet ja ei välejä ja kaiken kukkuraksi tää on hirveä if lause soppa
                     //saattais toimia jos mä laita ton gridview:in päälle parit dropdown höskät jotka menee näkyviin tarvittaessa ja piiloon muutoin ja riippúen curtab:istä niin se laittaisi tietyt tiedot niihin dropdown:eihin
 
 
-                    switch ((int)exiftype)
+                    switch (exiftype)
                     {
                         case 237383: //MeteringMode
                             switch (celldata)
