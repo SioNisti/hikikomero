@@ -168,6 +168,7 @@ namespace testiä
             this.descriptionMTDT.AllowUserToAddRows = false;
             this.descriptionMTDT.AllowUserToDeleteRows = false;
             this.descriptionMTDT.BackgroundColor = System.Drawing.Color.White;
+            this.descriptionMTDT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.descriptionMTDT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.descriptionMTDT.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.mtdtName,
@@ -203,9 +204,12 @@ namespace testiä
             // 
             // tab_description
             // 
+            this.tab_description.BackColor = System.Drawing.SystemColors.Control;
+            this.tab_description.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.tab_description.FlatAppearance.BorderSize = 4;
             resources.ApplyResources(this.tab_description, "tab_description");
             this.tab_description.Name = "tab_description";
-            this.tab_description.UseVisualStyleBackColor = true;
+            this.tab_description.UseVisualStyleBackColor = false;
             this.tab_description.Click += new System.EventHandler(this.tab_description_Click);
             // 
             // tab_origin

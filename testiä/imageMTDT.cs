@@ -684,103 +684,130 @@ namespace testiä
                             DateTime myDate = DateTime.ParseExact(celldata, "yyyy.MM.dd HH.mm.ss", System.Globalization.CultureInfo.InvariantCulture);
                             file.Properties.Set((ExifTag)exiftype, myDate);
                         }
-
-                        // x = x;  huom tän virka on olla ns "breakpoint":ina kun tuo vittuilee nytten
-                        //tää on aika paskaa koodia mutta jotenkin on tarkistettava ollaanko muuttamassa tota datetimeoriginal höskää koska se celldata pitää muuttaa datetimeksi
                     }
+
+                    // x = x;  huom tän virka on olla ns "breakpoint":ina kun tuo vittuilee nytten
+                    //tää on aika paskaa koodia mutta jotenkin on tarkistettava ollaanko muuttamassa tota datetimeoriginal höskää koska se celldata pitää muuttaa datetimeksi
 
                     //IF LAUSE SOTKUA KOSKA PERKELEEN ENUM:IT
                     //tää toimii mutta ei ole käyttäjäystävällinen koska pitää tietää tismalleen miten tuo exiflib tahtoo nuo tiedot. properties > data "flash" voi olla esim 'flash' meinaten että se oli päällä
                     //mutta jos haluaa sen laittaa tolla ohjelmalla niin pitää kirjoittaa 'FlashFired' ja kyllä tismalleen noin isot kirjaimet ja ei välejä ja kaiken kukkuraksi tää on hirveä if lause soppa
                     //saattais toimia jos mä laita ton gridview:in päälle parit dropdown höskät jotka menee näkyviin tarvittaessa ja piiloon muutoin ja riippúen curtab:istä niin se laittaisi tietyt tiedot niihin dropdown:eihin
 
-                    if ((int)exiftype == 237383) /*MeteringMode*/
+
+                    switch ((int)exiftype)
                     {
-                        if (celldata == null || celldata == "")
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(MeteringMode), myDate2));
-                        }
-                        else
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(MeteringMode), celldata));
-                        }
-                    }
-                    if ((int)exiftype == 237385/*Flash*/)
-                    {
-                        if (celldata == null || celldata == "")
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Flash), myDate2));
-                        }
-                        else
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Flash), celldata));
-                        }
-                    }
-                    if ((int)exiftype == 241992) //contrast
-                    {
-                        if (celldata == null || celldata == "")
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Contrast), myDate2));
-                        }
-                        else
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Contrast), celldata));
-                        }
-                    }
-                    if ((int)exiftype == 237384) //light source
-                    {
-                        if (celldata == null || celldata == "")
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(LightSource), myDate2));
-                        }
-                        else
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(LightSource), celldata));
-                        }
-                    }
-                    if ((int)exiftype == 234850) //exposure program
-                    {
-                        if (celldata == null || celldata == "")
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(ExposureProgram), myDate2));
-                        }
-                        else
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(ExposureProgram), celldata));
-                        }
-                    }
-                    if ((int)exiftype == 241993) //saturation
-                    {
-                        if (celldata == null || celldata == "")
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Saturation), myDate2));
-                        }
-                        else
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Saturation), celldata));
-                        }
-                    }
-                    if ((int)exiftype == 241994) // sharpness
-                    {
-                        if (celldata == null || celldata == "")
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Sharpness), myDate2));
-                        }
-                        else
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Sharpness), celldata));
-                        }
-                    }
-                    if ((int)exiftype == 241987) //white balance
-                    {
-                        if (celldata == null || celldata == "")
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(WhiteBalance), myDate2));
-                        }
-                        else
-                        {
-                            file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(WhiteBalance), celldata));
-                        }
+                        case 237383: //MeteringMode
+                            switch (celldata)
+                            {
+                                case null:
+                                case "":
+                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(MeteringMode), myDate2));
+                                    break;
+
+                                default:
+                                    file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(MeteringMode), celldata));
+                                    break;
+                            }
+                            break;
+
+                        case 237385: //Flash
+                            switch (celldata)
+                            {
+                                case null:
+                                case "":
+                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Flash), " "));
+                                    break;
+
+                                default:
+                                    file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Flash), celldata));
+                                    break;
+                            }
+                            break;
+
+                        case 241992: //Contrast
+                            switch (celldata)
+                            {
+                                case null:
+                                case "":
+                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Contrast), " "));
+                                    break;
+
+                                default:
+                                    file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Contrast), celldata));
+                                    break;
+                            }
+                            break;
+
+                        case 237384: //LigtSource
+                            switch (celldata)
+                            {
+                                case null:
+                                case "":
+                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(LightSource), " "));
+                                    break;
+
+                                default:
+                                    file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(LightSource), celldata));
+                                    break;
+                            }
+                            break;
+
+                        case 234850: //ExposureProgram
+                            switch (celldata)
+                            {
+                                case null:
+                                case "":
+                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(ExposureProgram), " "));
+                                    break;
+
+                                default:
+                                    file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(ExposureProgram), celldata));
+                                    break;
+                            }
+                            break;
+
+                        case 241993: //Saturation
+                            switch (celldata)
+                            {
+                                case null:
+                                case "":
+                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Saturation), " "));
+                                    break;
+
+                                default:
+                                    file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Saturation), celldata));
+                                    break;
+                            }
+                            break;
+
+                        case 241994: //Sharpness
+                            switch (celldata)
+                            {
+                                case null:
+                                case "":
+                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Sharpness), " "));
+                                    break;
+
+                                default:
+                                    file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Sharpness), celldata));
+                                    break;
+                            }
+                            break;
+
+                        case 241987: //WhiteBalance
+                            switch (celldata)
+                            {
+                                case null:
+                                case "":
+                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(WhiteBalance), " "));
+                                    break;
+
+                                default:
+                                    file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(WhiteBalance), celldata));
+                                    break;
+                            }
+                            break;
                     }
                 }
                 x++;
