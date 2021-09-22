@@ -41,6 +41,7 @@ namespace testiä
 
         int intti = 0;
         int curtab = 0;
+        int metadatachanger = 0;
 
         quickdata _d = new quickdata();
         public static string quickdata_type;
@@ -278,13 +279,13 @@ namespace testiä
             //descriptionMTDT.CurrentCell = null;voi perkele
             descriptionMTDT.ClearSelection();
             descriptionMTDT.Rows.Clear();
-
+            
             var file = ImageFile.FromFile(valittukuva);
-
+            /*
             foreach (var property in file.Properties)
             {
                 Debug.WriteLine(property.Name + " - " + property.Value);
-            }
+            }*/
 
             if (curtab == 0)
             {
@@ -613,17 +614,26 @@ namespace testiä
 
         private void descriptionMTDT_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            updatemtdt();
+            metadatachanger = 0;
+        }
+
+        public void updatemtdt()
+        {
+            gsImages();
             /*string vittu = descriptionMTDT.CurrentCell.RowIndex.ToString();
             string perkele = descriptionMTDT.Rows[descriptionMTDT.CurrentCell.RowIndex].Cells[1].Value.ToString();
             MessageBox.Show(vittu+"\n\n"+perkele);*/
 
             int x = 0;
-            string celldata;
-            var exiftype = descriptionMTDT.Rows[x].Cells[2].Value;
+            string celldata = quickdata.qdedited;
+            var exiftype = 0;
             Unohdakuva();
             var file = ImageFile.FromFile(valittukuva);
             foreach (DataGridViewRow row in descriptionMTDT.Rows)
             {
+                if (metadatachanger == 0)
+                {
                 if (descriptionMTDT.Rows[x].Cells[1].Value == null)
                 {
                     celldata = "";
@@ -633,8 +643,12 @@ namespace testiä
                 {
                     celldata = descriptionMTDT.Rows[x].Cells[1].Value.ToString();
                 }
+                    exiftype = (int)descriptionMTDT.Rows[x].Cells[2].Value;
+                } else
+                {
+                    exiftype = Int32.Parse(quickdata_type);
+                }
                 Debug.WriteLine(celldata);
-                exiftype = descriptionMTDT.Rows[x].Cells[2].Value;
 
                 //VITTUUUU MITEN SAAN TÄN TOIMIMAaN ILMAAN KAHEKSAA SATAA IF LAUSETTA PERKELEEN C# KUN SE EI OLE PHP JOSSA TÄTÄ ONGELMAA EI OLISI PERKELE
 
@@ -673,10 +687,10 @@ namespace testiä
                 //jees saatana
 
                 Debug.WriteLine("KIISSELI");
-                if ((bool)(descriptionMTDT.Rows[x].Cells[2].Value == exiftype))
+                if ((bool)((int)descriptionMTDT.Rows[x].Cells[2].Value == exiftype))
                 {
                     file.Properties.Set((ExifTag)exiftype, celldata);
-                    Debug.WriteLine("\n" + exiftype + " / " + celldata + "\nMEISSELI");
+                    Debug.WriteLine("\n" + exiftype.ToString() + " / " + celldata + "\nMEISSELI");
 
                     if ((int)exiftype == 236867)
                     {
@@ -819,7 +833,7 @@ namespace testiä
             file.Save(valittukansio2 + "/" + valittukuva2);
             PictureBox.Image = Image.FromFile(@valittukuva);
             Metat();
-            quickdataX();
+            //quickdataX();
             Debug.WriteLine("------------------------------------------------------------------");
         }
 
@@ -888,9 +902,8 @@ namespace testiä
             quickdata_name = descriptionMTDT.Rows[qdrow].Cells[0].Value.ToString();
             Debug.WriteLine("sr: " + qdrow.ToString() + "\n" + "qdt: " + quickdata_type + "\n" + "qdn: " + quickdata_name);
 
-            //quickdata d = new quickdata();
             _d.getdata();
             _d.Show();
-        }
+        }   
     }
 }

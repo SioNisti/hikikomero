@@ -10,7 +10,7 @@ namespace testiä
             InitializeComponent();
         }
 
-        public static bool qdon = true;
+        public static string qdedited;
 
         public void quickdata_Load(object sender, EventArgs e)
         {
@@ -26,7 +26,18 @@ namespace testiä
 
         private void qdclosing(object sender, FormClosingEventArgs e)
         {
-            qdon = false;
+            this.Hide();
+            e.Cancel = true;
+        }
+
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                qdedited = textBox1.Text;
+                imageMTDT i = new imageMTDT();
+                i.updatemtdt();
+            }
         }
     }
 }
