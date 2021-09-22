@@ -601,7 +601,7 @@ namespace testiä
             PictureBox.Image = Image.FromFile(@valittukuva);
             if (qdon == true)
             {
-                quickdata();
+                quickdataX();
             }
         }
 
@@ -819,6 +819,7 @@ namespace testiä
             file.Save(valittukansio2 + "/" + valittukuva2);
             PictureBox.Image = Image.FromFile(@valittukuva);
             Metat();
+            quickdataX();
             Debug.WriteLine("------------------------------------------------------------------");
         }
 
@@ -866,21 +867,30 @@ namespace testiä
                         int o = 2;
                         qdon = true;
                         qdrow = descriptionMTDT.SelectedCells[o].RowIndex;
-                        quickdata();
+                        quickdataX();
                     }
                 }
             }
         }
-        public void quickdata()
+        public void quickdataX()
         {
             quickdata_type = descriptionMTDT.Rows[qdrow].Cells[2].Value.ToString();
-            quickdata_data = descriptionMTDT.Rows[qdrow].Cells[1].Value.ToString();//kaatuu jos kyseinen solu on null
+            switch (descriptionMTDT.Rows[qdrow].Cells[1].Value) //tää estää kaatumisen jos solu 2(1) on null
+            {
+                case null:
+                    quickdata_data = "";
+                    break;
+
+                default:
+                    quickdata_data = descriptionMTDT.Rows[qdrow].Cells[1].Value.ToString();
+                    break;
+            }
             quickdata_name = descriptionMTDT.Rows[qdrow].Cells[0].Value.ToString();
             Debug.WriteLine("sr: " + qdrow.ToString() + "\n" + "qdt: " + quickdata_type + "\n" + "qdn: " + quickdata_name);
 
-            quickdata d = new quickdata();
-            d.Show();
-            _d.Refresh();
+            //quickdata d = new quickdata();
+            _d.getdata();
+            _d.Show();
         }
     }
 }

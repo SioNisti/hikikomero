@@ -58,6 +58,7 @@ namespace testiä
             this.Controls.Add(this.textBox1);
             this.Name = "quickdata";
             this.Text = "quickdata";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.qdclosing);
             this.Load += new System.EventHandler(this.quickdata_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
