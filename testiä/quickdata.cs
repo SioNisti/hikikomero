@@ -16,7 +16,13 @@ namespace testiä
         {
             InitializeComponent();
         }
-    public void quickdata_Load(object sender, EventArgs e)
+        public void quickdata_Load(object sender, EventArgs e)
+        {
+            label1.Text = imageMTDT.quickdata_name;
+            textBox1.Text = imageMTDT.quickdata_data;
+            //getdata();
+        }
+        public void getdata()
         {
             label1.Text = imageMTDT.quickdata_name;
             textBox1.Text = imageMTDT.quickdata_data;

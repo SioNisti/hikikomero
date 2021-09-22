@@ -38,11 +38,16 @@ namespace testiä
         public string valittukansio2;
         public string valittukuva;
         public string valittukuva2;
+
         int intti = 0;
         int curtab = 0;
+
+        quickdata _d = new quickdata();
         public static string quickdata_type;
         public static string quickdata_name;
         public static string quickdata_data;
+        public bool qdon = false;
+        public int qdrow;
 
         private void imageMTDT_Load(object sender, EventArgs e)
         {
@@ -594,6 +599,10 @@ namespace testiä
             CurrentFile.Text = valittukuva2;
             Metat();
             PictureBox.Image = Image.FromFile(@valittukuva);
+            if (qdon == true)
+            {
+                quickdata();
+            }
         }
 
         private void dragfolder(object sender, DragEventArgs e)
@@ -663,26 +672,21 @@ namespace testiä
                 //ongelman ratkaisi kun olin kirjottanut "exiftag.windows" niin siinä oli tullu se teksti-boksi jossa näky joku numero minkä oletin olevan sama juttu kuin se nimi mutta numerona (yllätys)
                 //jees saatana
 
-                //if (curtab == 0)
-                //{
                 Debug.WriteLine("KIISSELI");
                 if ((bool)(descriptionMTDT.Rows[x].Cells[2].Value == exiftype))
                 {
                     file.Properties.Set((ExifTag)exiftype, celldata);
                     Debug.WriteLine("\n" + exiftype + " / " + celldata + "\nMEISSELI");
 
-                    string myDate2 = "";
-
                     if ((int)exiftype == 236867)
                     {
                         if (celldata == null || celldata == "")
                         {
-                            file.Properties.Set((ExifTag)exiftype, myDate2);
+                            file.Properties.Set((ExifTag)exiftype, "");
                         }
                         else
                         {
-                            DateTime myDate = DateTime.ParseExact(celldata, "yyyy.MM.dd HH.mm.ss", System.Globalization.CultureInfo.InvariantCulture);
-                            file.Properties.Set((ExifTag)exiftype, myDate);
+                            file.Properties.Set((ExifTag)exiftype, DateTime.ParseExact(celldata, "yyyy.MM.dd HH.mm.ss", System.Globalization.CultureInfo.InvariantCulture));
                         }
                     }
 
@@ -694,7 +698,6 @@ namespace testiä
                     //mutta jos haluaa sen laittaa tolla ohjelmalla niin pitää kirjoittaa 'FlashFired' ja kyllä tismalleen noin isot kirjaimet ja ei välejä ja kaiken kukkuraksi tää on hirveä if lause soppa
                     //saattais toimia jos mä laita ton gridview:in päälle parit dropdown höskät jotka menee näkyviin tarvittaessa ja piiloon muutoin ja riippúen curtab:istä niin se laittaisi tietyt tiedot niihin dropdown:eihin
 
-
                     switch (exiftype)
                     {
                         case 237383: //MeteringMode
@@ -702,7 +705,7 @@ namespace testiä
                             {
                                 case null:
                                 case "":
-                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(MeteringMode), myDate2));
+                                    //doesn't save anything because the cell is null or otherwise blank
                                     break;
 
                                 default:
@@ -716,7 +719,7 @@ namespace testiä
                             {
                                 case null:
                                 case "":
-                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Flash), " "));
+                                    //doesn't save anything because the cell is null or otherwise blank
                                     break;
 
                                 default:
@@ -730,7 +733,7 @@ namespace testiä
                             {
                                 case null:
                                 case "":
-                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Contrast), " "));
+                                    //doesn't save anything because the cell is null or otherwise blank
                                     break;
 
                                 default:
@@ -744,7 +747,7 @@ namespace testiä
                             {
                                 case null:
                                 case "":
-                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(LightSource), " "));
+                                    //doesn't save anything because the cell is null or otherwise blank
                                     break;
 
                                 default:
@@ -758,7 +761,7 @@ namespace testiä
                             {
                                 case null:
                                 case "":
-                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(ExposureProgram), " "));
+                                    //doesn't save anything because the cell is null or otherwise blank
                                     break;
 
                                 default:
@@ -772,7 +775,7 @@ namespace testiä
                             {
                                 case null:
                                 case "":
-                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Saturation), " "));
+                                    //doesn't save anything because the cell is null or otherwise blank
                                     break;
 
                                 default:
@@ -786,7 +789,7 @@ namespace testiä
                             {
                                 case null:
                                 case "":
-                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(Sharpness), " "));
+                                    //doesn't save anything because the cell is null or otherwise blank
                                     break;
 
                                 default:
@@ -800,7 +803,7 @@ namespace testiä
                             {
                                 case null:
                                 case "":
-                                    //file.Properties.Set((ExifTag)exiftype, Enum.Parse(typeof(WhiteBalance), " "));
+                                    //doesn't save anything because the cell is null or otherwise blank
                                     break;
 
                                 default:
@@ -860,18 +863,24 @@ namespace testiä
                     Int32 selectedCellCount = descriptionMTDT.GetCellCount(DataGridViewElementStates.Selected);
                     if (selectedCellCount == 3)
                     {
-                        int o = selectedCellCount - 1;
-
-                        quickdata_type = descriptionMTDT.Rows[descriptionMTDT.SelectedCells[o].RowIndex].Cells[2].Value.ToString();
-                        quickdata_data = descriptionMTDT.Rows[descriptionMTDT.SelectedCells[o].RowIndex].Cells[1].Value.ToString();
-                        quickdata_name = descriptionMTDT.Rows[descriptionMTDT.SelectedCells[o].RowIndex].Cells[0].Value.ToString();
-                        Debug.WriteLine("sr: " + descriptionMTDT.SelectedCells[o].RowIndex.ToString() + "\n" + "qdt: " + quickdata_type + "\n" + "qdn: " + quickdata_name);
-
-                        quickdata d = new quickdata();
-                        d.Show();
+                        int o = 2;
+                        qdon = true;
+                        qdrow = descriptionMTDT.SelectedCells[o].RowIndex;
+                        quickdata();
                     }
                 }
             }
+        }
+        public void quickdata()
+        {
+            quickdata_type = descriptionMTDT.Rows[qdrow].Cells[2].Value.ToString();
+            quickdata_data = descriptionMTDT.Rows[qdrow].Cells[1].Value.ToString();//kaatuu jos kyseinen solu on null
+            quickdata_name = descriptionMTDT.Rows[qdrow].Cells[0].Value.ToString();
+            Debug.WriteLine("sr: " + qdrow.ToString() + "\n" + "qdt: " + quickdata_type + "\n" + "qdn: " + quickdata_name);
+
+            quickdata d = new quickdata();
+            d.Show();
+            _d.Refresh();
         }
     }
 }
