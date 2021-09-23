@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Directory = System.IO.Directory;
 /*
 *nää on kuulemma turhia t:vs
-*"kuulemma" on aika X sana tähän.  muunmuassa nää joskus vanhassa koodissa käytetyt library:t vei 300mb tilaa turhaan
+*"kuulemma" on aika aliliioteltu sana tähän.  muunmuassa nää joskus vanhassa koodissa käytetyt library:t vei 300mb tilaa turhaan
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
