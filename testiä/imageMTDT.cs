@@ -281,10 +281,10 @@ namespace testiä
 
             var file = ImageFile.FromFile(valittukuva);
 
-            foreach (var property in file.Properties)
+            /*foreach (var property in file.Properties)
             {
                 Debug.WriteLine(property.Name + " - " + property.Value);
-            }
+            }*/
 
             if (curtab == 0)
             {
@@ -380,14 +380,16 @@ namespace testiä
         {
             if (e.KeyCode == Keys.Enter)
             {
-                int bintti = intti;
-                int value2 = Convert.ToInt32(currentimage.Value);
-                intti = value2;
-                if (intti < 0)
+                intti = Convert.ToInt32(currentimage.Value);
+                if (Convert.ToInt32(currentimage.Value) < 0)
                 {
-                    MessageBox.Show("Value must be positive");
-                    intti = bintti;
-                    currentimage.Value = bintti;
+                    MessageBox.Show("Value must be positive", "Negative value");
+                    currentimage.Value = intti;
+                }
+                else if (Convert.ToInt32(currentimage.Value) > Convert.ToInt32(imageamount.Value))
+                {
+                    MessageBox.Show("Value must be lower than the count of found images", "Value too high");
+                    currentimage.Value = intti;
                 }
                 else
                 {
@@ -819,7 +821,7 @@ namespace testiä
             file.Save(valittukansio2 + "/" + valittukuva2);
             PictureBox.Image = Image.FromFile(@valittukuva);
             Metat();
-            quickdataX();
+            //quickdataX();
             Debug.WriteLine("------------------------------------------------------------------");
         }
 
