@@ -11,6 +11,9 @@ namespace testiä
         }
 
         public static string qdedited;
+        public static string qdkuva;
+        public static string qdkansio;
+        public static string qdkuva2;
 
         public void quickdata_Load(object sender, EventArgs e)
         {
@@ -22,6 +25,9 @@ namespace testiä
         {
             label1.Text = imageMTDT.quickdata_name;
             textBox1.Text = imageMTDT.quickdata_data;
+            qdkuva = imageMTDT.valittukuva;
+            qdkansio = imageMTDT.valittukansio2;
+            qdkuva2 = imageMTDT.valittukuva2;
         }
 
         private void qdclosing(object sender, FormClosingEventArgs e)
