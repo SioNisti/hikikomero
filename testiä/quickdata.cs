@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace testiä
@@ -9,6 +10,9 @@ namespace testiä
         {
             InitializeComponent();
         }
+
+        public imageMTDT f1;
+        public object PictureBox { get; private set; }
 
         public static string qdedited;
         public static string qdkuva;
@@ -42,8 +46,21 @@ namespace testiä
             {
                 qdedited = textBox1.Text;
                 imageMTDT i = new imageMTDT();
+                i.Unohdakuva();
                 i.updatemtdt();
             }
+        }
+        public void alzheimer()
+        {
+            //tää koodin pätkä ottaa sen käytössä olevan kuvan pois pictureboxista jotta sen voi tiedoston päälle voi tallentaa
+            /*var bit = new Bitmap(this.Width, this.Height);
+            var g = Graphics.FromImage(bit);
+
+            var oldImage = f1.PictureBox.Image;
+            f1.PictureBox.Image = bit;
+            oldImage?.Dispose();
+
+            g.Dispose();*/
         }
     }
 }

@@ -68,8 +68,8 @@ namespace testiä
             var bit = new Bitmap(this.Width, this.Height);
             var g = Graphics.FromImage(bit);
 
-            var oldImage = PictureBox.Image;
-            PictureBox.Image = bit;
+            var oldImage = this.PictureBox.Image;
+            this.PictureBox.Image = bit;
             oldImage?.Dispose();
 
             g.Dispose();
@@ -122,7 +122,7 @@ namespace testiä
                 }
 
                 gsImages();
-                Debug.WriteLine(intti);
+                Debug.WriteLine(intti+"ö");
             }
 
         }
@@ -169,10 +169,9 @@ namespace testiä
                 if (FileBox.Items.Count == 1)
                 {
                     currentimage.Value = 1;
-                    gsImages();
                 }
                 gsImages();
-                Debug.WriteLine(intti);
+                Debug.WriteLine(intti+"ä");
             }
         }
 
@@ -633,11 +632,11 @@ namespace testiä
 
             int x = 0;
             string celldata;
-            var exiftype = (object)"kaak";
+            int exiftype = 0;
 
             if (!qdused)
             {
-                exiftype = descriptionMTDT.Rows[x].Cells[2].Value;
+                exiftype = Int32.Parse(descriptionMTDT.Rows[x].Cells[2].Value.ToString());
             } else
             {
                 qdused = true;
@@ -654,12 +653,21 @@ namespace testiä
             {
                 file = ImageFile.FromFile(quickdata.qdkuva);
                 qdused = true;
-                MessageBox.Show(rowcount.ToString());
+                Debug.WriteLine("rwcnt "+rowcount.ToString());
             }
             int rowcount2 = rowcount;
             while (rowcount2 > 0)
             {
-                rowcount2--;
+                if (qdused)
+                {
+                    rowcount2 = 0;
+                    Debug.WriteLine("senkin sadisti");
+                }
+                else
+                {
+                    Debug.WriteLine("mittarilla voit testata");
+                    rowcount2--;
+                }
                 //MessageBox.Show(row.ToString());
                 if (!qdused)
                 {
@@ -690,11 +698,11 @@ namespace testiä
 
                 if (!qdused)
                 {
-                    exiftype = descriptionMTDT.Rows[x].Cells[2].Value;
+                    exiftype = Int32.Parse(descriptionMTDT.Rows[x].Cells[2].Value.ToString());
                 }
                 else
                 {
-                    exiftype = quickdata_type;
+                    exiftype = Int32.Parse(quickdata_type);
                 }
 
                 //VITTUUUU MITEN SAAN TÄN TOIMIMAaN ILMAAN KAHEKSAA SATAA IF LAUSETTA PERKELEEN C# KUN SE EI OLE PHP JOSSA TÄTÄ ONGELMAA EI OLISI PERKELE
@@ -734,22 +742,24 @@ namespace testiä
                 //jees saatana
 
                 Debug.WriteLine("KIISSELI");
+                //Debug.WriteLine(exiftype);
 
-                var kokki = (object)"a";
+                int kokki = 0;
                 if (!qdused)
                 {
-                    kokki = descriptionMTDT.Rows[x].Cells[2].Value;
+                    kokki = Int32.Parse(descriptionMTDT.Rows[x].Cells[2].Value.ToString());
                     //MessageBox.Show(kokki + " a");
                 }
                 else
                 {
-                    kokki = quickdata_type;
+                    kokki = Int32.Parse(quickdata_type);
                     //MessageBox.Show(kokki + " b");
                 }
 
                 if (kokki == exiftype)
                 {
-                    file.Properties.Set((ExifTag)exiftype, celldata); //kaatuu tähän quickdataa käyttäessä "specified cast is not valid"
+                    file.Properties.Set((ExifTag)exiftype, celldata); 
+                    //-------kaatuu ylemmälle riville quickdataa käyttäessä "specified cast is not valid". tuo "exiftype" variable lienee jotenkin rikki qd:ta käyttäessä-------
                     //sinänsä saattais toimia jos mä ottaisin sen qd:hen laitetun jutun tonne gridview:iin ja ottaisin sen uudestaan sieltä
                     Debug.WriteLine("\n" + exiftype + " / " + celldata + "\nMEISSELI");
 
@@ -899,13 +909,30 @@ namespace testiä
             else
             {
                 //quickdata.qdkuva.Dispose();
+                quickdata d = new quickdata();
+                d.alzheimer();
 
-                file.Save(/*quickdata.qdkansio + "/" + */quickdata.qdkuva2);
+                var bit = new Bitmap(this.Width, this.Height);
+                var g = Graphics.FromImage(bit);
+
+                var oldImage = imageMTDT.PictureBox.Image;
+                PictureBox.Image = bit;
+                oldImage?.Dispose();
+
+                g.Dispose();
+                
+                MessageBox.Show(valittukansio2 + "/" + valittukuva2);
+
+                //file.Save(/*quickdata.qdkansio + "/" + */quickdata.qdkuva2);
+
+                //tää ei pysty disposaan sitä pictureboxin kuvaa qd:sta käsin joka estää tän toimimisen
+
+                file.Save(valittukansio2 + "/" + valittukuva2);
             }
             PictureBox.Image = Image.FromFile(@valittukuva);
             Metat();
             //quickdataX();
-            Debug.WriteLine("a------------------------------------------------------------------");
+            Debug.WriteLine("------------------------------------------------------------------");
         }
 
         private void tab_description_Click(object sender, EventArgs e)
@@ -973,9 +1000,8 @@ namespace testiä
             quickdata_name = descriptionMTDT.Rows[qdrow].Cells[0].Value.ToString();
             Debug.WriteLine("sr: " + qdrow.ToString() + "\n" + "qdt: " + quickdata_type + "\n" + "qdn: " + quickdata_name);
 
-            //quickdata d = new quickdata();
-            _d.getdata();
             _d.Show();
+            _d.getdata();
         }
     }
 }
