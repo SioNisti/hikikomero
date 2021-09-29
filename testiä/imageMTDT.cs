@@ -42,14 +42,15 @@ namespace testiä
         int intti = 0;
         int curtab = 0;
         int rowcount = 5;
+        int qdct = 0;
 
         quickdata _d = new quickdata();
         public static string quickdata_type;
         public static string quickdata_name;
         public static string quickdata_data;
-        public bool qdon = false;
+        public static bool qdon = false;
         public bool qdused = true;
-        public int qdrow;
+        public static int qdrow;
 
         private void imageMTDT_Load(object sender, EventArgs e)
         {
@@ -604,33 +605,37 @@ namespace testiä
             valittukuva2 = item.SubItems[0].Text;
 
             CurrentFile.Text = valittukuva2;
+            if (qdon)
+            {
+                curtab = qdct;
+            }
             Metat();
             PictureBox.Image = Image.FromFile(@valittukuva);
-            if (qdon == true)
+            if (qdon)
             {
                 quickdataX();
             }
         }
 
-        private void dragfolder(object sender, DragEventArgs e)
-        {
-            //huom: ei toimi koska se ei syystä tuntemattomasta huoli sitä kansiota+
-            Kakapylytoimi();
-        }
-
         private void descriptionMTDT_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             //MessageBox.Show(intti.ToString() + " - (" + intti.ToString() + " * " + "2) = " + (intti - (intti * 2)).ToString());
-            qdused = false;
-            updatemtdt();
+                
+                qdused = false;
+                descriptionMTDT.ClearSelection();
+                System.Threading.Thread.Sleep(300);
+                updatemtdt(e.RowIndex);
+                descriptionMTDT.Update();
+                descriptionMTDT.Refresh();
+
         }
-        public void updatemtdt()
+        public void updatemtdt(int x)
         {
             /*string vittu = descriptionMTDT.CurrentCell.RowIndex.ToString();
             string perkele = descriptionMTDT.Rows[descriptionMTDT.CurrentCell.RowIndex].Cells[1].Value.ToString();
             MessageBox.Show(vittu+"\n\n"+perkele);*/
 
-            int x = 0;
+            //int x = 0;
             string celldata;
             int exiftype = 0;
 
@@ -915,7 +920,7 @@ namespace testiä
                 var bit = new Bitmap(this.Width, this.Height);
                 var g = Graphics.FromImage(bit);
 
-                var oldImage = imageMTDT.PictureBox.Image;
+                var oldImage = this.PictureBox.Image;
                 PictureBox.Image = bit;
                 oldImage?.Dispose();
 
@@ -934,7 +939,10 @@ namespace testiä
             //quickdataX();
             Debug.WriteLine("------------------------------------------------------------------");
         }
-
+        private void descriptionMTDT_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
         private void tab_description_Click(object sender, EventArgs e)
         {
             curtab = 0;
@@ -945,11 +953,6 @@ namespace testiä
         {
             curtab = 1;
             Metat();
-        }
-
-        private void descriptionMTDT_CellLeave(object sender, DataGridViewCellEventArgs e)
-        {
-            descriptionMTDT.ClearSelection();
         }
 
         private void tab_camera_Click(object sender, EventArgs e)
@@ -979,14 +982,29 @@ namespace testiä
                         int o = 2;
                         qdon = true;
                         qdrow = descriptionMTDT.SelectedCells[o].RowIndex;
+                        qdct = curtab;
                         quickdataX();
                     }
                 }
-            }
+            }/*
+            if (e.KeyCode == Keys.Enter)
+            {
+                qdused = false;
+                updatemtdt();
+            }*/
         }
         public void quickdataX()
-        {
-            quickdata_type = descriptionMTDT.Rows[qdrow].Cells[2].Value.ToString();
+        {/*
+            var file = ImageFile.FromFile(valittukuva);
+            descriptionMTDT.Rows.Add("Title", file.Properties.Get(ExifTag.WindowsTitle), 140091);
+            if (quickdata_type != null)
+            {
+                quickdata_type = descriptionMTDT.Rows[qdrow].Cells[2].Value.ToString();
+            }
+            else
+            {
+                quickdata_type = file.Properties.Get((ExifTag)exiftype);
+            }*/
             switch (descriptionMTDT.Rows[qdrow].Cells[1].Value) //tää estää kaatumisen jos solu 2(1) on null
             {
                 case null:

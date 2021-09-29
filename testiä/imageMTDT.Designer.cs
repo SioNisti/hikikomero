@@ -80,7 +80,6 @@ namespace testiä
             resources.ApplyResources(this.PictureBox, "PictureBox");
             this.PictureBox.Name = "PictureBox";
             this.PictureBox.TabStop = false;
-            this.PictureBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragfolder);
             // 
             // toolStrip1
             // 
@@ -104,7 +103,6 @@ namespace testiä
             resources.ApplyResources(this.ChosenFolder, "ChosenFolder");
             this.ChosenFolder.Name = "ChosenFolder";
             this.ChosenFolder.ReadOnly = true;
-            this.ChosenFolder.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragfolder);
             // 
             // FileBox
             // 
@@ -116,7 +114,6 @@ namespace testiä
             this.FileBox.Name = "FileBox";
             this.FileBox.UseCompatibleStateImageBehavior = false;
             this.FileBox.View = System.Windows.Forms.View.Details;
-            this.FileBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragfolder);
             // 
             // columnHeader1
             // 
@@ -258,7 +255,6 @@ namespace testiä
             this.MaximizeBox = false;
             this.Name = "imageMTDT";
             this.Load += new System.EventHandler(this.imageMTDT_Load);
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.dragfolder);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.toolStrip1.ResumeLayout(false);

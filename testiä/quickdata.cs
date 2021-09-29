@@ -18,6 +18,7 @@ namespace testiä
         public static string qdkuva;
         public static string qdkansio;
         public static string qdkuva2;
+        public static int qdrow;
 
         public void quickdata_Load(object sender, EventArgs e)
         {
@@ -32,10 +33,12 @@ namespace testiä
             qdkuva = imageMTDT.valittukuva;
             qdkansio = imageMTDT.valittukansio2;
             qdkuva2 = imageMTDT.valittukuva2;
+            qdrow = imageMTDT.qdrow;
         }
 
         private void qdclosing(object sender, FormClosingEventArgs e)
         {
+            imageMTDT.qdon = false;
             this.Hide();
             e.Cancel = true;
         }
@@ -47,7 +50,7 @@ namespace testiä
                 qdedited = textBox1.Text;
                 imageMTDT i = new imageMTDT();
                 i.Unohdakuva();
-                i.updatemtdt();
+                i.updatemtdt(qdrow);
             }
         }
         public void alzheimer()
