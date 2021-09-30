@@ -33,6 +33,11 @@ namespace testiä
         public imageMTDT()
         {
             InitializeComponent();
+            GlobalHotKey.RegisterHotKey("CTRL + N", () => nextimage());
+            GlobalHotKey.RegisterHotKey("CTRL + Right", () => nextimage());
+            GlobalHotKey.RegisterHotKey("CTRL + B", () => previmage());
+            GlobalHotKey.RegisterHotKey("CTRL + Left", () => previmage());
+            GlobalHotKey.RegisterHotKey("CTRL + D", () => Kakapylytoimi());
         }
 
         public static string valittukansio2;
@@ -100,30 +105,8 @@ namespace testiä
                 tab_origin.Enabled = true;
 
                 //edellinen kuva
-                Unohdakuva();
-                intti--;
-
-                FileBox.Items[0].Selected = true;
-
-                imageamount.Value = FileBox.Items.Count;
-                currentimage.Value = intti;
-
-                if (intti < 1)
-                {
-                    intti = FileBox.Items.Count;
-                }
-
-                if (FileBox.Items.Count == 1)
-                {
-                    currentimage.Value = 1;
-                }
-                else
-                {
-                    currentimage.Value = intti;
-                }
-
-                gsImages();
-                Debug.WriteLine(intti+"ö");
+                previmage();
+                Debug.WriteLine(intti);
             }
 
         }
@@ -153,121 +136,62 @@ namespace testiä
                 tab_origin.Enabled = true;
 
                 // seuraava kuva
-                Unohdakuva();
-
-                intti++;
-
-                FileBox.Items[0].Selected = true;
-
-                if (intti == FileBox.Items.Count + 1)
-                {
-                    intti = 1;
-                }
-
-                imageamount.Value = FileBox.Items.Count;
-                currentimage.Value = intti;
-
-                if (FileBox.Items.Count == 1)
-                {
-                    currentimage.Value = 1;
-                }
-                gsImages();
-                Debug.WriteLine(intti+"ä");
+                nextimage();
+                Debug.WriteLine(intti);
             }
         }
-
-        private void imagehotkey(object sender, KeyPressEventArgs e)
+        public void nextimage()
         {
-            if (valittukansio2 == null || valittukansio2 == "")
+            // seuraava kuva
+            Unohdakuva();
+
+            intti++;
+
+            FileBox.Items[0].Selected = true;
+
+            if (intti == FileBox.Items.Count + 1)
             {
-                prevbtn.Enabled = false;
-                nxtbtn.Enabled = false;
-                TagSearch.Enabled = false;
-                currentimage.Enabled = false;
-                tab_ap.Enabled = false;
-                tab_camera.Enabled = false;
-                tab_description.Enabled = false;
-                tab_origin.Enabled = false;
+                intti = 1;
+            }
+
+            imageamount.Value = FileBox.Items.Count;
+            currentimage.Value = intti;
+
+            if (FileBox.Items.Count == 1)
+            {
+                currentimage.Value = 1;
+                gsImages();
+            }
+            gsImages();
+            Debug.WriteLine(intti);
+        }
+        public void previmage()
+        {
+            //edellinen kuva
+            Unohdakuva();
+            intti--;
+
+            FileBox.Items[0].Selected = true;
+
+            imageamount.Value = FileBox.Items.Count;
+            currentimage.Value = intti;
+
+            if (intti < 1)
+            {
+                intti = FileBox.Items.Count;
+            }
+
+            if (FileBox.Items.Count == 1)
+            {
+                currentimage.Value = 1;
             }
             else
             {
-                prevbtn.Enabled = true;
-                nxtbtn.Enabled = true;
-                TagSearch.Enabled = true;
-                currentimage.Enabled = true;
-                tab_ap.Enabled = true;
-                tab_camera.Enabled = true;
-                tab_description.Enabled = true;
-                tab_origin.Enabled = true;
-
-                if (ModifierKeys.HasFlag(Keys.Control))
-                {
-                    if (e.KeyChar == 37 || e.KeyChar == 66)
-                    {
-                        //edellinen kuva
-                        Unohdakuva();
-                        intti--;
-
-                        FileBox.Items[0].Selected = true;
-
-                        imageamount.Value = FileBox.Items.Count;
-                        currentimage.Value = intti;
-
-                        if (intti < 1)
-                        {
-                            intti = FileBox.Items.Count;
-                        }
-
-                        if (FileBox.Items.Count == 1)
-                        {
-                            currentimage.Value = 1;
-                        }
-                        else
-                        {
-                            currentimage.Value = intti;
-                        }
-
-                        gsImages();
-                        Debug.WriteLine(intti);
-                    }
-                }
-                //https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.keys?view=net-5.0
-                if (ModifierKeys.HasFlag(Keys.Control))
-                {
-                    if (e.KeyChar == 39 || e.KeyChar == 78)
-                    {
-                        // seuraava kuva
-                        Unohdakuva();
-
-                        intti++;
-
-                        FileBox.Items[0].Selected = true;
-
-                        if (intti == FileBox.Items.Count + 1)
-                        {
-                            intti = 1;
-                        }
-
-                        imageamount.Value = FileBox.Items.Count;
-                        currentimage.Value = intti;
-
-                        if (FileBox.Items.Count == 1)
-                        {
-                            currentimage.Value = 1;
-                            gsImages();
-                        }
-                        gsImages();
-                        Debug.WriteLine(intti);
-                    }
-                }
+                currentimage.Value = intti;
             }
-            if (ModifierKeys.HasFlag(Keys.Control))
-            {
-                if (e.KeyChar == 68)
-                {
-                    Kakapylytoimi();
-                }
-            }
+
+            gsImages();
+            Debug.WriteLine(intti);
         }
 
         public void Metat()
@@ -636,12 +560,14 @@ namespace testiä
             MessageBox.Show(vittu+"\n\n"+perkele);*/
 
             //int x = 0;
+            PictureBox.Refresh();
             string celldata;
             int exiftype = 0;
 
             if (!qdused)
             {
                 exiftype = Int32.Parse(descriptionMTDT.Rows[x].Cells[2].Value.ToString());
+                Debug.WriteLine(x);
             } else
             {
                 qdused = true;
@@ -676,6 +602,7 @@ namespace testiä
                 //MessageBox.Show(row.ToString());
                 if (!qdused)
                 {
+                    Debug.WriteLine(x);
                     if (descriptionMTDT.Rows[x].Cells[1].Value == null)
                     {
                         celldata = "";
@@ -707,7 +634,7 @@ namespace testiä
                 }
                 else
                 {
-                    exiftype = Int32.Parse(quickdata_type);
+                    exiftype = Int32.Parse(quickdata.qdtype);
                 }
 
                 //VITTUUUU MITEN SAAN TÄN TOIMIMAaN ILMAAN KAHEKSAA SATAA IF LAUSETTA PERKELEEN C# KUN SE EI OLE PHP JOSSA TÄTÄ ONGELMAA EI OLISI PERKELE
@@ -903,7 +830,7 @@ namespace testiä
                             break;
                     }
                 }
-                x++;
+                //x++; tää rikko sen.  oli jääny yli vanhasta koodista
             }
 
             if (!qdused)
@@ -1016,6 +943,7 @@ namespace testiä
                     break;
             }
             quickdata_name = descriptionMTDT.Rows[qdrow].Cells[0].Value.ToString();
+            quickdata_type = descriptionMTDT.Rows[qdrow].Cells[2].Value.ToString();
             Debug.WriteLine("sr: " + qdrow.ToString() + "\n" + "qdt: " + quickdata_type + "\n" + "qdn: " + quickdata_name);
 
             _d.Show();

@@ -18,8 +18,9 @@ namespace testiä
         public static string qdkuva;
         public static string qdkansio;
         public static string qdkuva2;
+        public static string qdtype;
         public static int qdrow;
-
+        
         public void quickdata_Load(object sender, EventArgs e)
         {
             //label1.Text = imageMTDT.quickdata_name;
@@ -34,6 +35,7 @@ namespace testiä
             qdkansio = imageMTDT.valittukansio2;
             qdkuva2 = imageMTDT.valittukuva2;
             qdrow = imageMTDT.qdrow;
+            qdtype = imageMTDT.quickdata_type;
         }
 
         private void qdclosing(object sender, FormClosingEventArgs e)

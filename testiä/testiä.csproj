@@ -81,6 +81,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="hotkey.cs" />
     <Compile Include="imageMTDT.cs">
       <SubType>Form</SubType>
     </Compile>

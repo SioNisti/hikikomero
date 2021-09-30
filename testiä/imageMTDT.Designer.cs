@@ -64,7 +64,6 @@ namespace testiä
             this.prevbtn.Name = "prevbtn";
             this.prevbtn.UseVisualStyleBackColor = true;
             this.prevbtn.Click += new System.EventHandler(this.Button1_Click);
-            this.prevbtn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.imagehotkey);
             // 
             // nxtbtn
             // 
@@ -72,7 +71,6 @@ namespace testiä
             this.nxtbtn.Name = "nxtbtn";
             this.nxtbtn.UseVisualStyleBackColor = true;
             this.nxtbtn.Click += new System.EventHandler(this.Button2_Click);
-            this.nxtbtn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.imagehotkey);
             // 
             // PictureBox
             // 
