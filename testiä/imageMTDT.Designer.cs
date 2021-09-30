@@ -51,6 +51,7 @@ namespace testiä
             this.tab_origin = new System.Windows.Forms.Button();
             this.tab_camera = new System.Windows.Forms.Button();
             this.tab_ap = new System.Windows.Forms.Button();
+            this.refreshbtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageamount)).BeginInit();
@@ -156,6 +157,7 @@ namespace testiä
             // 
             resources.ApplyResources(this.TagSearch, "TagSearch");
             this.TagSearch.Name = "TagSearch";
+            this.TagSearch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TagSearch_MouseClick);
             this.TagSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TagSearch_KeyUp);
             // 
             // descriptionMTDT
@@ -201,7 +203,6 @@ namespace testiä
             // 
             this.tab_description.BackColor = System.Drawing.SystemColors.Control;
             this.tab_description.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.tab_description.FlatAppearance.BorderSize = 4;
             resources.ApplyResources(this.tab_description, "tab_description");
             this.tab_description.Name = "tab_description";
             this.tab_description.UseVisualStyleBackColor = false;
@@ -228,11 +229,19 @@ namespace testiä
             this.tab_ap.UseVisualStyleBackColor = true;
             this.tab_ap.Click += new System.EventHandler(this.tab_ap_Click);
             // 
+            // refreshbtn
+            // 
+            resources.ApplyResources(this.refreshbtn, "refreshbtn");
+            this.refreshbtn.Name = "refreshbtn";
+            this.refreshbtn.UseVisualStyleBackColor = true;
+            this.refreshbtn.Click += new System.EventHandler(this.refreshbtn_Click);
+            // 
             // imageMTDT
             // 
             this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.refreshbtn);
             this.Controls.Add(this.tab_ap);
             this.Controls.Add(this.tab_camera);
             this.Controls.Add(this.tab_origin);
@@ -289,6 +298,7 @@ namespace testiä
         private System.Windows.Forms.DataGridViewTextBoxColumn mtdtName;
         private System.Windows.Forms.DataGridViewTextBoxColumn mtdtData;
         private System.Windows.Forms.DataGridViewTextBoxColumn exif;
+        private System.Windows.Forms.Button refreshbtn;
     }
 }
 

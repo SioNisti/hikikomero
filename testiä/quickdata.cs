@@ -26,6 +26,13 @@ namespace testiä
             //label1.Text = imageMTDT.quickdata_name;
             //textBox1.Text = imageMTDT.quickdata_data;
             getdata();
+            imageMTDT i = new imageMTDT();
+            GlobalHotKey.RegisterHotKey("CTRL + N", () => i.nextimage()); //seuraava kuva
+            GlobalHotKey.RegisterHotKey("CTRL + Right", () => i.nextimage());//seuraava kuva
+            GlobalHotKey.RegisterHotKey("CTRL + B", () => i.previmage());//edellinen kuva
+            GlobalHotKey.RegisterHotKey("CTRL + Left", () => i.previmage());//edellinen kuva
+            GlobalHotKey.RegisterHotKey("CTRL + D", () => i.Kakapylytoimi());//valitse kansio
+            GlobalHotKey.RegisterHotKey("CTRL + R", () => i.refresh());//valitsee saman kansion uudestaan ns "päivittääkkseen" tiedosto listan
         }
         public void getdata()
         {
@@ -44,17 +51,6 @@ namespace testiä
             this.Hide();
             e.Cancel = true;
         }
-
-        private void textBox1_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                qdedited = textBox1.Text;
-                imageMTDT i = new imageMTDT();
-                i.Unohdakuva();
-                i.updatemtdt(qdrow);
-            }
-        }
         public void alzheimer()
         {
             //tää koodin pätkä ottaa sen käytössä olevan kuvan pois pictureboxista jotta sen voi tiedoston päälle voi tallentaa
@@ -66,6 +62,17 @@ namespace testiä
             oldImage?.Dispose();
 
             g.Dispose();*/
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                qdedited = textBox1.Text;
+                imageMTDT i = new imageMTDT();
+                i.Unohdakuva();
+                i.updatemtdt(qdrow);
+            }
         }
     }
 }

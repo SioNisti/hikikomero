@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="prevbtn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="prevbtn.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 630</value>
@@ -141,7 +145,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;prevbtn.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
+  </data>
+  <data name="nxtbtn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
   <data name="nxtbtn.Location" type="System.Drawing.Point, System.Drawing">
     <value>543, 630</value>
@@ -165,7 +172,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;nxtbtn.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="PictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 28</value>
@@ -173,7 +180,6 @@
   <data name="PictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>1056, 594</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
   </data>
@@ -190,7 +196,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PictureBox.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -217,7 +223,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="DirectoryBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -268,13 +274,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ChosenFolder.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="FileBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>1074, 107</value>
   </data>
   <data name="FileBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 151</value>
+    <value>318, 244</value>
   </data>
   <data name="FileBox.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -289,7 +295,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;FileBox.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="columnHeader1.Text" xml:space="preserve">
     <value>File name</value>
@@ -319,7 +325,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;CurrentFile.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="imageamount.Location" type="System.Drawing.Point, System.Drawing">
     <value>1243, 5</value>
@@ -340,7 +346,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;imageamount.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="currentimage.Location" type="System.Drawing.Point, System.Drawing">
     <value>1108, 5</value>
@@ -364,7 +370,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;currentimage.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="TagSearch.Location" type="System.Drawing.Point, System.Drawing">
     <value>1074, 82</value>
@@ -388,7 +394,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TagSearch.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <metadata name="mtdtName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -400,13 +406,13 @@
     <value>True</value>
   </metadata>
   <data name="descriptionMTDT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1074, 287</value>
+    <value>1073, 380</value>
   </data>
   <data name="descriptionMTDT.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 3</value>
   </data>
   <data name="descriptionMTDT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 382</value>
+    <value>318, 289</value>
   </data>
   <data name="descriptionMTDT.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -421,7 +427,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;descriptionMTDT.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <metadata name="mtdtName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -447,14 +453,17 @@
   <data name="exif.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="tab_description.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
   <data name="tab_description.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1074, 264</value>
+    <value>1073, 357</value>
   </data>
   <data name="tab_description.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 0, 0</value>
   </data>
   <data name="tab_description.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 23</value>
+    <value>81, 23</value>
   </data>
   <data name="tab_description.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -472,13 +481,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tab_description.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
+  </data>
+  <data name="tab_origin.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
   <data name="tab_origin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="tab_origin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1153, 264</value>
+    <value>1153, 357</value>
   </data>
   <data name="tab_origin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 0</value>
@@ -502,13 +514,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tab_origin.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
+  </data>
+  <data name="tab_camera.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
   <data name="tab_camera.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="tab_camera.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1233, 264</value>
+    <value>1231, 357</value>
   </data>
   <data name="tab_camera.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 0</value>
@@ -532,19 +547,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tab_camera.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="tab_ap.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
   <data name="tab_ap.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="tab_ap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1312, 264</value>
+    <value>1309, 357</value>
   </data>
   <data name="tab_ap.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 0</value>
   </data>
   <data name="tab_ap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 23</value>
+    <value>82, 23</value>
   </data>
   <data name="tab_ap.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -562,6 +580,33 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tab_ap.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="refreshbtn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="refreshbtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1317, 107</value>
+  </data>
+  <data name="refreshbtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 26</value>
+  </data>
+  <data name="refreshbtn.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="refreshbtn.Text" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="&gt;&gt;refreshbtn.Name" xml:space="preserve">
+    <value>refreshbtn</value>
+  </data>
+  <data name="&gt;&gt;refreshbtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;refreshbtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;refreshbtn.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

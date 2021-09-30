@@ -33,11 +33,12 @@ namespace testiä
         public imageMTDT()
         {
             InitializeComponent();
-            GlobalHotKey.RegisterHotKey("CTRL + N", () => nextimage());
-            GlobalHotKey.RegisterHotKey("CTRL + Right", () => nextimage());
-            GlobalHotKey.RegisterHotKey("CTRL + B", () => previmage());
-            GlobalHotKey.RegisterHotKey("CTRL + Left", () => previmage());
-            GlobalHotKey.RegisterHotKey("CTRL + D", () => Kakapylytoimi());
+            GlobalHotKey.RegisterHotKey("CTRL + N", () => nextimage()); //seuraava kuva
+            GlobalHotKey.RegisterHotKey("CTRL + Right", () => nextimage());//seuraava kuva
+            GlobalHotKey.RegisterHotKey("CTRL + B", () => previmage());//edellinen kuva
+            GlobalHotKey.RegisterHotKey("CTRL + Left", () => previmage());//edellinen kuva
+            GlobalHotKey.RegisterHotKey("CTRL + D", () => Kakapylytoimi());//valitse kansio
+            GlobalHotKey.RegisterHotKey("CTRL + R", () => refresh());//valitsee saman kansion uudestaan ns "päivittääkkseen" tiedosto listan
         }
 
         public static string valittukansio2;
@@ -82,37 +83,19 @@ namespace testiä
         }
         private void Button1_Click(object sender, EventArgs e)
         {
-            if (valittukansio2 == null || valittukansio2 == "")
-            {
-                prevbtn.Enabled = false;
-                nxtbtn.Enabled = false;
-                TagSearch.Enabled = false;
-                currentimage.Enabled = false;
-                tab_ap.Enabled = false;
-                tab_camera.Enabled = false;
-                tab_description.Enabled = false;
-                tab_origin.Enabled = false;
-            }
-            else
-            {
-                prevbtn.Enabled = true;
-                nxtbtn.Enabled = true;
-                TagSearch.Enabled = true;
-                currentimage.Enabled = true;
-                tab_ap.Enabled = true;
-                tab_camera.Enabled = true;
-                tab_description.Enabled = true;
-                tab_origin.Enabled = true;
-
                 //edellinen kuva
                 previmage();
                 Debug.WriteLine(intti);
-            }
-
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
+                // seuraava kuva
+                nextimage();
+                Debug.WriteLine(intti);
+        }
+        public void nextimage()
+        {
             if (valittukansio2 == null || valittukansio2 == "")
             {
                 prevbtn.Enabled = false;
@@ -134,14 +117,7 @@ namespace testiä
                 tab_camera.Enabled = true;
                 tab_description.Enabled = true;
                 tab_origin.Enabled = true;
-
-                // seuraava kuva
-                nextimage();
-                Debug.WriteLine(intti);
             }
-        }
-        public void nextimage()
-        {
             // seuraava kuva
             Unohdakuva();
 
@@ -164,6 +140,10 @@ namespace testiä
             }
             gsImages();
             Debug.WriteLine(intti);
+            prevbtn.Enabled = true;
+            nxtbtn.Enabled = true;
+            TagSearch.Enabled = true;
+            currentimage.Enabled = true;
         }
         public void previmage()
         {
@@ -192,6 +172,10 @@ namespace testiä
 
             gsImages();
             Debug.WriteLine(intti);
+            prevbtn.Enabled = true;
+            nxtbtn.Enabled = true;
+            TagSearch.Enabled = true;
+            currentimage.Enabled = true;
         }
 
         public void Metat()
@@ -214,6 +198,11 @@ namespace testiä
 
             if (curtab == 0)
             {
+                tab_description.BackColor = Color.White;
+                tab_origin.BackColor = Color.Gray;
+                tab_camera.BackColor = Color.Gray;
+                tab_ap.BackColor = Color.Gray;
+
                 descriptionMTDT.Rows.Add("Title", file.Properties.Get(ExifTag.WindowsTitle), 140091);
                 descriptionMTDT.Rows.Add("Subject", file.Properties.Get(ExifTag.WindowsSubject), 140095);
                 descriptionMTDT.Rows.Add("Rating", file.Properties.Get(ExifTag.Rating), 118246);
@@ -223,6 +212,11 @@ namespace testiä
             }
             if (curtab == 1)
             {
+                tab_description.BackColor = Color.Gray;
+                tab_origin.BackColor = Color.White;
+                tab_camera.BackColor = Color.Gray;
+                tab_ap.BackColor = Color.Gray;
+
                 descriptionMTDT.Rows.Add("Authors", file.Properties.Get(ExifTag.WindowsAuthor), 140093);
                 descriptionMTDT.Rows.Add("Date taken", file.Properties.Get(ExifTag.DateTimeOriginal), 236867);
                 //descriptionMTDT.Rows.Add("Date acquired", file.Properties.Get(ExifTag.SubSecTime), 237520); exiflib:issä ei ole "date acquired" juttua???
@@ -231,6 +225,11 @@ namespace testiä
             }
             if (curtab == 2)
             {
+                tab_description.BackColor = Color.Gray;
+                tab_origin.BackColor = Color.Gray;
+                tab_camera.BackColor = Color.White;
+                tab_ap.BackColor = Color.Gray;
+
                 descriptionMTDT.Rows.Add("Camera maker", file.Properties.Get(ExifTag.Make), 100271);
                 descriptionMTDT.Rows.Add("Camera model", file.Properties.Get(ExifTag.Model), 100272);
                 descriptionMTDT.Rows.Add("ISO speed", file.Properties.Get(ExifTag.ISOSpeedRatings), 234855);
@@ -241,6 +240,11 @@ namespace testiä
             }
             if (curtab == 3)
             {
+                tab_description.BackColor = Color.Gray;
+                tab_origin.BackColor = Color.Gray;
+                tab_camera.BackColor = Color.Gray;
+                tab_ap.BackColor = Color.White;
+
                 descriptionMTDT.Rows.Add("Lens maker", file.Properties.Get(ExifTag.LensMake), 242035);
                 descriptionMTDT.Rows.Add("Lens model", file.Properties.Get(ExifTag.LensModel), 242036); //tää on eri mitä w käyttää
                 descriptionMTDT.Rows.Add("Flash maker", file.Properties.Get(ExifTag.FlashEnergy), 241483); //tää on eri mitä w käyttää
@@ -262,7 +266,7 @@ namespace testiä
             Kakapylytoimi();
         }
 
-        private void Kakapylytoimi()
+        public void Kakapylytoimi()
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
             //dialog.InitialDirectory = "C:\\Users"; tällä sais valittua alotus kansion mutta jos se ei ole määritelty niin se alottaa siitä mihin jäit
@@ -306,6 +310,48 @@ namespace testiä
                 currentimage.Enabled = true;
             }
         }
+        public void refresh()
+        {
+            if (valittukansio2 != null)
+            {
+                FileBox.Items.Clear();
+
+                string[] files = Directory.GetFiles(valittukansio2);
+
+                foreach (string file in files)
+                {
+                    string fileName = Path.GetFileName(file);
+                    ListViewItem item = new ListViewItem(fileName);
+
+                    if (file.Contains(".jpg")/* || file.Contains(".png")*/)
+                    {
+                        item.Tag = file;
+
+                        FileBox.Items.Add(item);
+                    }
+                }
+            if (FileBox.Items.Count == 0)
+            {
+                MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs");
+            }
+            else
+            {
+                intti = 0;
+                imageamount.Value = FileBox.Items.Count;
+                currentimage.Value = intti;
+
+                prevbtn.Enabled = true;
+                nxtbtn.Enabled = true;
+                TagSearch.Enabled = true;
+                currentimage.Enabled = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Cannot refresh.  No folder selected.", "Cannot refresh");
+            }
+        }
+
         private void currentimage_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)
@@ -853,13 +899,13 @@ namespace testiä
 
                 g.Dispose();
                 
-                MessageBox.Show(valittukansio2 + "/" + valittukuva2);
+                //MessageBox.Show(valittukansio2 + "/" + valittukuva2);
 
                 //file.Save(/*quickdata.qdkansio + "/" + */quickdata.qdkuva2);
 
                 //tää ei pysty disposaan sitä pictureboxin kuvaa qd:sta käsin joka estää tän toimimisen
 
-                file.Save(valittukansio2 + "/" + valittukuva2);
+                file.Save(valittukansio2 + "/VITU_" + valittukuva2);
             }
             PictureBox.Image = Image.FromFile(@valittukuva);
             Metat();
@@ -998,5 +1044,17 @@ namespace testiä
                 currentimage.Enabled = true;
             }
         }
+
+        private void TagSearch_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(TagSearch.Text == "Search images with tags")
+            TagSearch.Text = "";
+        }
+
+        private void refreshbtn_Click(object sender, EventArgs e)
+        {
+            refresh();
+        }
+
     }
 }
