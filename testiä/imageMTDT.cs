@@ -176,7 +176,7 @@ namespace testiä
             }
         }
 
-        private void PictureBox_KeyUp(object sender, KeyEventArgs e)
+        private void imagehotkey(object sender, KeyPressEventArgs e)
         {
             if (valittukansio2 == null || valittukansio2 == "")
             {
@@ -202,7 +202,7 @@ namespace testiä
 
                 if (ModifierKeys.HasFlag(Keys.Control))
                 {
-                    if (e.KeyCode == Keys.Left || e.KeyCode == Keys.B)
+                    if (e.KeyChar == 37 || e.KeyChar == 66)
                     {
                         //edellinen kuva
                         Unohdakuva();
@@ -234,7 +234,7 @@ namespace testiä
                 //https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.keys?view=net-5.0
                 if (ModifierKeys.HasFlag(Keys.Control))
                 {
-                    if (e.KeyCode == Keys.Right || e.KeyCode == Keys.N)
+                    if (e.KeyChar == 39 || e.KeyChar == 78)
                     {
                         // seuraava kuva
                         Unohdakuva();
@@ -263,7 +263,7 @@ namespace testiä
             }
             if (ModifierKeys.HasFlag(Keys.Control))
             {
-                if (e.KeyCode == Keys.D)
+                if (e.KeyChar == 68)
                 {
                     Kakapylytoimi();
                 }
@@ -382,9 +382,9 @@ namespace testiä
                 currentimage.Enabled = true;
             }
         }
-        private void currentimage_KeyUp(object sender, KeyEventArgs e)
+        private void currentimage_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyChar == (char)13)
             {
                 intti = Convert.ToInt32(currentimage.Value);
                 if (Convert.ToInt32(currentimage.Value) < 0)
@@ -967,12 +967,12 @@ namespace testiä
             Metat();
         }
 
-        private void dtgrd_KeyUp(object sender, KeyEventArgs e)
+        private void descriptionMTDT_KeyPress(object sender, KeyPressEventArgs e)
         {
             //miten vitaleeessa saan ton quickdata_Load() event:in käynnistettyä täältä imagemtdt:stä >:[
             if (ModifierKeys.HasFlag(Keys.Control))
             {
-                if (e.KeyCode == Keys.Q)
+                if (e.KeyChar == 17)
                 {
                     //avaa quickdata ja lähetä valitun rivin tiedot
 
@@ -1035,25 +1035,25 @@ namespace testiä
         private void start_DragDrop(object sender, DragEventArgs e)
         {
             string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-                valittukansio2 = fileList[0];
-                ChosenFolder.Text = fileList[0];
+            valittukansio2 = fileList[0];
+            ChosenFolder.Text = fileList[0];
 
-                FileBox.Items.Clear();
+            FileBox.Items.Clear();
 
-                string[] files = Directory.GetFiles(fileList[0]);
+            string[] files = Directory.GetFiles(fileList[0]);
 
-                foreach (string file in files)
+            foreach (string file in files)
+            {
+                string fileName = Path.GetFileName(file);
+                ListViewItem item = new ListViewItem(fileName);
+
+                if (file.Contains(".jpg")/* || file.Contains(".png")*/)
                 {
-                    string fileName = Path.GetFileName(file);
-                    ListViewItem item = new ListViewItem(fileName);
+                    item.Tag = file;
 
-                    if (file.Contains(".jpg")/* || file.Contains(".png")*/)
-                    {
-                        item.Tag = file;
-
-                        FileBox.Items.Add(item);
-                    }
+                    FileBox.Items.Add(item);
                 }
+            }
             if (FileBox.Items.Count == 0)
             {
                 MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs");

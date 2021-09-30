@@ -64,7 +64,7 @@ namespace testiä
             this.prevbtn.Name = "prevbtn";
             this.prevbtn.UseVisualStyleBackColor = true;
             this.prevbtn.Click += new System.EventHandler(this.Button1_Click);
-            this.prevbtn.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
+            this.prevbtn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.imagehotkey);
             // 
             // nxtbtn
             // 
@@ -72,7 +72,7 @@ namespace testiä
             this.nxtbtn.Name = "nxtbtn";
             this.nxtbtn.UseVisualStyleBackColor = true;
             this.nxtbtn.Click += new System.EventHandler(this.Button2_Click);
-            this.nxtbtn.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
+            this.nxtbtn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.imagehotkey);
             // 
             // PictureBox
             // 
@@ -152,7 +152,7 @@ namespace testiä
             0,
             -2147483648});
             this.currentimage.Name = "currentimage";
-            this.currentimage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.currentimage_KeyUp);
+            this.currentimage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.currentimage_KeyPress);
             // 
             // TagSearch
             // 
@@ -176,7 +176,7 @@ namespace testiä
             this.descriptionMTDT.Name = "descriptionMTDT";
             this.descriptionMTDT.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.descriptionMTDT_CellEndEdit);
             this.descriptionMTDT.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.descriptionMTDT_CellLeave);
-            this.descriptionMTDT.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dtgrd_KeyUp);
+            this.descriptionMTDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.descriptionMTDT_KeyPress);
             // 
             // mtdtName
             // 
@@ -257,7 +257,6 @@ namespace testiä
             this.Load += new System.EventHandler(this.imageMTDT_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.start_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.start_DragEnter);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
