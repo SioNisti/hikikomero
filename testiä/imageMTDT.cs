@@ -1021,5 +1021,54 @@ namespace testiä
             _d.Show();
             _d.getdata();
         }
+        private void start_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+        private void start_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+                valittukansio2 = fileList[0];
+                ChosenFolder.Text = fileList[0];
+
+                FileBox.Items.Clear();
+
+                string[] files = Directory.GetFiles(fileList[0]);
+
+                foreach (string file in files)
+                {
+                    string fileName = Path.GetFileName(file);
+                    ListViewItem item = new ListViewItem(fileName);
+
+                    if (file.Contains(".jpg")/* || file.Contains(".png")*/)
+                    {
+                        item.Tag = file;
+
+                        FileBox.Items.Add(item);
+                    }
+                }
+            if (FileBox.Items.Count == 0)
+            {
+                MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs");
+            }
+            else
+            {
+                intti = 0;
+                imageamount.Value = FileBox.Items.Count;
+                currentimage.Value = intti;
+
+                prevbtn.Enabled = true;
+                nxtbtn.Enabled = true;
+                TagSearch.Enabled = true;
+                currentimage.Enabled = true;
+            }
+        }
     }
 }

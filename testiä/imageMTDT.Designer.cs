@@ -255,6 +255,8 @@ namespace testiä
             this.MaximizeBox = false;
             this.Name = "imageMTDT";
             this.Load += new System.EventHandler(this.imageMTDT_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.start_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.start_DragEnter);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PictureBox_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.toolStrip1.ResumeLayout(false);
