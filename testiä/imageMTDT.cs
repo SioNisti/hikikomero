@@ -33,13 +33,14 @@ namespace testiä
         public imageMTDT()
         {
             InitializeComponent();
+
             GlobalHotKey.RegisterHotKey("CTRL + N", () => nextimage()); //seuraava kuva
             GlobalHotKey.RegisterHotKey("CTRL + Right", () => nextimage());//seuraava kuva
             GlobalHotKey.RegisterHotKey("CTRL + B", () => previmage());//edellinen kuva
             GlobalHotKey.RegisterHotKey("CTRL + Left", () => previmage());//edellinen kuva
+            GlobalHotKey.RegisterHotKey("CTRL + T", () => fcsTagSearch());//laittaa focusin siihen tägihaku lootaan
             GlobalHotKey.RegisterHotKey("CTRL + D", () => Kakapylytoimi());//valitse kansio
             GlobalHotKey.RegisterHotKey("CTRL + R", () => refresh());//valitsee saman kansion uudestaan ns "päivittääkkseen" tiedosto listan
-            GlobalHotKey.RegisterHotKey("CTRL + T", () => fcsTagSearch());//laittaa focusin siihen tägihaku lootaan
 
             quickdata form2 = new quickdata();
             form2.ThePicture = this.ThePicture;
@@ -66,6 +67,9 @@ namespace testiä
         public static bool qdon = false;
         public bool qdused = true;
         public static int qdrow;
+
+        public static bool showpngs = false;
+        public static bool msgbx = false;
 
         private void imageMTDT_Load(object sender, EventArgs e)
         {
@@ -105,6 +109,13 @@ namespace testiä
         }
         public void nextimage()
         {
+            if (valittukansio2 == null || valittukansio2 == "")
+            {
+                MessageBox.Show("No images found", "No images", 0, MessageBoxIcon.Error);
+
+                return;
+            }
+
             if (valittukansio2 == null || valittukansio2 == "")
             {
                 prevbtn.Enabled = false;
@@ -156,6 +167,12 @@ namespace testiä
         }
         public void previmage()
         {
+            if (valittukansio2 == null || valittukansio2 == "")
+            {
+                MessageBox.Show("No images found", "No images", 0, MessageBoxIcon.Error);
+
+                return;
+            }
             //edellinen kuva
             Unohdakuva();
             intti--;
@@ -294,7 +311,7 @@ namespace testiä
                     string fileName = Path.GetFileName(file);
                     ListViewItem item = new ListViewItem(fileName);
 
-                    if (file.Contains(".jpg")/* || file.Contains(".png")*/)
+                    if (file.Contains(".jpg") || file.Contains(".png") && showpngs/* || file.Contains(".png")*/)
                     {
                         item.Tag = file;
 
@@ -332,7 +349,7 @@ namespace testiä
                     string fileName = Path.GetFileName(file);
                     ListViewItem item = new ListViewItem(fileName);
 
-                    if (file.Contains(".jpg")/* || file.Contains(".png")*/)
+                    if (file.Contains(".jpg") || file.Contains(".png") && showpngs/* || file.Contains(".png")*/)
                     {
                         item.Tag = file;
 
@@ -1031,7 +1048,7 @@ namespace testiä
                 string fileName = Path.GetFileName(file);
                 ListViewItem item = new ListViewItem(fileName);
 
-                if (file.Contains(".jpg")/* || file.Contains(".png")*/)
+                if (file.Contains(".jpg") || file.Contains(".png") && showpngs/* || file.Contains(".png")*/)
                 {
                     item.Tag = file;
 
@@ -1068,6 +1085,8 @@ namespace testiä
         public void fcsTagSearch()
         {
             TagSearch.Focus();
+            if (TagSearch.Text == "Search images with tags")
+                TagSearch.Text = "";
         }
 
         private void FileBox_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -1081,27 +1100,41 @@ namespace testiä
                 {
                     //MessageBox.Show("File: "+FileBox.SelectedItems[0].Text+"\nFound on row: "+row);
                     Debug.WriteLine(row+" joo");
-                    //edellinen kuva
                     Unohdakuva();
                     intti = row;
-
-                    //FileBox.Items[0].Selected = true; en täysin oo varma mikä tän virka on.  saattanee olla vanhan koodin jäännös
 
                     imageamount.Value = FileBox.Items.Count;
                     currentimage.Value = intti;
 
-                    currentimage.Value = intti;
-
                     gsImages();
-                    Debug.WriteLine(intti);
+
                     prevbtn.Enabled = true;
                     nxtbtn.Enabled = true;
                     TagSearch.Enabled = true;
                     currentimage.Enabled = true;
+                    break; //pomppaa pois foreach loopista kun kuva on löydetty.  estää turhan työn
                 }
                 row++;
             }
 
+        }
+
+        private void showpng_Click(object sender, EventArgs e)
+        {
+            if (showpngs)
+            {
+                showpngs = false;
+                showpng.Text = "Show PNGs";
+                if (valittukansio2 != null)
+                refresh();
+            }
+            else 
+            { 
+                showpngs = true;
+                showpng.Text = "Hide PNGs";
+                if (valittukansio2 != null)
+                    refresh();
+            }
         }
     }
 }

@@ -52,6 +52,7 @@ namespace testiä
             this.tab_camera = new System.Windows.Forms.Button();
             this.tab_ap = new System.Windows.Forms.Button();
             this.refreshbtn = new System.Windows.Forms.Button();
+            this.showpng = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageamount)).BeginInit();
@@ -84,7 +85,8 @@ namespace testiä
             // 
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DirectoryBtn});
+            this.DirectoryBtn,
+            this.showpng});
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -237,6 +239,13 @@ namespace testiä
             this.refreshbtn.UseVisualStyleBackColor = true;
             this.refreshbtn.Click += new System.EventHandler(this.refreshbtn_Click);
             // 
+            // showpng
+            // 
+            this.showpng.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.showpng, "showpng");
+            this.showpng.Name = "showpng";
+            this.showpng.Click += new System.EventHandler(this.showpng_Click);
+            // 
             // imageMTDT
             // 
             this.AllowDrop = true;
@@ -300,6 +309,7 @@ namespace testiä
         private System.Windows.Forms.DataGridViewTextBoxColumn mtdtData;
         private System.Windows.Forms.DataGridViewTextBoxColumn exif;
         private System.Windows.Forms.Button refreshbtn;
+        private System.Windows.Forms.ToolStripButton showpng;
     }
 }
 
