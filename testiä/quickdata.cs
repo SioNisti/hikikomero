@@ -20,7 +20,24 @@ namespace testiä
         public static string qdkuva2;
         public static string qdtype;
         public static int qdrow;
-        
+
+        private PictureBox _thePicture;
+        public PictureBox ThePicture
+        {
+            set { this._thePicture = value; }
+            get { return this._thePicture; }
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            if (this.ThePicture != null)
+            {
+                var bmp = new Bitmap(this.ThePicture.Width, this.ThePicture.Height);
+                this.ThePicture.DrawToBitmap(bmp, this.ThePicture.ClientRectangle);
+                e.Graphics.DrawImage(bmp, 25, 25, 800, 1050);
+            }
+        }
+
         public void quickdata_Load(object sender, EventArgs e)
         {
             //label1.Text = imageMTDT.quickdata_name;
@@ -54,14 +71,18 @@ namespace testiä
         public void alzheimer()
         {
             //tää koodin pätkä ottaa sen käytössä olevan kuvan pois pictureboxista jotta sen voi tiedoston päälle voi tallentaa
-            /*var bit = new Bitmap(this.Width, this.Height);
+
+            imageMTDT i = new imageMTDT();
+            /*
+            var bit = new Bitmap(this.Width, this.Height);
             var g = Graphics.FromImage(bit);
 
-            var oldImage = f1.PictureBox.Image;
-            f1.PictureBox.Image = bit;
+            var oldImage = i.ThePicture.Image;
+            i.ThePicture.Image = bit;
             oldImage?.Dispose();
 
             g.Dispose();*/
+            i.ThePicture.Dispose();
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -69,8 +90,11 @@ namespace testiä
             if (e.KeyChar == (char)Keys.Enter)
             {
                 qdedited = textBox1.Text;
+                alzheimer();
                 imageMTDT i = new imageMTDT();
                 i.Unohdakuva();
+                i.ThePicture.Dispose();
+                i.ThePicture.Image.Dispose();
                 i.updatemtdt(qdrow);
             }
         }

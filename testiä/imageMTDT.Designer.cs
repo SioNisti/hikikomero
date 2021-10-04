@@ -113,6 +113,7 @@ namespace testiä
             this.FileBox.Name = "FileBox";
             this.FileBox.UseCompatibleStateImageBehavior = false;
             this.FileBox.View = System.Windows.Forms.View.Details;
+            this.FileBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FileBox_MouseDoubleClick);
             // 
             // columnHeader1
             // 
@@ -158,7 +159,7 @@ namespace testiä
             resources.ApplyResources(this.TagSearch, "TagSearch");
             this.TagSearch.Name = "TagSearch";
             this.TagSearch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TagSearch_MouseClick);
-            this.TagSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TagSearch_KeyUp);
+            this.TagSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TagSearch_KeyPress);
             // 
             // descriptionMTDT
             // 

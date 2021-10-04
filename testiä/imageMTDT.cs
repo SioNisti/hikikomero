@@ -39,6 +39,15 @@ namespace testiä
             GlobalHotKey.RegisterHotKey("CTRL + Left", () => previmage());//edellinen kuva
             GlobalHotKey.RegisterHotKey("CTRL + D", () => Kakapylytoimi());//valitse kansio
             GlobalHotKey.RegisterHotKey("CTRL + R", () => refresh());//valitsee saman kansion uudestaan ns "päivittääkkseen" tiedosto listan
+            GlobalHotKey.RegisterHotKey("CTRL + T", () => fcsTagSearch());//laittaa focusin siihen tägihaku lootaan
+
+            quickdata form2 = new quickdata();
+            form2.ThePicture = this.ThePicture;
+
+        }
+        public PictureBox ThePicture
+        {
+            get { return PictureBox; }
         }
 
         public static string valittukansio2;
@@ -75,8 +84,8 @@ namespace testiä
             var bit = new Bitmap(this.Width, this.Height);
             var g = Graphics.FromImage(bit);
 
-            var oldImage = this.PictureBox.Image;
-            this.PictureBox.Image = bit;
+            var oldImage = ThePicture.Image;
+            ThePicture.Image = bit;
             oldImage?.Dispose();
 
             g.Dispose();
@@ -123,7 +132,7 @@ namespace testiä
 
             intti++;
 
-            FileBox.Items[0].Selected = true;
+            //FileBox.Items[0].Selected = true; en täysin oo varma mikä tän virka on.  saattanee olla vanhan koodin jäännös
 
             if (intti == FileBox.Items.Count + 1)
             {
@@ -151,7 +160,7 @@ namespace testiä
             Unohdakuva();
             intti--;
 
-            FileBox.Items[0].Selected = true;
+            //FileBox.Items[0].Selected = true; en täysin oo varma mikä tän virka on.  saattanee olla vanhan koodin jäännös
 
             imageamount.Value = FileBox.Items.Count;
             currentimage.Value = intti;
@@ -296,7 +305,7 @@ namespace testiä
             }
             if (FileBox.Items.Count == 0)
             {
-                MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs");
+                MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs", 0, MessageBoxIcon.Information);
             }
             else
             {
@@ -332,7 +341,7 @@ namespace testiä
                 }
             if (FileBox.Items.Count == 0)
             {
-                MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs");
+                MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs", 0, MessageBoxIcon.Information);
             }
             else
             {
@@ -348,7 +357,7 @@ namespace testiä
             }
             else
             {
-                MessageBox.Show("Cannot refresh.  No folder selected.", "Cannot refresh");
+                MessageBox.Show("Cannot refresh.  No folder selected.", "Cannot refresh", 0, MessageBoxIcon.Error);
             }
         }
 
@@ -359,12 +368,12 @@ namespace testiä
                 intti = Convert.ToInt32(currentimage.Value);
                 if (Convert.ToInt32(currentimage.Value) < 0)
                 {
-                    MessageBox.Show("Value must be positive", "Negative value");
+                    MessageBox.Show("Value must be positive", "Negative value", 0, MessageBoxIcon.Error);
                     currentimage.Value = intti;
                 }
                 else if (Convert.ToInt32(currentimage.Value) > Convert.ToInt32(imageamount.Value))
                 {
-                    MessageBox.Show("Value must be lower than the count of found images", "Value too high");
+                    MessageBox.Show("Value must be lower than the count of found images", "Value too high", 0, MessageBoxIcon.Error);
                     currentimage.Value = intti;
                 }
                 else
@@ -373,10 +382,9 @@ namespace testiä
                 }
             }
         }
-
-        private void TagSearch_KeyUp(object sender, KeyEventArgs e)
+        private void TagSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyChar == (char)Keys.Enter)
             {
                 searchwithtag(TagSearch.Text);
             }
@@ -472,7 +480,7 @@ namespace testiä
 
                     if (sloop >= fcount - 1)
                     {
-                        MessageBox.Show("No images were found with the tags \"" + text + "\"", "No found images");
+                        MessageBox.Show("No images were found with the tags \"" + text + "\"", "No found images", 0, MessageBoxIcon.Error);
                         b--;
                         break;
                     }
@@ -552,11 +560,11 @@ namespace testiä
                             imageamount.Value = FileBox.Items.Count;
                         }
                     }
-                }
+                }/*
                 if (FileBox.Items.Count == 0)
                 {
-                    MessageBox.Show("No images were found with the tags \"" + text + "\"", "No found images");
-                }
+                    MessageBox.Show("No images were found with the tags \"" + text + "\"", "No found images", 0, MessageBoxIcon.Error);
+                }*/
             }
 
         }
@@ -580,7 +588,7 @@ namespace testiä
                 curtab = qdct;
             }
             Metat();
-            PictureBox.Image = Image.FromFile(@valittukuva);
+            ThePicture.Image = Image.FromFile(@valittukuva);
             if (qdon)
             {
                 quickdataX();
@@ -606,7 +614,7 @@ namespace testiä
             MessageBox.Show(vittu+"\n\n"+perkele);*/
 
             //int x = 0;
-            PictureBox.Refresh();
+            ThePicture.Refresh();
             string celldata;
             int exiftype = 0;
 
@@ -890,24 +898,26 @@ namespace testiä
                 quickdata d = new quickdata();
                 d.alzheimer();
 
-                var bit = new Bitmap(this.Width, this.Height);
-                var g = Graphics.FromImage(bit);
-
-                var oldImage = this.PictureBox.Image;
-                PictureBox.Image = bit;
-                oldImage?.Dispose();
-
-                g.Dispose();
-                
                 //MessageBox.Show(valittukansio2 + "/" + valittukuva2);
 
                 //file.Save(/*quickdata.qdkansio + "/" + */quickdata.qdkuva2);
 
                 //tää ei pysty disposaan sitä pictureboxin kuvaa qd:sta käsin joka estää tän toimimisen
 
-                file.Save(valittukansio2 + "/VITU_" + valittukuva2);
+                this.Unohdakuva();
+                PictureBox.Dispose();
+                ThePicture.Dispose();
+
+                try
+                {
+                    file.Save(valittukansio2 + "/a_" + valittukuva2);
+                }
+                catch (System.IO.IOException)
+                {
+                    MessageBox.Show("Se kusinen paska ei onnistunut disposata sitä pictureboxin kuvaa prkl", "vittu", 0, MessageBoxIcon.Error);
+                }
             }
-            PictureBox.Image = Image.FromFile(@valittukuva);
+            ThePicture.Image = Image.FromFile(@valittukuva);
             Metat();
             //quickdataX();
             Debug.WriteLine("------------------------------------------------------------------");
@@ -1030,7 +1040,7 @@ namespace testiä
             }
             if (FileBox.Items.Count == 0)
             {
-                MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs");
+                MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs", 0, MessageBoxIcon.Information);
             }
             else
             {
@@ -1055,6 +1065,43 @@ namespace testiä
         {
             refresh();
         }
+        public void fcsTagSearch()
+        {
+            TagSearch.Focus();
+        }
 
+        private void FileBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Debug.WriteLine("dc");
+            int row = 1;
+            foreach (var i in FileBox.Items)
+            {
+                Debug.WriteLine(row+"\n"+ FileBox.SelectedItems[0] + "\n" +i);
+                if (i == FileBox.SelectedItems[0])
+                {
+                    //MessageBox.Show("File: "+FileBox.SelectedItems[0].Text+"\nFound on row: "+row);
+                    Debug.WriteLine(row+" joo");
+                    //edellinen kuva
+                    Unohdakuva();
+                    intti = row;
+
+                    //FileBox.Items[0].Selected = true; en täysin oo varma mikä tän virka on.  saattanee olla vanhan koodin jäännös
+
+                    imageamount.Value = FileBox.Items.Count;
+                    currentimage.Value = intti;
+
+                    currentimage.Value = intti;
+
+                    gsImages();
+                    Debug.WriteLine(intti);
+                    prevbtn.Enabled = true;
+                    nxtbtn.Enabled = true;
+                    TagSearch.Enabled = true;
+                    currentimage.Enabled = true;
+                }
+                row++;
+            }
+
+        }
     }
 }
