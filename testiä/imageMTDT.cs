@@ -30,6 +30,17 @@ namespace testiä
 {
     public partial class imageMTDT : Form
     {
+        public class MessageBoxer
+        {
+            public static bool IsOpen { get; set; }
+
+            public static void Show(string messageBoxText, string headr, MessageBoxIcon sign)
+            {
+                IsOpen = true;
+                MessageBox.Show(messageBoxText, headr, 0, sign);
+                IsOpen = false;
+            }
+        }
         public imageMTDT()
         {
             InitializeComponent();
@@ -69,7 +80,8 @@ namespace testiä
         public static int qdrow;
 
         public static bool showpngs = false;
-        public static bool msgbx = false;
+        //Timer _timeri = new Timer();
+        //static System.Windows.Forms.Timer _timeri = new System.Windows.Forms.Timer();
 
         private void imageMTDT_Load(object sender, EventArgs e)
         {
@@ -81,6 +93,7 @@ namespace testiä
             tab_camera.Enabled = false;
             tab_description.Enabled = false;
             tab_origin.Enabled = false;
+            diatimeSel.Enabled = false;
         }
         public void Unohdakuva()
         {
@@ -109,35 +122,21 @@ namespace testiä
         }
         public void nextimage()
         {
-            if (valittukansio2 == null || valittukansio2 == "")
+            if (valittukansio2 == null)
             {
-                MessageBox.Show("No images found", "No images", 0, MessageBoxIcon.Error);
+                if (!MessageBoxer.IsOpen)
+                {
+                    //MessageBox.Show("No images found", "No images", 0, MessageBoxIcon.Error);
+                    MessageBoxer.Show("No images found", "No images", MessageBoxIcon.Error);
 
-                return;
+                    return;
+                }
+                if (MessageBoxer.IsOpen)
+                {
+                    return;
+                }
             }
 
-            if (valittukansio2 == null || valittukansio2 == "")
-            {
-                prevbtn.Enabled = false;
-                nxtbtn.Enabled = false;
-                TagSearch.Enabled = false;
-                currentimage.Enabled = false;
-                tab_ap.Enabled = false;
-                tab_camera.Enabled = false;
-                tab_description.Enabled = false;
-                tab_origin.Enabled = false;
-            }
-            else
-            {
-                prevbtn.Enabled = true;
-                nxtbtn.Enabled = true;
-                TagSearch.Enabled = true;
-                currentimage.Enabled = true;
-                tab_ap.Enabled = true;
-                tab_camera.Enabled = true;
-                tab_description.Enabled = true;
-                tab_origin.Enabled = true;
-            }
             // seuraava kuva
             Unohdakuva();
 
@@ -163,15 +162,24 @@ namespace testiä
             prevbtn.Enabled = true;
             nxtbtn.Enabled = true;
             TagSearch.Enabled = true;
+            diatimeSel.Enabled = true;
             currentimage.Enabled = true;
         }
         public void previmage()
         {
-            if (valittukansio2 == null || valittukansio2 == "")
+            if(valittukansio2 == null)
             {
-                MessageBox.Show("No images found", "No images", 0, MessageBoxIcon.Error);
+                if (!MessageBoxer.IsOpen)
+                {
+                    //MessageBox.Show("No images found", "No images", 0, MessageBoxIcon.Error);
+                    MessageBoxer.Show("No images found", "No images", MessageBoxIcon.Error);
 
-                return;
+                    return;
+                }
+                if (MessageBoxer.IsOpen)
+                {
+                    return;
+                }
             }
             //edellinen kuva
             Unohdakuva();
@@ -201,6 +209,7 @@ namespace testiä
             prevbtn.Enabled = true;
             nxtbtn.Enabled = true;
             TagSearch.Enabled = true;
+            diatimeSel.Enabled = true;
             currentimage.Enabled = true;
         }
 
@@ -322,7 +331,8 @@ namespace testiä
             }
             if (FileBox.Items.Count == 0)
             {
-                MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs", 0, MessageBoxIcon.Information);
+                //MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs", 0, MessageBoxIcon.Information);
+                MessageBoxer.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs", MessageBoxIcon.Information);
             }
             else
             {
@@ -333,6 +343,7 @@ namespace testiä
                 prevbtn.Enabled = true;
                 nxtbtn.Enabled = true;
                 TagSearch.Enabled = true;
+                diatimeSel.Enabled = true;
                 currentimage.Enabled = true;
             }
         }
@@ -358,7 +369,8 @@ namespace testiä
                 }
             if (FileBox.Items.Count == 0)
             {
-                MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs", 0, MessageBoxIcon.Information);
+                //MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs", 0, MessageBoxIcon.Information);
+                MessageBoxer.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs", MessageBoxIcon.Information);
             }
             else
             {
@@ -370,11 +382,13 @@ namespace testiä
                 nxtbtn.Enabled = true;
                 TagSearch.Enabled = true;
                 currentimage.Enabled = true;
+                diatimeSel.Enabled = true;
                 }
             }
             else
             {
-                MessageBox.Show("Cannot refresh.  No folder selected.", "Cannot refresh", 0, MessageBoxIcon.Error);
+                //MessageBox.Show("Cannot refresh.  No folder selected.", "Cannot refresh", 0, MessageBoxIcon.Error);
+                MessageBoxer.Show("Cannot refresh.  No folder selected.", "Cannot refresh", MessageBoxIcon.Error);
             }
         }
 
@@ -385,12 +399,14 @@ namespace testiä
                 intti = Convert.ToInt32(currentimage.Value);
                 if (Convert.ToInt32(currentimage.Value) < 0)
                 {
-                    MessageBox.Show("Value must be positive", "Negative value", 0, MessageBoxIcon.Error);
+                    //MessageBox.Show("Value must be positive", "Negative value", 0, MessageBoxIcon.Error);
+                    MessageBoxer.Show("Value must be positive", "Negative value", MessageBoxIcon.Error);
                     currentimage.Value = intti;
                 }
                 else if (Convert.ToInt32(currentimage.Value) > Convert.ToInt32(imageamount.Value))
                 {
-                    MessageBox.Show("Value must be lower than the count of found images", "Value too high", 0, MessageBoxIcon.Error);
+                    //MessageBox.Show("Value must be lower than the count of found images", "Value too high", 0, MessageBoxIcon.Error);
+                    MessageBoxer.Show("Value must be lower than the count of found images", "Value too high", MessageBoxIcon.Error);
                     currentimage.Value = intti;
                 }
                 else
@@ -497,7 +513,8 @@ namespace testiä
 
                     if (sloop >= fcount - 1)
                     {
-                        MessageBox.Show("No images were found with the tags \"" + text + "\"", "No found images", 0, MessageBoxIcon.Error);
+                        //MessageBox.Show("No images were found with the tags \"" + text + "\"", "No found images", 0, MessageBoxIcon.Error);
+                        MessageBoxer.Show("No images were found with the tags \"" + text + "\"", "No found images", MessageBoxIcon.Error);
                         b--;
                         break;
                     }
@@ -931,7 +948,8 @@ namespace testiä
                 }
                 catch (System.IO.IOException)
                 {
-                    MessageBox.Show("Se kusinen paska ei onnistunut disposata sitä pictureboxin kuvaa prkl", "vittu", 0, MessageBoxIcon.Error);
+                    //MessageBox.Show("Se kusinen paska ei onnistunut disposata sitä pictureboxin kuvaa prkl", "vittu", 0, MessageBoxIcon.Error);
+                    MessageBoxer.Show("Se kusinen paska ei onnistunut disposata sitä pictureboxin kuvaa prkl", "vittu", MessageBoxIcon.Error);
                 }
             }
             ThePicture.Image = Image.FromFile(@valittukuva);
@@ -1057,7 +1075,8 @@ namespace testiä
             }
             if (FileBox.Items.Count == 0)
             {
-                MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs", 0, MessageBoxIcon.Information);
+                //MessageBox.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs", 0, MessageBoxIcon.Information);
+                MessageBoxer.Show("No JPG images were found in the path \"" + valittukansio2 + "\"", "No JPGs", MessageBoxIcon.Information);
             }
             else
             {
@@ -1069,6 +1088,7 @@ namespace testiä
                 nxtbtn.Enabled = true;
                 TagSearch.Enabled = true;
                 currentimage.Enabled = true;
+                diatimeSel.Enabled = true;
             }
         }
 
@@ -1112,6 +1132,7 @@ namespace testiä
                     nxtbtn.Enabled = true;
                     TagSearch.Enabled = true;
                     currentimage.Enabled = true;
+                    diatimeSel.Enabled = true;
                     break; //pomppaa pois foreach loopista kun kuva on löydetty.  estää turhan työn
                 }
                 row++;
@@ -1126,7 +1147,7 @@ namespace testiä
                 showpngs = false;
                 showpng.Text = "Show PNGs";
                 if (valittukansio2 != null)
-                refresh();
+                    refresh();
             }
             else 
             { 
@@ -1135,6 +1156,40 @@ namespace testiä
                 if (valittukansio2 != null)
                     refresh();
             }
+        }
+        //Timer _timeri = new Timer();
+        private void diatimeSel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != (char)Keys.Enter)
+            {
+                return;
+            }
+            if (diatimeSel.Value < 1)
+            {
+                timer1.Enabled = false;
+                timer1.Dispose();
+                return;
+            }
+
+            timer1.Interval = (int)diatimeSel.Value;
+            if (!timer1.Enabled)
+            {
+                timer1.Enabled = false;
+                timer1.Dispose();
+                timer1.Enabled = true;
+            }
+            else
+            {
+                timer1.Enabled = false;
+                timer1.Dispose();
+                return;
+            }
+
+            //timer1.Tick += changedia;
+        }
+        public void changedia(Object myObject, EventArgs myEventArgs)
+        {
+            nextimage();
         }
     }
 }

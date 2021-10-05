@@ -29,12 +29,14 @@ namespace testiä
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(imageMTDT));
             this.prevbtn = new System.Windows.Forms.Button();
             this.nxtbtn = new System.Windows.Forms.Button();
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.DirectoryBtn = new System.Windows.Forms.ToolStripButton();
+            this.showpng = new System.Windows.Forms.ToolStripButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.ChosenFolder = new System.Windows.Forms.TextBox();
             this.FileBox = new System.Windows.Forms.ListView();
@@ -52,12 +54,15 @@ namespace testiä
             this.tab_camera = new System.Windows.Forms.Button();
             this.tab_ap = new System.Windows.Forms.Button();
             this.refreshbtn = new System.Windows.Forms.Button();
-            this.showpng = new System.Windows.Forms.ToolStripButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.diatimeSel = new System.Windows.Forms.NumericUpDown();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageamount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentimage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.descriptionMTDT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diatimeSel)).BeginInit();
             this.SuspendLayout();
             // 
             // prevbtn
@@ -97,6 +102,13 @@ namespace testiä
             resources.ApplyResources(this.DirectoryBtn, "DirectoryBtn");
             this.DirectoryBtn.Name = "DirectoryBtn";
             this.DirectoryBtn.Click += new System.EventHandler(this.ToolStripButton1_Click_1);
+            // 
+            // showpng
+            // 
+            this.showpng.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.showpng, "showpng");
+            this.showpng.Name = "showpng";
+            this.showpng.Click += new System.EventHandler(this.showpng_Click);
             // 
             // ChosenFolder
             // 
@@ -239,18 +251,33 @@ namespace testiä
             this.refreshbtn.UseVisualStyleBackColor = true;
             this.refreshbtn.Click += new System.EventHandler(this.refreshbtn_Click);
             // 
-            // showpng
+            // label1
             // 
-            this.showpng.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.showpng, "showpng");
-            this.showpng.Name = "showpng";
-            this.showpng.Click += new System.EventHandler(this.showpng_Click);
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // diatimeSel
+            // 
+            resources.ApplyResources(this.diatimeSel, "diatimeSel");
+            this.diatimeSel.Maximum = new decimal(new int[] {
+            30000,
+            0,
+            0,
+            0});
+            this.diatimeSel.Name = "diatimeSel";
+            this.diatimeSel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.diatimeSel_KeyPress);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.changedia);
             // 
             // imageMTDT
             // 
             this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.diatimeSel);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.refreshbtn);
             this.Controls.Add(this.tab_ap);
             this.Controls.Add(this.tab_camera);
@@ -280,6 +307,7 @@ namespace testiä
             ((System.ComponentModel.ISupportInitialize)(this.imageamount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentimage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.descriptionMTDT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diatimeSel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,6 +338,9 @@ namespace testiä
         private System.Windows.Forms.DataGridViewTextBoxColumn exif;
         private System.Windows.Forms.Button refreshbtn;
         private System.Windows.Forms.ToolStripButton showpng;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown diatimeSel;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
