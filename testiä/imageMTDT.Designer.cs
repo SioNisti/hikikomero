@@ -57,6 +57,7 @@ namespace testiä
             this.label1 = new System.Windows.Forms.Label();
             this.diatimeSel = new System.Windows.Forms.NumericUpDown();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageamount)).BeginInit();
@@ -91,6 +92,7 @@ namespace testiä
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DirectoryBtn,
+            this.toolStripSeparator1,
             this.showpng});
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Name = "toolStrip1";
@@ -258,6 +260,7 @@ namespace testiä
             // 
             // diatimeSel
             // 
+            this.diatimeSel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.diatimeSel, "diatimeSel");
             this.diatimeSel.Maximum = new decimal(new int[] {
             30000,
@@ -270,6 +273,11 @@ namespace testiä
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.changedia);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
             // imageMTDT
             // 
@@ -341,6 +349,7 @@ namespace testiä
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown diatimeSel;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

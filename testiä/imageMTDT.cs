@@ -231,6 +231,14 @@ namespace testiä
                 Debug.WriteLine(property.Name + " - " + property.Value);
             }*/
 
+            if(!tab_ap.Enabled)
+            {
+                tab_ap.Enabled = true;
+                tab_camera.Enabled = true;
+                tab_description.Enabled = true;
+                tab_origin.Enabled = true;
+            }
+
             if (curtab == 0)
             {
                 tab_description.BackColor = Color.White;
@@ -534,11 +542,7 @@ namespace testiä
                                     string gottenTags2 = gottenTags.ToString();
                                     char gt2 = gottenTags2[0];
 
-                                    if (gottenTags2[0].Equals(';'))
-                                    {
-                                        //gottenTags2 = gottenTags2; varoitukset pois
-                                    }
-                                    else
+                                    if (!gottenTags2[0].Equals(';'))
                                     {
                                         gottenTags2 = ";" + gottenTags2;
                                     }
@@ -1189,7 +1193,11 @@ namespace testiä
         }
         public void changedia(Object myObject, EventArgs myEventArgs)
         {
-            nextimage();
+            if(FileBox.Items.Count > 0)
+            {
+                nextimage();
+            }
+            else { return; }
         }
     }
 }
