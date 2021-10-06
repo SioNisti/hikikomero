@@ -20,6 +20,7 @@ namespace testiä
         public static string qdkuva2;
         public static string qdtype;
         public static int qdrow;
+        public static int qdintti;
 
         private PictureBox _thePicture;
         public PictureBox ThePicture
@@ -60,6 +61,7 @@ namespace testiä
             qdkuva2 = imageMTDT.valittukuva2;
             qdrow = imageMTDT.qdrow;
             qdtype = imageMTDT.quickdata_type;
+            qdintti= imageMTDT.intti;
         }
 
         private void qdclosing(object sender, FormClosingEventArgs e)
@@ -90,6 +92,7 @@ namespace testiä
             if (e.KeyChar == (char)Keys.Enter)
             {
                 qdedited = textBox1.Text;
+                qdintti = imageMTDT.intti;
                 alzheimer();
                 imageMTDT i = new imageMTDT();
                 i.Unohdakuva();

@@ -44,6 +44,13 @@ namespace testiä
         public imageMTDT()
         {
             InitializeComponent();
+            /*diatimeSel.Controls[0].Visible = false;
+            diatimeSel.Controls[1].Width = Width - 4;
+            currentimage.Controls[0].Visible = false;
+            currentimage.Controls[1].Width = Width - 4;
+            imageamount.Controls[0].Visible = false;
+            imageamount.Controls[1].Width = Width - 4;*/
+
 
             GlobalHotKey.RegisterHotKey("CTRL + N", () => nextimage()); //seuraava kuva
             GlobalHotKey.RegisterHotKey("CTRL + Right", () => nextimage());//seuraava kuva
@@ -54,7 +61,7 @@ namespace testiä
             GlobalHotKey.RegisterHotKey("CTRL + R", () => refresh());//valitsee saman kansion uudestaan ns "päivittääkkseen" tiedosto listan
 
             quickdata form2 = new quickdata();
-            form2.ThePicture = this.ThePicture;
+            form2.ThePicture = this.PictureBox;
 
         }
         public PictureBox ThePicture
@@ -66,7 +73,7 @@ namespace testiä
         public static string valittukuva;
         public static string valittukuva2;
 
-        int intti = 0;
+        public static int intti = 0;
         int curtab = 0;
         int rowcount = 5;
         int qdct = 0;
@@ -149,7 +156,8 @@ namespace testiä
                 intti = 1;
             }
 
-            imageamount.Value = FileBox.Items.Count;
+            //imageamount.Value = FileBox.Items.Count;
+            imageAmount2.Text = "/ "+FileBox.Items.Count.ToString();
             currentimage.Value = intti;
 
             if (FileBox.Items.Count == 1)
@@ -187,7 +195,8 @@ namespace testiä
 
             //FileBox.Items[0].Selected = true; en täysin oo varma mikä tän virka on.  saattanee olla vanhan koodin jäännös
 
-            imageamount.Value = FileBox.Items.Count;
+            imageAmount2.Text = "/ " + FileBox.Items.Count.ToString();
+            //imageamount.Value = FileBox.Items.Count;
             currentimage.Value = intti;
 
             if (intti < 1)
@@ -345,7 +354,8 @@ namespace testiä
             else
             {
                 intti = 0;
-                imageamount.Value = FileBox.Items.Count;
+                //imageamount.Value = FileBox.Items.Count;
+                imageAmount2.Text = "/ " + FileBox.Items.Count.ToString();
                 currentimage.Value = intti;
 
                 prevbtn.Enabled = true;
@@ -383,7 +393,8 @@ namespace testiä
             else
             {
                 intti = 0;
-                imageamount.Value = FileBox.Items.Count;
+                //imageamount.Value = FileBox.Items.Count;
+                imageAmount2.Text = "/ " + FileBox.Items.Count.ToString();
                 currentimage.Value = intti;
 
                 prevbtn.Enabled = true;
@@ -411,7 +422,8 @@ namespace testiä
                     MessageBoxer.Show("Value must be positive", "Negative value", MessageBoxIcon.Error);
                     currentimage.Value = intti;
                 }
-                else if (Convert.ToInt32(currentimage.Value) > Convert.ToInt32(imageamount.Value))
+                //else if (Convert.ToInt32(currentimage.Value) > Convert.ToInt32(imageamount.Value))
+                else if (Convert.ToInt32(currentimage.Value) > Convert.ToInt32(imageAmount2.Text))
                 {
                     //MessageBox.Show("Value must be lower than the count of found images", "Value too high", 0, MessageBoxIcon.Error);
                     MessageBoxer.Show("Value must be lower than the count of found images", "Value too high", MessageBoxIcon.Error);
@@ -480,7 +492,8 @@ namespace testiä
                     }
                 }
                 intti = 1;
-                imageamount.Value = FileBox.Items.Count;
+                imageAmount2.Text = "/ " + FileBox.Items.Count.ToString();
+                //imageamount.Value = FileBox.Items.Count;
             }
             else if (text != "notag" && text != "")
             {
@@ -534,7 +547,7 @@ namespace testiä
                             string fileName = Path.GetFileName(file);
                             ListViewItem item = new ListViewItem(fileName);
 
-                            if (file.Contains(".jpg"))
+                            if (file.EndsWith(".jpg"))
                             {
                                 var gottenTags = ImageFile.FromFile(file).Properties.Get(ExifTag.WindowsKeywords);
                                 if (gottenTags != null && gottenTags.ToString() != "") //huh saatana piti lisätä toi toinen ehto tohon koska muuten jos jollain oli täginä "" niin se paska kaatu
@@ -595,7 +608,8 @@ namespace testiä
                                 }
                             }
                             intti = 1;
-                            imageamount.Value = FileBox.Items.Count;
+                            //imageamount.Value = FileBox.Items.Count;
+                            imageAmount2.Text = "/ " + FileBox.Items.Count.ToString();
                         }
                     }
                 }/*
@@ -637,13 +651,17 @@ namespace testiä
         {
             //MessageBox.Show(intti.ToString() + " - (" + intti.ToString() + " * " + "2) = " + (intti - (intti * 2)).ToString());
                 
+            if (valittukuva2.EndsWith(".png"))
+            {
+                MessageBoxer.Show("Cannot edit PNG metadata.", "PNG image", MessageBoxIcon.Exclamation);
+                return;
+            }
                 qdused = false;
                 descriptionMTDT.ClearSelection();
                 System.Threading.Thread.Sleep(300);
                 updatemtdt(e.RowIndex);
                 descriptionMTDT.Update();
                 descriptionMTDT.Refresh();
-
         }
         public void updatemtdt(int x)
         {
@@ -674,7 +692,8 @@ namespace testiä
                 qdused = false;
             } else
             {
-                file = ImageFile.FromFile(quickdata.qdkuva);
+                //file = ImageFile.FromFile(quickdata.qdkuva);
+                file = ImageFile.FromFile(valittukuva);
                 qdused = true;
                 Debug.WriteLine("rwcnt "+rowcount.ToString());
             }
@@ -780,8 +799,9 @@ namespace testiä
                     //MessageBox.Show(kokki + " b");
                 }
 
-                if (kokki == exiftype)
-                {
+                if (kokki != exiftype)
+                { break; }
+                //{
                     file.Properties.Set((ExifTag)exiftype, celldata); 
                     //-------kaatuu ylemmälle riville quickdataa käyttäessä "specified cast is not valid". tuo "exiftype" variable lienee jotenkin rikki qd:ta käyttäessä-------
                     //sinänsä saattais toimia jos mä ottaisin sen qd:hen laitetun jutun tonne gridview:iin ja ottaisin sen uudestaan sieltä
@@ -921,13 +941,14 @@ namespace testiä
                             }
                             break;
                     }
-                }
+                //}
                 //x++; tää rikko sen.  oli jääny yli vanhasta koodista
             }
 
             if (!qdused)
             {
                 Unohdakuva();
+                PictureBox.Image = Image.FromFile(@"../../sumutorvi.png");
                 file.Save(valittukansio2 + "/" + valittukuva2);
             }
             else
@@ -946,16 +967,38 @@ namespace testiä
                 PictureBox.Dispose();
                 ThePicture.Dispose();
 
+                PictureBox.Image = Image.FromFile(@"C:/Users/Bamsemums/Desktop/työt/Csharp/hikikomero/testiä/sumutorvi.png");
+                //intti = intti;
+
+                /*C:\\Users\\Bamsemums\\Desktop\\työt\\Csharp\\hikikomero\\testiä\\
+                intti = intti + quickdata.qdintti;
+                    previmage();
                 try
                 {
-                    file.Save(valittukansio2 + "/a_" + valittukuva2);
+                    previmage();
+                }
+                catch (System.ArgumentOutOfRangeException)
+                {
+                    MessageBoxer.Show("splat: "+intti, "vittu", MessageBoxIcon.Error);
+                }*/
+                try
+                {
+                    file.Save(valittukansio2 + "/" + valittukuva2);
                 }
                 catch (System.IO.IOException)
                 {
                     //MessageBox.Show("Se kusinen paska ei onnistunut disposata sitä pictureboxin kuvaa prkl", "vittu", 0, MessageBoxIcon.Error);
-                    MessageBoxer.Show("Se kusinen paska ei onnistunut disposata sitä pictureboxin kuvaa prkl", "vittu", MessageBoxIcon.Error);
+                    MessageBoxer.Show("Se kusinen paska ei onnistunut \"disposata\" sitä pictureboxin kuvaa prkl.  se ei vaan tiedä että se PictureBox on olemassa vaikkakin se vetää imageMTDT:n koodia jossa se PictureBox on.  vaikkei se tiedä että se on olemassa niin se ei valita että \"mikä vittu tää on\" kun sen yrittää \"disposata\".", "vittu", MessageBoxIcon.Error);
                 }
+            }/*
+            try
+            {
+                nextimage();
             }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                MessageBoxer.Show("splat2: " + intti, "vittu", MessageBoxIcon.Error);
+            }*/
             ThePicture.Image = Image.FromFile(@valittukuva);
             Metat();
             //quickdataX();
@@ -1085,7 +1128,8 @@ namespace testiä
             else
             {
                 intti = 0;
-                imageamount.Value = FileBox.Items.Count;
+                //imageamount.Value = FileBox.Items.Count;
+                imageAmount2.Text = "/ " + FileBox.Items.Count.ToString();
                 currentimage.Value = intti;
 
                 prevbtn.Enabled = true;
@@ -1127,7 +1171,8 @@ namespace testiä
                     Unohdakuva();
                     intti = row;
 
-                    imageamount.Value = FileBox.Items.Count;
+                    //imageamount.Value = FileBox.Items.Count;
+                    imageAmount2.Text = "/ " + FileBox.Items.Count.ToString();
                     currentimage.Value = intti;
 
                     gsImages();

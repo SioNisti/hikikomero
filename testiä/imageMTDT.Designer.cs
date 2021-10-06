@@ -36,13 +36,13 @@ namespace testiä
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.DirectoryBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.showpng = new System.Windows.Forms.ToolStripButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.ChosenFolder = new System.Windows.Forms.TextBox();
             this.FileBox = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CurrentFile = new System.Windows.Forms.TextBox();
-            this.imageamount = new System.Windows.Forms.NumericUpDown();
             this.currentimage = new System.Windows.Forms.NumericUpDown();
             this.TagSearch = new System.Windows.Forms.TextBox();
             this.descriptionMTDT = new System.Windows.Forms.DataGridView();
@@ -57,10 +57,9 @@ namespace testiä
             this.label1 = new System.Windows.Forms.Label();
             this.diatimeSel = new System.Windows.Forms.NumericUpDown();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.imageAmount2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imageamount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentimage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.descriptionMTDT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diatimeSel)).BeginInit();
@@ -105,6 +104,11 @@ namespace testiä
             this.DirectoryBtn.Name = "DirectoryBtn";
             this.DirectoryBtn.Click += new System.EventHandler(this.ToolStripButton1_Click_1);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
             // showpng
             // 
             this.showpng.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -141,20 +145,9 @@ namespace testiä
             this.CurrentFile.Name = "CurrentFile";
             this.CurrentFile.ReadOnly = true;
             // 
-            // imageamount
-            // 
-            this.imageamount.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.imageamount, "imageamount");
-            this.imageamount.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.imageamount.Name = "imageamount";
-            this.imageamount.ReadOnly = true;
-            // 
             // currentimage
             // 
+            this.currentimage.BackColor = System.Drawing.SystemColors.Control;
             this.currentimage.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.currentimage, "currentimage");
             this.currentimage.Maximum = new decimal(new int[] {
@@ -260,6 +253,7 @@ namespace testiä
             // 
             // diatimeSel
             // 
+            this.diatimeSel.BackColor = System.Drawing.SystemColors.Control;
             this.diatimeSel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.diatimeSel, "diatimeSel");
             this.diatimeSel.Maximum = new decimal(new int[] {
@@ -274,16 +268,17 @@ namespace testiä
             // 
             this.timer1.Tick += new System.EventHandler(this.changedia);
             // 
-            // toolStripSeparator1
+            // imageAmount2
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            resources.ApplyResources(this.imageAmount2, "imageAmount2");
+            this.imageAmount2.Name = "imageAmount2";
             // 
             // imageMTDT
             // 
             this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.imageAmount2);
             this.Controls.Add(this.diatimeSel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.refreshbtn);
@@ -294,7 +289,6 @@ namespace testiä
             this.Controls.Add(this.descriptionMTDT);
             this.Controls.Add(this.TagSearch);
             this.Controls.Add(this.currentimage);
-            this.Controls.Add(this.imageamount);
             this.Controls.Add(this.CurrentFile);
             this.Controls.Add(this.FileBox);
             this.Controls.Add(this.ChosenFolder);
@@ -312,7 +306,6 @@ namespace testiä
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imageamount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentimage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.descriptionMTDT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diatimeSel)).EndInit();
@@ -333,7 +326,6 @@ namespace testiä
         private System.Windows.Forms.ListView FileBox;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.TextBox CurrentFile;
-        private System.Windows.Forms.NumericUpDown imageamount;
         private System.Windows.Forms.NumericUpDown currentimage;
         private System.Windows.Forms.TextBox TagSearch;
         private System.Windows.Forms.DataGridView descriptionMTDT;
@@ -350,6 +342,7 @@ namespace testiä
         private System.Windows.Forms.NumericUpDown diatimeSel;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Label imageAmount2;
     }
 }
 
