@@ -423,7 +423,7 @@ namespace testiä
                     currentimage.Value = intti;
                 }
                 //else if (Convert.ToInt32(currentimage.Value) > Convert.ToInt32(imageamount.Value))
-                else if (Convert.ToInt32(currentimage.Value) > Convert.ToInt32(imageAmount2.Text))
+                else if (currentimage.Value > Convert.ToInt32(imageAmount2.Text.Remove(0, 1)))
                 {
                     //MessageBox.Show("Value must be lower than the count of found images", "Value too high", 0, MessageBoxIcon.Error);
                     MessageBoxer.Show("Value must be lower than the count of found images", "Value too high", MessageBoxIcon.Error);
@@ -948,7 +948,6 @@ namespace testiä
             if (!qdused)
             {
                 Unohdakuva();
-                PictureBox.Image = Image.FromFile(@"../../sumutorvi.png");
                 file.Save(valittukansio2 + "/" + valittukuva2);
             }
             else
